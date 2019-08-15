@@ -1,10 +1,9 @@
 {
-  "name": "socket.io-chat",
-  "version": "0.0.0",
-  "description": "A simple chat client using socket.io",
+  "name": "moshi",
+  "version": "0.5.0",
+  "description": "Research tool for chatroom experiments. Built from the example chat client found in socket.io",
   "main": "index.js",
-  "author": "Grant Timmerman",
-  "private": true,
+  "author": "Dominic DiFranzo",
   "license": "BSD",
   "dependencies": {
     "express": "^4.17.1",
