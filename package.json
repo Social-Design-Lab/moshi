@@ -7,6 +7,7 @@
   "license": "BSD",
   "dependencies": {
     "express": "^4.17.1",
+    "random-permutation": "0.0.0",
     "socket.io": "^2.2.0"
   },
   "scripts": {

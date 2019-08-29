@@ -4,14 +4,21 @@
   <meta charset="UTF-8">
   <title>Socket.IO Chat Example</title>
   <link rel="stylesheet" href="style.css">
-</head>
+  <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+</head>  
 <body>
   <ul class="pages">
     <li class="chat page">
       <div class="chatArea">
         <ul class="messages"></ul>
       </div>
-      <input class="inputMessage" placeholder="Type here..."/>
+      <div class="ui buttons">
+        <button class="green ui button">One</button>
+        <button class="green ui button">Two</button>
+        <button class="red ui button">Three</button>
+        <button class="red ui button">Four</button>
+      </div>
+      <input class="inputMessage" placeholder="Type here..."/>   
     </li>
     <li class="login page">
       <div class="form">
@@ -19,15 +26,16 @@
         <input class="usernameInput" type="text" maxlength="14" />
       </div>
     </li>
-    <li class="full page">
-      <div class="area">
-        <h2 class="title">Room is Full</h3>
-      </div>
-    </li>
+
   </ul>
+
 
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+  <script type="text/javascript" src="csvjson.json"></script>
+
+
 </body>
 </html>

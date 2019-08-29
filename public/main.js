@@ -1,4 +1,7 @@
-$(function() {
+//here
+$.getJSON('csvjson.json', function(csvjson) {
+  inputData = csvjson;
+  console.log(csvjson);
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
   var COLORS = [
@@ -12,6 +15,9 @@ $(function() {
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
+  var $suggestedMessage = $('.ui.button'); // Input suggestion message button
+  var $suggestedMessageBox = $('.ui.buttons');
+  var $b1 = $('b1');
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -44,7 +50,7 @@ $(function() {
     if (username) {
       $loginPage.fadeOut();
       $chatPage.show();
-      $loginPage.off('click');
+      $loginPage.off('click'); // what does this one do?
       $currentInput = $inputMessage.focus();
 
       // Tell the server your username join room
@@ -80,7 +86,7 @@ $(function() {
   function addChatMessage (data, options) {
     // Don't fade the message in if there is an 'X was typing'
     var $typingMessages = getTypingMessages(data);
-    options = options || {};
+    options = options || {}; 
     if ($typingMessages.length !== 0) {
       options.fade = false;
       $typingMessages.remove();
@@ -94,7 +100,7 @@ $(function() {
 
     var typingClass = data.typing ? 'typing' : '';
     var $messageDiv = $('<li class="message"/>')
-      .data('username', data.username)
+      .data('username', data.username) //?
       .addClass(typingClass)
       .append($usernameDiv, $messageBodyDiv);
 
@@ -143,7 +149,7 @@ $(function() {
     } else {
       $messages.append($el);
     }
-    $messages[0].scrollTop = $messages[0].scrollHeight;
+    $messages[0].scrollTop = $messages[0].scrollHeight; //?
   }
 
   // Prevents input from having injected markup
@@ -179,7 +185,7 @@ $(function() {
   }
 
   // Gets the color of a username through our hash function
-  function getUsernameColor (username) {
+  function getUsernameColor (username) { 
     // Compute hash code
     var hash = 7;
     for (var i = 0; i < username.length; i++) {
@@ -203,13 +209,45 @@ $(function() {
         sendMessage();
         socket.emit('stop typing');
         typing = false;
+        var count = Object.keys(inputData).length;
+
+        $.getJSON('PosCsvjson.json', function(csvjson) {
+          inputData = csvjson;
+          inputData0 = shuffle(inputData)
+          $('.ui.green.button')[0].textContent =inputData0[1].Response;
+          $('.ui.green.button')[1].textContent =inputData0[2].Response;
+        });
+
+        $.getJSON('NegCsvjson.json', function(csvjson) {
+          inputData = csvjson;
+          inputData00 = shuffle(inputData)
+          $('.ui.red.button')[0].textContent =inputData00[1].Response;
+          $('.ui.red.button')[1].textContent =inputData00[2].Response;
+        });
+
+
       } else {
         setUsername();
       }
     }
   });
 
+  function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+  }
+
   $inputMessage.on('input', function() {
+    updateTyping();
+  });
+
+  $suggestedMessage.on('input', function() {
     updateTyping();
   });
 
@@ -224,6 +262,13 @@ $(function() {
   $inputMessage.click(function () {
     $inputMessage.focus();
   });
+
+  $('.ui.button').on('click', function() {
+      var txt = $(this).text();
+      $("input:text").val(txt);  
+      sendMessage();  
+      console.log(txt);
+    });
 
   // Socket events
 
