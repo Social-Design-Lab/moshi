@@ -214,15 +214,15 @@ $.getJSON('csvjson.json', function(csvjson) {
         $.getJSON('PosCsvjson.json', function(csvjson) {
           inputData = csvjson;
           inputData0 = shuffle(inputData)
-          $('.ui.green.button')[0].textContent =inputData0[1].Response;
-          $('.ui.green.button')[1].textContent =inputData0[2].Response;
+          $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          $('.ui.blue.button')[1].textContent =inputData0[2].Response;
         });
 
         $.getJSON('NegCsvjson.json', function(csvjson) {
           inputData = csvjson;
           inputData00 = shuffle(inputData)
-          $('.ui.red.button')[0].textContent =inputData00[1].Response;
-          $('.ui.red.button')[1].textContent =inputData00[2].Response;
+          $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+          $('.ui.gray.button')[1].textContent =inputData00[2].Response;
         });
 
 
