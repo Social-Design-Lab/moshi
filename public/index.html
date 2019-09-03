@@ -5,11 +5,14 @@
   <title>Socket.IO Chat Example</title>
   <link rel="stylesheet" href="style.css">
   <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+  <title>Stopwatch</title>
+  <link rel="stylesheet" href="stopwatch.css">
 </head>  
 <body>
   <ul class="pages">
     <li class="chat page">
       <div class="chatArea">
+        <div> Time Left: <span id="timer"></span></div>
         <ul class="messages"></ul>
       </div>
       <div class="ui buttons">
@@ -35,6 +38,10 @@
   <script src="/main.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
   <script type="text/javascript" src="csvjson.json"></script>
+  <script src="lib/easytimer/dist/easytimer.min.js"></script>
+  <script>
+    var Timer = new easytimer.Timer();
+  </script>
 
 
 </body>

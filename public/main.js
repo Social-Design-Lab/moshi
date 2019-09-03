@@ -1,5 +1,6 @@
 //here
 $.getJSON('csvjson.json', function(csvjson) {
+
   inputData = csvjson;
   console.log(csvjson);
   var FADE_TIME = 150; // ms
@@ -37,7 +38,9 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (data.numUsers === 1) {
       message += "there's 1 participant";
     } else {
-      message += "there are " + data.numUsers + " participants";
+      message += "there are " + data.numUsers + " participants"; 
+      document.getElementById('timer').innerHTML = 00 + ":" + 20;
+      startTimer();
     }
     log(message);
   }
@@ -243,6 +246,39 @@ $.getJSON('csvjson.json', function(csvjson) {
     return a;
   }
 
+//zhila : check
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+  if(m<0)
+  {
+    $chatPage.fadeOut();
+    alert('Your time is over!');
+    //zhila: check
+    alertornot();
+    $fullPage.show();
+    $chatPage.off('click');
+    socket.emit('disconnect');
+
+    
+    
+  } 
+  // Zhila: next task: store the chat to the data base
+  // add an timeout event to handle it! emit timeout here and handle it down below
+  document.getElementById('timer').innerHTML =
+  m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
+
   $inputMessage.on('input', function() {
     updateTyping();
   });
@@ -266,7 +302,22 @@ $.getJSON('csvjson.json', function(csvjson) {
   $('.ui.button').on('click', function() {
       var txt = $(this).text();
       $("input:text").val(txt);  
-      sendMessage();  
+      sendMessage();
+      // update the suggestion box ..
+      $.getJSON('PosCsvjson.json', function(csvjson) {
+        inputData = csvjson;
+        inputData0 = shuffle(inputData)
+        $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+        $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      });
+
+      $.getJSON('NegCsvjson.json', function(csvjson) {
+        inputData = csvjson;
+        inputData00 = shuffle(inputData)
+        $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      });
+
       console.log(txt);
     });
 
@@ -301,11 +352,13 @@ $.getJSON('csvjson.json', function(csvjson) {
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
+
   });
 
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
     log(data.username + ' left');
+    //alert(data.username+ ' left. Thanks for your participation!'); // Zhila: discuss possible option with Jess!
     addParticipantsMessage(data);
     removeChatTyping(data);
   });
@@ -335,4 +388,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     log('attempt to reconnect has failed');
   });
 
+
 });
+
+

@@ -76,14 +76,14 @@ io.on('connection', function (socket) {
           myroom = all_rooms[i].name;
           all_rooms[i].full = true;
           console.log("Entering exsiting room. My room is now: "+myroom);
-          socket.join(myroom);
+          socket.join(myroom) ;
           socket.emit('login', {
             numUsers: 2
           });
-          // echo globally (all clients) that a person has connected
+          
           socket.to(myroom).emit('user joined', {
             username: socket.username,
-            numUsers: 2
+            numUsers: 2,
           });
           break;
 
@@ -178,8 +178,6 @@ io.on('connection', function (socket) {
         numUsers: numUsers
       });
     }
-
-
 
   });
 });

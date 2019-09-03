@@ -160,3 +160,121 @@ ul {
   right: 0;
   width: 100%;
 }
+/* zhila: to be removed */
+.stopwatch {
+    width: 300px;
+    background-color: #0af;
+    border-radius: 5px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.75), 0 0 1px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+
+    &, & * {
+        transition: all 0.15s ease-out;
+    }
+
+    .controls {
+        display: flex;
+
+        button {
+            flex-grow: 1;
+            margin: 0 5px 4px;
+            padding: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 4px rgba(0, 0, 0, 0.75);
+            border: 0;
+            outline: 0;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+
+            &:active {
+                margin-bottom: 0;
+                margin-top: 4px;
+                box-shadow: none;
+            }
+        }
+
+        .start {
+            background-color: #5d5;
+
+            &:hover {
+                background-color: #6e6;
+            }
+        }
+
+        .stop {
+            background-color: #d55;
+
+            &:hover {
+                background-color: #e66;
+            }
+        }
+
+        .reset {
+            background-color: #55d;
+
+            &:hover {
+                background-color: #66e;
+            }
+        }
+    }
+
+    .display {
+        font-size: 50px;
+        font-family: sans-serif;
+        text-align: center;
+        margin-top: 10px;
+
+        :not(:last-child):after {
+            content: ':';
+        }
+    }
+    /* Zhila: to be removed or modified!; */
+    .stopWatch {
+        width: 280px;
+        height: auto;
+        text-align: center; 
+        display: block;
+        padding: 5px;
+        margin: 0 auto;
+    } 
+
+     .timer {
+        width: auto;
+        height: auto;
+        padding: 10px;
+        font-weight: bold;
+        font-family: tahoma;
+        display: block;
+        border: 1px solid #eee;
+        text-align: center;
+        box-shadow: 0 0 5px #ccc;
+        background: #fbfbf0;
+        color: darkblue;
+        border-bottom:4px solid darkgrey;
+    } 
+    .button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .fulltime { 
+      display:none; 
+      font-size:16px; 
+      font-weight:bold; 
+    }
+/*zhila: to be removed!*/
+ /*   .div{
+      background-color:#419D78;
+      color:#EFD0CA;
+      font-size:20px;
+      text-align:center;
+    }
+*/
+
+}
+
+
+
+
