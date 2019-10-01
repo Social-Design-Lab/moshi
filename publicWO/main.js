@@ -19,6 +19,9 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $suggestedMessage = $('.ui.button'); // Input suggestion message button
   var $suggestedMessageBox = $('.ui.buttons');
   var $b1 = $('b1');
+  var chat_content = '';
+  var box_count =0;
+  var is_suggested;
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -32,6 +35,13 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $currentInput = $usernameInput.focus();
 
   var socket = io();
+  var conv_expriment = {
+    data: new Date(),
+    group: 'Without_Suggestions', // this item should be hard coded for each group
+    convo: new Array()// An array to store objects of each conversation
+  };
+  console.log('000000000---000---0000000');
+  console.log(conv_expriment.data);
 
   function addParticipantsMessage (data) {
     var message = '';
@@ -39,7 +49,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 00 + ":" + 20;
+      document.getElementById('timer').innerHTML = 00 + ":" + 20; // set the chat period..
       startTimer();
     }
     log(message);
@@ -65,6 +75,8 @@ $.getJSON('csvjson.json', function(csvjson) {
   // Sends a chat message
   function sendMessage () {
     var message = $inputMessage.val();
+    chat_content = chat_content.concat(' ');
+    chat_content = chat_content.concat(message);
     // Prevent markup from being injected into the message
     message = cleanInput(message);
     // if there is a non-empty message and a socket connection
@@ -72,10 +84,16 @@ $.getJSON('csvjson.json', function(csvjson) {
       $inputMessage.val('');
       addChatMessage({
         username: username,
-        message: message
+        message: message,
+        is_suggested: is_suggested
       });
       // tell server to execute 'new message' and send along one parameter
-      socket.emit('new message', message);
+      var obj = {
+        username: username,
+        message: message,
+        is_suggested: is_suggested
+      };
+      socket.emit('new message', obj);
     }
   }
 
@@ -107,6 +125,11 @@ $.getJSON('csvjson.json', function(csvjson) {
       .addClass(typingClass)
       .append($usernameDiv, $messageBodyDiv);
 
+    if (data.message != 'is typing'){
+        conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+        console.log(conv_expriment);
+    }
+  
     addMessageElement($messageDiv, options);
   }
 
@@ -208,6 +231,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     }
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
+      is_suggested = 0;
       if (username) {
         sendMessage();
         socket.emit('stop typing');
@@ -241,12 +265,13 @@ $.getJSON('csvjson.json', function(csvjson) {
         j = Math.floor(Math.random() * (i + 1));
         x = a[i];
         a[i] = a[j];
-        a[j] = x;
+        a[j] = x; 
     }
     return a;
   }
 
-//zhila : check
+
+
 function startTimer() {
   var presentTime = document.getElementById('timer').innerHTML;
   var timeArray = presentTime.split(/[:]+/);
@@ -256,17 +281,22 @@ function startTimer() {
   if(m<0)
   {
     $chatPage.fadeOut();
-    alert('Your time is over!');
-    //zhila: check
+    console.log(chat_content);
+    console.log('box usage count was:');
+    console.log(box_count);
+    alert('Thanks for using "the application name?". Please tell us about your experience in a 20 questions survey!');
+    user_record ={
+      "name": username,
+      "text" : chat_content,
+      "num": box_count
+    }
+    // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
+    postSurveyTab();
     alertornot();
     $fullPage.show();
     $chatPage.off('click');
     socket.emit('disconnect');
-
-    
-    
   } 
-  // Zhila: next task: store the chat to the data base
   // add an timeout event to handle it! emit timeout here and handle it down below
   document.getElementById('timer').innerHTML =
   m + ":" + s;
@@ -277,6 +307,13 @@ function checkSecond(sec) {
   if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
   if (sec < 0) {sec = "59"};
   return sec;
+}
+//zhila: update this function with the URL to the post questioner 
+function postSurveyTab(){
+  socket.emit('send to DB', conv_expriment);
+  chat_content = ''; //empty the chat history.
+
+  window.open('https://www.w3schools.com', '_self');  
 }
 
   $inputMessage.on('input', function() {
@@ -301,7 +338,9 @@ function checkSecond(sec) {
 
   $('.ui.button').on('click', function() {
       var txt = $(this).text();
-      $("input:text").val(txt);  
+      box_count = box_count+1;
+      is_suggested=1; 
+      $("input:text").val(txt);   
       sendMessage();
       // update the suggestion box ..
       $.getJSON('PosCsvjson.json', function(csvjson) {
@@ -318,7 +357,7 @@ function checkSecond(sec) {
         $('.ui.gray.button')[1].textContent =inputData00[2].Response;
       });
 
-      console.log(txt);
+      //console.log(txt);
     });
 
   // Socket events
@@ -358,7 +397,7 @@ function checkSecond(sec) {
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
     log(data.username + ' left');
-    //alert(data.username+ ' left. Thanks for your participation!'); // Zhila: discuss possible option with Jess!
+
     addParticipantsMessage(data);
     removeChatTyping(data);
   });

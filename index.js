@@ -7,12 +7,18 @@ var server = require('http').createServer(app);
 const io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
 
+// loading .env file
+require('dotenv').config();
+
+var MongoClient = require('mongodb').MongoClient;
+var url = process.env.url;
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
 
 // Routing
-app.use(express.static(path.join(__dirname, 'public')));
+// Set the folder based on the condition to :publicWO , publicNegOnly, publicNegPos
+app.use(express.static(path.join(__dirname, 'publicWO'))); 
 
 // Chatroom
 
@@ -118,11 +124,15 @@ io.on('connection', function (socket) {
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
+    is_suggested = data.is_suggested;
     socket.to(myroom).emit('new message', {
     //socket.broadcast.emit('new message', {
       username: socket.username,
-      message: data
+      message: data.message,
+      is_suggested: data.is_suggested
     });
+    
+
   });
 
   // when the client emits 'add user', this listens and executes
@@ -150,7 +160,32 @@ io.on('connection', function (socket) {
       });
     }
   });
+  //when the client emit 'send to DB', we send it to mongoDB:
+  // socket.on('send to DB', function(data)
+  socket.on('send to DB', function(data)
+  {    
+    MongoClient.connect(url, {useNewUrlParser: true } ,function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("mydb");
+      var myobj = data;
+      dbo.collection("conversationHist").insertOne(myobj,function(err,res){
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+      });
+    }); 
 
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("mydb");
+      dbo.collection("conversationHist").find({}).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        db.close();
+      });
+
+    });
+  });
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
     socket.to(myroom).emit
