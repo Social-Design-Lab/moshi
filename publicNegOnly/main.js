@@ -1,4 +1,4 @@
-//here
+//Negetive only
 $.getJSON('csvjson.json', function(csvjson) {
 
   inputData = csvjson;
@@ -245,8 +245,8 @@ $.getJSON('csvjson.json', function(csvjson) {
         //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
         // });
 
-        $.getJSON('NegCsvjson.json', function(csvjson) {
-          inputData = csvjson;
+        $.getJSON('NegCsvjson.json', function(csvjsonN) {
+          inputData = csvjsonN;
           inputData00 = shuffle(inputData)
           $('.ui.blue.button')[0].textContent =inputData00[1].Response;
           $('.ui.blue.button')[1].textContent =inputData00[2].Response;
@@ -353,8 +353,8 @@ function postSurveyTab(){
       $.getJSON('NegCsvjson.json', function(csvjson) {
         inputData = csvjson;
         inputData00 = shuffle(inputData)
-        $('.ui.blue.button')[0].textContent =inputData00[1].Response;
-        $('.ui.blue.button')[1].textContent =inputData00[2].Response;
+        $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        $('.ui.gray.button')[1].textContent =inputData00[2].Response;
       });
 
       //console.log(txt);

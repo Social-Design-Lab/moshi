@@ -1,4 +1,4 @@
-//here
+//PositieNegetive
 $.getJSON('csvjson.json', function(csvjson) {
 
   inputData = csvjson;

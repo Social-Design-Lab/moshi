@@ -18,7 +18,14 @@ server.listen(port, function () {
 
 // Routing
 // Set the folder based on the condition to :publicWO , publicNegOnly, publicNegPos
-app.use(express.static(path.join(__dirname, 'publicWO'))); 
+
+app.use(express.static(path.join(__dirname, 'publicWO')));
+app.use('/N',express.static(path.join(__dirname, 'publicNegOnly')));
+app.use('/NP',express.static(path.join(__dirname, 'publicNegPos'))); 
+
+
+
+//zhila,, fix it .. they might need same name..
 
 // Chatroom
 
