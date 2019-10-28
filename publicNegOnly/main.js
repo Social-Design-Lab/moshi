@@ -19,7 +19,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $inputMessage = $('.ui.input'); // Input message input box
 
   var $suggestedMessage = $('.ui.button'); // Input suggestion message button
-  var $suggestedMessageBox = $('.ui.buttons');
+  // var $suggestedMessageBox = $('.ui.buttons');
   var $submit =$('ui.white.button');
 
   var $b1 = $('b1');
