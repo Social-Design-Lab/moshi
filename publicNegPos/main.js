@@ -60,9 +60,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   //Set username when clicking on submit button...
   $('ui.white.button').on('click', function() 
   {
-    console.log('Before SUBMIT button');
     setUsername();
-    console.log('After SUBMIT button')
   });
 
   // Sets the client's username
@@ -478,5 +476,4 @@ function postSurveyTab(){
 
 
 });
-
 

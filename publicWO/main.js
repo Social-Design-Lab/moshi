@@ -15,9 +15,11 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
-  var $inputMessage = $('.inputMessage'); // Input message input box
+  var $inputMessage = $('.ui.input'); // Input message input box
   var $suggestedMessage = $('.ui.button'); // Input suggestion message button
   var $suggestedMessageBox = $('.ui.buttons');
+  var $submit =$('ui.white.button');
+
   var $b1 = $('b1');
   var chat_content = '';
   var box_count =0;
@@ -54,6 +56,11 @@ $.getJSON('csvjson.json', function(csvjson) {
     }
     log(message);
   }
+  //Set username when clicking on submit button...
+  $('ui.white.button').on('click', function() 
+  {
+    setUsername();
+  });
 
   // Sets the client's username
   function setUsername () {
@@ -74,7 +81,8 @@ $.getJSON('csvjson.json', function(csvjson) {
 
   // Sends a chat message
   function sendMessage () {
-    var message = $inputMessage.val();
+    // var message = $inputMessage.val();
+    var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
     chat_content = chat_content.concat(' ');
     chat_content = chat_content.concat(message);
     // Prevent markup from being injected into the message
@@ -238,19 +246,19 @@ $.getJSON('csvjson.json', function(csvjson) {
         typing = false;
         var count = Object.keys(inputData).length;
 
-        $.getJSON('PosCsvjson.json', function(csvjson) {
-          inputData = csvjson;
-          inputData0 = shuffle(inputData)
-          $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-          $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-        });
+        // $.getJSON('PosCsvjson.json', function(csvjson) {
+        //   inputData = csvjson;
+        //   inputData0 = shuffle(inputData)
+        //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+        //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+        // });
 
-        $.getJSON('NegCsvjson.json', function(csvjson) {
-          inputData = csvjson;
-          inputData00 = shuffle(inputData)
-          $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-          $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-        });
+        // $.getJSON('NegCsvjson.json', function(csvjson) {
+        //   inputData = csvjson;
+        //   inputData00 = shuffle(inputData)
+        //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        // });
 
 
       } else {
@@ -258,6 +266,37 @@ $.getJSON('csvjson.json', function(csvjson) {
       }
     }
   });
+
+
+  function sendText()
+  {
+  console.log('PURPOLE');
+  is_suggested = 0;
+  if (username) {
+    sendMessage();
+    socket.emit('stop typing');
+    typing = false;
+    var count = Object.keys(inputData).length;
+
+    // $.getJSON('PosCsvjson.json', function(csvjson) {
+    //   inputData = csvjson;
+    //   inputData0 = shuffle(inputData)
+    //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+    //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+    // });
+
+    // $.getJSON('NegCsvjson.json', function(csvjson) {
+    //   inputData = csvjson;
+    //   inputData00 = shuffle(inputData)
+    //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+    //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+    // });
+
+
+    } else {
+      setUsername();
+    }
+  }
 
   function shuffle(a) {
     var j, x, i;
@@ -338,24 +377,30 @@ function postSurveyTab(){
 
   $('.ui.button').on('click', function() {
       var txt = $(this).text();
+      if($(this).text().length==0 ||  $(this).text()=="Submit") //zhila: add it to other versions then remove this comment
+      {
+        sendText()
+        return
+      }
+
       box_count = box_count+1;
       is_suggested=1; 
       $("input:text").val(txt);   
       sendMessage();
       // update the suggestion box ..
-      $.getJSON('PosCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData0 = shuffle(inputData)
-        $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-        $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-      });
+      // $.getJSON('PosCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData0 = shuffle(inputData)
+      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      // });
 
-      $.getJSON('NegCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData00 = shuffle(inputData)
-        $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-        $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-      });
+      // $.getJSON('NegCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData00 = shuffle(inputData)
+      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      // });
 
       //console.log(txt);
     });
