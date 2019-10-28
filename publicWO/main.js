@@ -474,5 +474,3 @@ function postSurveyTab(){
 
 
 });
-
-
