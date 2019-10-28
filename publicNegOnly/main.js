@@ -19,11 +19,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $inputMessage = $('.ui.input'); // Input message input box
 
   var $suggestedMessage = $('.ui.button'); // Input suggestion message button
-<<<<<<< HEAD
-  // var $suggestedMessageBox = $('.ui.buttons');
-=======
   var $suggestedMessageBox = $('.ui.buttons');
->>>>>>> e65ff23029a5915aac6a0f83dd60cab7c1d33365
   var $submit =$('ui.white.button');
 
   var $b1 = $('b1');
@@ -479,4 +475,5 @@ function postSurveyTab(){
 
 
 });
+
 
