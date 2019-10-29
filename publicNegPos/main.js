@@ -19,7 +19,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $suggestedMessage = $('.ui.button'); // Input suggestion message button
   var $suggestedMessageBox = $('.ui.buttons');
 
-  var $submit =$('ui.white.button');
+  var $submit =$('big.ui.white.button');
   var $b1 = $('b1');
   var chat_content = '';
   var box_count =0;
@@ -58,7 +58,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   }
 
   //Set username when clicking on submit button...
-  $('ui.white.button').on('click', function() 
+  $('big.ui.white.button').on('click', function() 
   {
     setUsername();
   });
