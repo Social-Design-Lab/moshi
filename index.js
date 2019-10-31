@@ -20,9 +20,9 @@ server.listen(port, function () {
 // Set the folder based on the condition to :publicWO , publicNegOnly, publicNegPos
 
 app.use(express.static(path.join(__dirname, 'publicWO')));
-app.use('/N',express.static(path.join(__dirname, 'publicNegOnly')));
-app.use('/NP',express.static(path.join(__dirname, 'publicNegPos'))); 
-
+app.use('/n',express.static(path.join(__dirname, 'publicNegOnly')));
+app.use('/np',express.static(path.join(__dirname, 'publicNegPos'))); 
+app.use('/p',express.static(path.join(__dirname, 'publicPos'))); 
 
 
 //zhila,, fix it .. they might need same name..
@@ -195,7 +195,7 @@ io.on('connection', function (socket) {
   });
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
-    socket.to(myroom).emit
+    // socket.to(myroom).emit
     //socket.broadcast.emit('typing', {
     socket.to(myroom).emit('typing', {
       username: socket.username
@@ -210,15 +210,20 @@ io.on('connection', function (socket) {
   });
 
   // when the user disconnects.. perform this
-  socket.on('disconnect', function () {
+  socket.on('bearct', function () {
     if (addedUser) {
       --numUsers;
-
       // echo globally that this client has left
       socket.to(myroom).emit('user left', {
         username: socket.username,
         numUsers: numUsers
       });
+      //all_rooms.pop(r); //DO I NEED TO kill the room when only one participant leaves ? maybe another one come and start the chat with the other participant...
+    }
+    if(numUsers==0) // if both user got disconnected
+    {
+      myroom=-1;
+      all_rooms=[]
     }
 
   });

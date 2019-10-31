@@ -255,12 +255,12 @@ $.getJSON('csvjson.json', function(csvjson) {
         //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
         // });
 
-        $.getJSON('NegCsvjson.json', function(csvjsonN) {
-          inputData = csvjsonN;
-          inputData00 = shuffle(inputData)
-          $('.ui.blue.button')[0].textContent =inputData00[1].Response;
-          $('.ui.blue.button')[1].textContent =inputData00[2].Response;
-        });
+        // $.getJSON('NegCsvjson.json', function(csvjsonN) {
+        //   inputData = csvjsonN;
+        //   inputData00 = shuffle(inputData)
+        //   $('.ui.blue.button')[0].textContent =inputData00[1].Response;
+        //   $('.ui.blue.button')[1].textContent =inputData00[2].Response;
+        // });
 
 
       } else {
@@ -286,12 +286,12 @@ $.getJSON('csvjson.json', function(csvjson) {
       //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
       // });
 
-      $.getJSON('NegCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData00 = shuffle(inputData)
-        $('.ui.blue.button')[0].textContent =inputData00[1].Response;
-        $('.ui.blue.button')[1].textContent =inputData00[2].Response;
-      });
+      // $.getJSON('NegCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData00 = shuffle(inputData)
+      //   $('.ui.blue.button')[0].textContent =inputData00[1].Response;
+      //   $('.ui.blue.button')[1].textContent =inputData00[2].Response;
+      // });
 
 
       } else {
@@ -396,12 +396,12 @@ function postSurveyTab(){
       //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
       // });
 
-      $.getJSON('NegCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData00 = shuffle(inputData)
-        $('.ui.blue.button')[0].textContent =inputData00[1].Response;
-        $('.ui.blue.button')[1].textContent =inputData00[2].Response;
-      });
+      // $.getJSON('NegCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData00 = shuffle(inputData)
+      //   $('.ui.blue.button')[0].textContent =inputData00[1].Response;
+      //   $('.ui.blue.button')[1].textContent =inputData00[2].Response;
+      // });
 
       //console.log(txt);
     });
@@ -431,6 +431,13 @@ function postSurveyTab(){
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
     addChatMessage(data);
+    $.getJSON('NegCsvjson.json', function(csvjsonN) {
+      inputData = csvjsonN;
+      inputData00 = shuffle(inputData)
+      $('.ui.blue.button')[0].textContent =inputData00[1].Response;
+      $('.ui.blue.button')[1].textContent =inputData00[2].Response;
+    });
+
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
