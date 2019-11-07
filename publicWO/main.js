@@ -323,7 +323,8 @@ function startTimer() {
     console.log(chat_content);
     console.log('box usage count was:');
     console.log(box_count);
-    alert('Thanks for using "the application name?". Please tell us about your experience in a 20 questions survey!');
+    let randCode = Math.random().toString(36).substring(7);
+    alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
     user_record ={
       "name": username,
       "text" : chat_content,

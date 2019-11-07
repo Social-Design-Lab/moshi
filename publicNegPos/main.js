@@ -247,19 +247,19 @@ $.getJSON('csvjson.json', function(csvjson) {
         typing = false;
         var count = Object.keys(inputData).length;
         // update after the enter 
-        // $.getJSON('PosCsvjson.json', function(csvjson) {
-        //   inputData = csvjson;
-        //   inputData0 = shuffle(inputData)
-        //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-        //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-        // });
+        $.getJSON('PosCsvjson.json', function(csvjson) {
+          inputData = csvjson;
+          inputData0 = shuffle(inputData)
+          $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+        });
 
-        // $.getJSON('NegCsvjson.json', function(csvjson) {
-        //   inputData = csvjson;
-        //   inputData00 = shuffle(inputData)
-        //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-        //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-        // });
+        $.getJSON('NegCsvjson.json', function(csvjson) {
+          inputData = csvjson;
+          inputData00 = shuffle(inputData)
+          $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+          $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        });
 
 
       } else {
@@ -279,19 +279,19 @@ $.getJSON('csvjson.json', function(csvjson) {
       typing = false;
       var count = Object.keys(inputData).length;
       // update after sending the buttons
-      // $.getJSON('PosCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData0 = shuffle(inputData)
-      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-      // });
+      $.getJSON('PosCsvjson.json', function(csvjson) {
+        inputData = csvjson;
+        inputData0 = shuffle(inputData)
+        $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+        $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      });
 
-      // $.getJSON('NegCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData00 = shuffle(inputData)
-      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-      // });
+      $.getJSON('NegCsvjson.json', function(csvjson) {
+        inputData = csvjson;
+        inputData00 = shuffle(inputData)
+        $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      });
 
 
       } else {
@@ -324,7 +324,8 @@ function startTimer() {
     console.log(chat_content);
     console.log('box usage count was:');
     console.log(box_count);
-    alert('Thanks for using "the application name?". Please tell us about your experience in a 20 questions survey!');
+    let randCode = Math.random().toString(36).substring(7);
+    alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
     user_record ={
       "name": username,
       "text" : chat_content,
@@ -390,19 +391,19 @@ function postSurveyTab(){
       $("input:text").val(txt);   
       sendMessage();//zhila:ask Jess if she wants to send the text to the message box first or not
       // update the suggestion box .. after pressing the suggestion box
-      // $.getJSON('PosCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData0 = shuffle(inputData)
-      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-      // });
+      $.getJSON('PosCsvjson.json', function(csvjson) {
+        inputData = csvjson;
+        inputData0 = shuffle(inputData)
+        $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+        $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      });
 
-      // $.getJSON('NegCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData00 = shuffle(inputData)
-      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-      // });
+      $.getJSON('NegCsvjson.json', function(csvjson) {
+        inputData = csvjson;
+        inputData00 = shuffle(inputData)
+        $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      });
 
       //console.log(txt);
     });
