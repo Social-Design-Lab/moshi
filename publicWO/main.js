@@ -28,6 +28,9 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
   var $fullPage = $('.full.page'); // The chatroom page
+  var $codePage = $('.code.page'); // The code page
+  $codePage.hide();
+
 
   // Prompt for setting a username
   var username;
@@ -59,9 +62,30 @@ $.getJSON('csvjson.json', function(csvjson) {
   //Set username when clicking on submit button...
   $('big.ui.white.button').on('click', function() 
   {
-    setUsername();
-  });
+    if($(this).text()=="Submit")
+    {
+     setUsername(); 
+    }
 
+    if($(this).text()=="Ok!") // should I have an OK button?
+    {
+      // post-Survey-Tab();s
+      window.open('https://www.w3schools.com', '_self');   //zhila: change into the Qualtrics survey.. 
+      $codePage.fadeOut();
+    }
+
+   if($(this).text()=="Copy Code")
+    {
+      var copyText = document.getElementById("codeInput");
+      copyText.select();
+      copyText.setSelectionRange(0,99999);
+      document.execCommand("copy");
+      alert("Copied the text:" + copyText.value);
+      window.open('https://www.w3schools.com', '_self');   //zhila: change into the Qualtrics survey.. 
+      $codePage.fadeOut();
+    }
+
+  });
   // Sets the client's username
   function setUsername () {
     username = cleanInput($usernameInput.val().trim());
@@ -323,39 +347,42 @@ function startTimer() {
     console.log(chat_content);
     console.log('box usage count was:');
     console.log(box_count);
-    let randCode = Math.random().toString(36).substring(7);
-    alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
+    // let randCode = Math.random().toString(36).substring(7);
+    // alert("You are finished working with your partner. ");
     user_record ={
       "name": username,
       "text" : chat_content,
       "num": box_count
     }
     // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
-    postSurveyTab();
+    $chatPage.fadeOut();
+    $codePage.show();
+    // $chatPage.off('click');
+    socket.emit('send to DB', conv_expriment);
+    codeTab();
     alertornot();
     $fullPage.show();
-    $chatPage.off('click');
+    $codePage.off('click');
     socket.emit('disconnect');
+
   } 
   // add an timeout event to handle it! emit timeout here and handle it down below
   document.getElementById('timer').innerHTML =
   m + ":" + s;
   setTimeout(startTimer, 1000);
 }
-
 function checkSecond(sec) {
   if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
   if (sec < 0) {sec = "59"};
   return sec;
 }
 //zhila: update this function with the URL to the post questioner 
-function postSurveyTab(){
-  socket.emit('send to DB', conv_expriment);
-  chat_content = ''; //empty the chat history.
-
-  window.open('https://www.w3schools.com', '_self');  
+//load the code tab, and on click event redirect the user to qualtrics survey url ... 
+function codeTab(){
+    //$('.ui.red.button')[0].textContent = Math.random().toString(36).substring(7);
+    $('.input.ui.input')[3].value = Math.random().toString(36).substring(7);
+    chat_content = ''; //empty the chat history.
 }
-
   $inputMessage.on('input', function() {
     updateTyping();
   });
@@ -382,6 +409,23 @@ function postSurveyTab(){
       {
         sendText()
         return
+      }
+
+      if($(this).text()=="Ok!")
+      {
+        $codePage.fadeOut();
+        window.open('https://www.w3schools.com', '_self');  
+      }
+
+      if($(this).text()=="Copy Code")
+      {
+        var copyText = document.getElementById("codeInput");
+        copyText.select();
+        copyText.setSelectionRange(0,99999);
+        document.execCommand("copy");
+        alert("Copied the text:" + copyText.value);
+        window.open('https://www.w3schools.com', '_self');   //zhila: change into the Qualtrics survey.. 
+        $codePage.fadeOut();
       }
 
       box_count = box_count+1;
