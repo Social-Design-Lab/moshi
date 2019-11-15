@@ -439,6 +439,7 @@ function codeTab(){
         inputData0 = shuffle(inputData)
         $('.ui.blue.button')[0].textContent =inputData0[1].Response;
         $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+        $('.ui.blue.button')[2].textContent =inputData0[3].Response;
       });
 
       $.getJSON('NegCsvjson.json', function(csvjson) {
@@ -446,6 +447,8 @@ function codeTab(){
         inputData00 = shuffle(inputData)
         $('.ui.gray.button')[0].textContent =inputData00[1].Response;
         $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
       });
 
     });
@@ -478,6 +481,8 @@ function codeTab(){
           inputData0 = shuffle(inputData)
           $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+
         });
 
         $.getJSON('NegCsvjson.json', function(csvjson) {
@@ -485,6 +490,8 @@ function codeTab(){
           inputData00 = shuffle(inputData)
           $('.ui.gray.button')[0].textContent =inputData00[1].Response;
           $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+          $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
         });
   });
 
