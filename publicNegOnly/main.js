@@ -1,8 +1,7 @@
-//Negetive only
+//Negetive
 $.getJSON('csvjson.json', function(csvjson) {
 
   inputData = csvjson;
-  console.log(csvjson);
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
   var COLORS = [
@@ -15,13 +14,11 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
-  // var $inputMessage = $('.inputMessage'); // Input message input box
   var $inputMessage = $('.ui.input'); // Input message input box
-
   var $suggestedMessage = $('.ui.button'); // Input suggestion message button
-  // var $suggestedMessageBox = $('.ui.buttons');
-  var $submit =$('big.ui.white.button');
+  var $suggestedMessageBox = $('.ui.buttons');
 
+  var $submit =$('big.ui.white.button');
   var $b1 = $('b1');
   var chat_content = '';
   var box_count =0;
@@ -31,7 +28,12 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $chatPage = $('.chat.page'); // The chatroom page
   var $fullPage = $('.full.page'); // The chatroom page
   var $codePage = $('.code.page'); // The code page
-  $codePage.hide();
+  // $codePage.hide();
+  //      $('.ui.modal')
+  //   .modal('hide')
+  // ;
+
+
   // Prompt for setting a username
   var username;
   var connected = false;
@@ -42,11 +44,10 @@ $.getJSON('csvjson.json', function(csvjson) {
   var socket = io();
   var conv_expriment = {
     data: new Date(),
-    group: 'Negetive', // this item should be hard coded for each group
+    group: 'Positive_Negetive', // this item should be hard coded for each group
     convo: new Array()// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
-  console.log(conv_expriment.data);
 
   function addParticipantsMessage (data) {
     var message = '';
@@ -54,20 +55,21 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 00 + ":" + 15; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 20; // set the chat period.
       startTimer();
     }
     log(message);
   }
+
   //Set username when clicking on submit button...
-   $('big.ui.white.button').on('click', function() 
+  $('big.ui.white.button').on('click', function() 
   {
     if($(this).text()=="Submit")
     {
      setUsername(); 
     }
 
-    if($(this).text()=="Ok!") // should I have an OK button?
+    if($(this).text()=="Ok!")
     {
       // post-Survey-Tab();s
       window.open('https://www.w3schools.com', '_self');   //zhila: change into the Qualtrics survey.. 
@@ -76,6 +78,7 @@ $.getJSON('csvjson.json', function(csvjson) {
 
    if($(this).text()=="Copy Code")
     {
+      // socket.emit('send to DB', conv_expriment);
       var copyText = document.getElementById("codeInput");
       copyText.select();
       copyText.setSelectionRange(0,99999);
@@ -95,7 +98,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (username) {
       $loginPage.fadeOut();
       $chatPage.show();
-      $loginPage.off('click'); // what does this one do?
+      $loginPage.off('click');
       $currentInput = $inputMessage.focus();
 
       // Tell the server your username join room
@@ -106,7 +109,6 @@ $.getJSON('csvjson.json', function(csvjson) {
 
   // Sends a chat message
   function sendMessage () {
-    // var message = $inputMessage.val();
     var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
     chat_content = chat_content.concat(' ');
     chat_content = chat_content.concat(message);
@@ -160,7 +162,6 @@ $.getJSON('csvjson.json', function(csvjson) {
 
     if (data.message != 'is typing'){
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
-        console.log(conv_expriment);
     }
   
     addMessageElement($messageDiv, options);
@@ -270,16 +271,10 @@ $.getJSON('csvjson.json', function(csvjson) {
         socket.emit('stop typing');
         typing = false;
         var count = Object.keys(inputData).length;
+        // update after the enter 
 
-        // $.getJSON('PosCsvjson.json', function(csvjson) {
-        //   inputData = csvjson;
-        //   inputData0 = shuffle(inputData)
-        //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-        //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-        // });
-
-        $.getJSON('NegCsvjson.json', function(csvjsonN) {
-          inputData = csvjsonN;
+        $.getJSON('NegCsvjson.json', function(csvjson) {
+          inputData = csvjson;
           inputData00 = shuffle(inputData)
           $('.ui.blue.button')[0].textContent =inputData00[1].Response;
           $('.ui.blue.button')[1].textContent =inputData00[2].Response;
@@ -292,11 +287,11 @@ $.getJSON('csvjson.json', function(csvjson) {
         setUsername();
       }
     }
+
   });
 
     function sendText()
     {
-    console.log('PURPOLE');
     is_suggested = 0;
     if (username) {
       sendMessage();
@@ -304,14 +299,6 @@ $.getJSON('csvjson.json', function(csvjson) {
       typing = false;
       var count = Object.keys(inputData).length;
       // update after sending the buttons
-
-      // $.getJSON('PosCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData0 = shuffle(inputData)
-      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-      // });
-
       $.getJSON('NegCsvjson.json', function(csvjson) {
         inputData = csvjson;
         inputData00 = shuffle(inputData)
@@ -320,6 +307,7 @@ $.getJSON('csvjson.json', function(csvjson) {
         $('.ui.blue.button')[2].textContent =inputData00[3].Response;
 
       });
+
 
 
       } else {
@@ -339,8 +327,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   }
 
 
-
-function startTimer() {
+  function startTimer() {
   var presentTime = document.getElementById('timer').innerHTML;
   var timeArray = presentTime.split(/[:]+/);
   var m = timeArray[0];
@@ -349,9 +336,6 @@ function startTimer() {
   if(m<0)
   {
     $chatPage.fadeOut();
-    console.log(chat_content);
-    console.log('box usage count was:');
-    console.log(box_count);
     let randCode = Math.random().toString(36).substring(7);
     // alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
     user_record ={
@@ -360,15 +344,17 @@ function startTimer() {
       "num": box_count
     }
     // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
-    $chatPage.fadeOut();
-    $codePage.show();
-    // $chatPage.off('click');
     socket.emit('send to DB', conv_expriment);
+    $chatPage.fadeOut();
+     $('.ui.modal')
+    .modal('show')
+  ;
+    // $codePage.show();
+    // $chatPage.off('click');
+    console.log("@@@data  send to mongoDB @@@");
     codeTab();
     alertornot();
-    $fullPage.show();
-    $codePage.off('click');
-    socket.emit('disconnect');
+
   } 
   // add an timeout event to handle it! emit timeout here and handle it down below
   document.getElementById('timer').innerHTML =
@@ -381,11 +367,15 @@ function checkSecond(sec) {
   if (sec < 0) {sec = "59"};
   return sec;
 }
-//zhila: update this function with the URL to the post questioner 
+//load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
     //$('.ui.red.button')[0].textContent = Math.random().toString(36).substring(7);
     $('.input.ui.input')[3].value = Math.random().toString(36).substring(7);
     chat_content = ''; //empty the chat history.
+    $fullPage.show();
+    $codePage.off('click');
+    socket.emit('disconnect');
+
 }
 
   $inputMessage.on('input', function() {
@@ -410,7 +400,7 @@ function codeTab(){
 
   $('.ui.button').on('click', function() {
       var txt = $(this).text();
-      if($(this).text().length==0 ||  $(this).text()=="Submit") //zhila: add it to other versions then remove this comment
+      if($(this).text().length==0 ||  $(this).text()=="Submit") 
       {
         sendText()
         return
@@ -424,6 +414,7 @@ function codeTab(){
 
       if($(this).text()=="Copy Code")
       {
+        // socket.emit('send to DB', conv_expriment);
         var copyText = document.getElementById("codeInput");
         copyText.select();
         copyText.setSelectionRange(0,99999);
@@ -437,13 +428,7 @@ function codeTab(){
       is_suggested=1; 
       $("input:text").val(txt);   
       sendMessage();
-      // update the suggestion box ..
-      // $.getJSON('PosCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData0 = shuffle(inputData)
-      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-      // });
+      // update the suggestion box .. after pressing the suggestion box
 
       $.getJSON('NegCsvjson.json', function(csvjson) {
         inputData = csvjson;
@@ -454,7 +439,6 @@ function codeTab(){
 
       });
 
-      //console.log(txt);
     });
 
   // Socket events
@@ -472,9 +456,7 @@ function codeTab(){
       addParticipantsMessage(data);
     } else {
       $chatPage.fadeOut();
-      $fullPage.show();
-      $chatPage.off('click');
-      
+      $fullPage.show();      
     }
     
   });
@@ -482,13 +464,15 @@ function codeTab(){
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
     addChatMessage(data);
-    $.getJSON('NegCsvjson.json', function(csvjsonN) {
-      inputData = csvjsonN;
-      inputData00 = shuffle(inputData)
-      $('.ui.blue.button')[0].textContent =inputData00[1].Response;
-      $('.ui.blue.button')[1].textContent =inputData00[2].Response;
-    });
 
+        $.getJSON('NegCsvjson.json', function(csvjson) {
+          inputData = csvjson;
+          inputData00 = shuffle(inputData)
+          $('.ui.blue.button')[0].textContent =inputData00[1].Response;
+          $('.ui.blue.button')[1].textContent =inputData00[2].Response;
+          $('.ui.blue.button')[2].textContent =inputData00[3].Response;
+
+        });
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
@@ -533,5 +517,4 @@ function codeTab(){
 
 
 });
-
 

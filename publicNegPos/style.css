@@ -1,5 +1,5 @@
 /* Fix user-agent */
-/* Neg-Positive version */
+/* Neg-positive */
 
 * {
   box-sizing: border-box;
@@ -84,7 +84,7 @@ ul {
   outline: none;
   padding-bottom: 15px;
   text-align: center;
-  width: 300px;
+  /*width: 300px;*/
 }
 
 .login.page .title {
@@ -100,7 +100,6 @@ ul {
   color: #fff;
   font-weight: 100;
 }
-/*zhila:remove this part;*/
 
 .code.page {
   background-color: #000;
@@ -117,7 +116,7 @@ ul {
 }
 
 .code.page .title {
-  font-size: 200%;
+  font-size: 150%;
 }
 
 .code.page .title{
@@ -132,7 +131,7 @@ ul {
   outline: none;
   padding-bottom: 15px;
   text-align: center;
-  width: 300px;
+  /*width: 300px;*/
 }
 
 /*zhila:remove this part;*/
@@ -203,6 +202,10 @@ ul {
   margin-right:10px;
  float:right;
 
+}
+
+.illustration {
+  width: 100%;
 }
 
 }

@@ -2,7 +2,6 @@
 $.getJSON('csvjson.json', function(csvjson) {
 
   inputData = csvjson;
-  console.log(csvjson);
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
   var COLORS = [
@@ -29,7 +28,11 @@ $.getJSON('csvjson.json', function(csvjson) {
   var $chatPage = $('.chat.page'); // The chatroom page
   var $fullPage = $('.full.page'); // The chatroom page
   var $codePage = $('.code.page'); // The code page
-  $codePage.hide();
+  // $codePage.hide();
+  //      $('.ui.modal')
+  //   .modal('hide')
+  // ;
+
 
   // Prompt for setting a username
   var username;
@@ -45,7 +48,6 @@ $.getJSON('csvjson.json', function(csvjson) {
     convo: new Array()// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
-  console.log(conv_expriment.data);
 
   function addParticipantsMessage (data) {
     var message = '';
@@ -53,7 +55,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 00 + ":" + 10; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 20; // set the chat period.
       startTimer();
     }
     log(message);
@@ -76,6 +78,7 @@ $.getJSON('csvjson.json', function(csvjson) {
 
    if($(this).text()=="Copy Code")
     {
+      // socket.emit('send to DB', conv_expriment);
       var copyText = document.getElementById("codeInput");
       copyText.select();
       copyText.setSelectionRange(0,99999);
@@ -159,7 +162,6 @@ $.getJSON('csvjson.json', function(csvjson) {
 
     if (data.message != 'is typing'){
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
-        console.log(conv_expriment);
     }
   
     addMessageElement($messageDiv, options);
@@ -275,13 +277,15 @@ $.getJSON('csvjson.json', function(csvjson) {
           inputData0 = shuffle(inputData)
           $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          $('.ui.blue.button')[2].textContent =inputData0[3].Response;
         });
-
         $.getJSON('NegCsvjson.json', function(csvjson) {
           inputData = csvjson;
           inputData00 = shuffle(inputData)
           $('.ui.gray.button')[0].textContent =inputData00[1].Response;
           $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+          $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
         });
 
 
@@ -294,7 +298,6 @@ $.getJSON('csvjson.json', function(csvjson) {
 
     function sendText()
     {
-    console.log('PURPOLE');
     is_suggested = 0;
     if (username) {
       sendMessage();
@@ -307,14 +310,17 @@ $.getJSON('csvjson.json', function(csvjson) {
         inputData0 = shuffle(inputData)
         $('.ui.blue.button')[0].textContent =inputData0[1].Response;
         $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+        $('.ui.blue.button')[2].textContent =inputData0[3].Response;
       });
-
       $.getJSON('NegCsvjson.json', function(csvjson) {
         inputData = csvjson;
         inputData00 = shuffle(inputData)
         $('.ui.gray.button')[0].textContent =inputData00[1].Response;
         $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
       });
+
 
 
       } else {
@@ -334,8 +340,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   }
 
 
-
-function startTimer() {
+  function startTimer() {
   var presentTime = document.getElementById('timer').innerHTML;
   var timeArray = presentTime.split(/[:]+/);
   var m = timeArray[0];
@@ -344,26 +349,24 @@ function startTimer() {
   if(m<0)
   {
     $chatPage.fadeOut();
-    console.log(chat_content);
-    console.log('box usage count was:');
-    console.log(box_count);
-    // let randCode = Math.random().toString(36).substring(7);
-    // alert("You are finished working with your partner. ");
+    let randCode = Math.random().toString(36).substring(7);
+    // alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
     user_record ={
       "name": username,
       "text" : chat_content,
       "num": box_count
     }
     // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
-    $chatPage.fadeOut();
-    $codePage.show();
-    // $chatPage.off('click');
     socket.emit('send to DB', conv_expriment);
+    $chatPage.fadeOut();
+     $('.ui.modal')
+    .modal('show')
+  ;
+    // $codePage.show();
+    // $chatPage.off('click');
+    console.log("@@@data  send to mongoDB @@@");
     codeTab();
     alertornot();
-    $fullPage.show();
-    $codePage.off('click');
-    socket.emit('disconnect');
 
   } 
   // add an timeout event to handle it! emit timeout here and handle it down below
@@ -382,6 +385,10 @@ function codeTab(){
     //$('.ui.red.button')[0].textContent = Math.random().toString(36).substring(7);
     $('.input.ui.input')[3].value = Math.random().toString(36).substring(7);
     chat_content = ''; //empty the chat history.
+    $fullPage.show();
+    $codePage.off('click');
+    socket.emit('disconnect');
+
 }
 
   $inputMessage.on('input', function() {
@@ -420,6 +427,7 @@ function codeTab(){
 
       if($(this).text()=="Copy Code")
       {
+        // socket.emit('send to DB', conv_expriment);
         var copyText = document.getElementById("codeInput");
         copyText.select();
         copyText.setSelectionRange(0,99999);

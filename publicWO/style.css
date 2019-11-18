@@ -83,7 +83,7 @@ ul {
   outline: none;
   padding-bottom: 15px;
   text-align: center;
-  width: 400px;
+  /*width: 400px;*/
 }
 
 .login.page .title {
@@ -98,6 +98,41 @@ ul {
 .login.page .title, .login.page .usernameInput {
   color: #fff;
   font-weight: 100;
+}
+
+
+.code.page {
+  background-color: #000;
+
+}
+.code.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.code.page .title {
+  font-size: 150%;
+}
+
+.code.page .title{
+  color: #fff;
+  font-weight: 100;
+}
+
+.login.page .form  {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+/*  width: 300px;
+*/
 }
 
 /* Chat page */
