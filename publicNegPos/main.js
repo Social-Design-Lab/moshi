@@ -358,6 +358,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     }
     // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
     socket.emit('send to DB', conv_expriment);
+    console.log('sent to db####################');
     $chatPage.fadeOut();
      $('.ui.modal')
     .modal('show')
