@@ -23,6 +23,8 @@ $.getJSON('csvjson.json', function(csvjson) {
   var chat_content = '';
   var box_count =0;
   var is_suggested;
+  var message_id = 0
+  var root_id=1; //zhila: ask dominic about this one..
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -43,6 +45,11 @@ $.getJSON('csvjson.json', function(csvjson) {
 
   var socket = io();
   var conv_expriment = {
+    data: new Date(),
+    group: 'Positive_Negetive', // this item should be hard coded for each group
+    convo: new Array()// An array to store objects of each conversation
+  };
+  var conv_expriment_second = {
     data: new Date(),
     group: 'Positive_Negetive', // this item should be hard coded for each group
     convo: new Array()// An array to store objects of each conversation
@@ -109,6 +116,7 @@ $.getJSON('csvjson.json', function(csvjson) {
 
   // Sends a chat message
   function sendMessage () {
+    message_id = message_id+1;
     var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
     chat_content = chat_content.concat(' ');
     chat_content = chat_content.concat(message);
@@ -126,7 +134,9 @@ $.getJSON('csvjson.json', function(csvjson) {
       var obj = {
         username: username,
         message: message,
-        is_suggested: is_suggested
+        is_suggested: is_suggested,
+        //zhila: send id of the sender
+        sender_id:message_id
       };
       socket.emit('new message', obj);
     }
@@ -163,6 +173,10 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (data.message != 'is typing'){
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
     }
+    //zhila: Update the data base based on Jess Example:id: reply_number, reply_to: sender_number
+    // if (data.message != 'is typing'){
+    //     conv_expriment_second.convo.push({id: reply_number, reply_to: sender_number, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+    // }
   
     addMessageElement($messageDiv, options);
   }
