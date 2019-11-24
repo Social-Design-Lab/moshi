@@ -64,7 +64,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 00 + ":" + 40; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 20; // set the chat period.
       startTimer();
     }
     log(message);
@@ -407,7 +407,7 @@ function checkSecond(sec) {
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
   //zhila: check
-    var str_val = user_record.name.concat('hal').concat(root_id);
+    var str_val = '{'.concat(user_record.name).concat('}').concat('hal').concat('{').concat(root_id).concat('}');
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
     console.log(str_val);

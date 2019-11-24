@@ -10,7 +10,7 @@ var port = process.env.PORT || 3000;
 // loading .env file
 require('dotenv').config();
 
-var MongoClient = require('mongodb').MongoClient;
+var MongoClient =  require('mongodb').MongoClient;
 var url = process.env.url;
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
