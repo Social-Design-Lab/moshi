@@ -23,6 +23,9 @@ $.getJSON('csvjson.json', function(csvjson) {
   var chat_content = '';
   var box_count =0;
   var is_suggested;
+  var root_id=1; //zhila: ask Jess about this one..
+  var sender_id=0;
+  var reply_to =0;
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -44,7 +47,12 @@ $.getJSON('csvjson.json', function(csvjson) {
   var socket = io();
   var conv_expriment = {
     data: new Date(),
-    group: 'Positive_Negetive', // this item should be hard coded for each group
+    group: 'Negetive', // this item should be hard coded for each group
+    convo: new Array()// An array to store objects of each conversation
+  };
+  var conv_expriment_second = {
+    data: new Date(),
+    group: 'Negetive', // this item should be hard coded for each group
     convo: new Array()// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
@@ -103,12 +111,17 @@ $.getJSON('csvjson.json', function(csvjson) {
 
       // Tell the server your username join room
       //socket.emit('add user', username);
-      socket.emit('join room', username);
+      var obj ={
+        username: username,
+        sender_id:sender_id
+      };
+      socket.emit('join room', obj);
     }
   }
 
   // Sends a chat message
   function sendMessage () {
+    sender_id = sender_id+1;
     var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
     chat_content = chat_content.concat(' ');
     chat_content = chat_content.concat(message);
@@ -123,10 +136,15 @@ $.getJSON('csvjson.json', function(csvjson) {
         is_suggested: is_suggested
       });
       // tell server to execute 'new message' and send along one parameter
+      //zhila:remove it:
+      console.log('sender id is: '+sender_id);
+      console.log('reply to:' +reply_to);
       var obj = {
         username: username,
         message: message,
-        is_suggested: is_suggested
+        is_suggested: is_suggested,
+        //send sender's id
+        sender_id: sender_id
       };
       socket.emit('new message', obj);
     }
@@ -163,7 +181,10 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (data.message != 'is typing'){
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
     }
-  
+    //zhila: Update the data base based on Jess Example:id: reply_number, reply_to: sender_number
+    if (data.message != 'is typing'){
+        conv_expriment_second.convo.push({id: sender_id, reply_to: reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+    }
     addMessageElement($messageDiv, options);
   }
 
@@ -344,7 +365,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       "num": box_count
     }
     // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
-    socket.emit('send to DB', conv_expriment);
+    socket.emit('send to DB', conv_expriment_second);
     $chatPage.fadeOut();
      $('.ui.modal')
     .modal('show')
@@ -369,8 +390,9 @@ function checkSecond(sec) {
 }
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
-    //$('.ui.red.button')[0].textContent = Math.random().toString(36).substring(7);
-    $('.input.ui.input')[3].value = Math.random().toString(36).substring(7);
+    var str_val = '{'.concat(user_record.name).concat('}').concat('hal').concat('{').concat(root_id).concat('}');
+    $('.input.ui.input')[3].value = str_val;
+    //$('.input.ui.input')[3].value = Math.random().toString(36).substring(7);
     chat_content = ''; //empty the chat history.
     $fullPage.show();
     $codePage.off('click');
@@ -463,6 +485,8 @@ function codeTab(){
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
+    reply_to = data.sender_id+1;
+    sender_id = data.sender_id+1;
     addChatMessage(data);
 
         $.getJSON('NegCsvjson.json', function(csvjson) {
@@ -479,8 +503,15 @@ function codeTab(){
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
+    //give the new user the sender id
+    socket.emit('sender update', sender_id);
 
   });
+  socket.on('sender update', function(id){
+    reply_to =id;
+    sender_id = id;
+  });
+
 
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {

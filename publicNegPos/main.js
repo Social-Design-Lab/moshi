@@ -23,7 +23,6 @@ $.getJSON('csvjson.json', function(csvjson) {
   var chat_content = '';
   var box_count =0;
   var is_suggested;
-  // var message_id = 0
   var root_id=1; //zhila: ask Jess about this one..
   var sender_id=0;
   var reply_to =0;
@@ -144,7 +143,7 @@ $.getJSON('csvjson.json', function(csvjson) {
         username: username,
         message: message,
         is_suggested: is_suggested,
-        //zhila: send id of the sender
+        //send sender's id
         sender_id: sender_id
       };
       socket.emit('new message', obj);
@@ -538,7 +537,7 @@ function codeTab(){
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
-    //zhila: give the new user the sender id
+    //give the new user the sender id
     socket.emit('sender update', sender_id);
 
   });
