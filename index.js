@@ -40,12 +40,15 @@ io.on('connection', function (socket) {
   var myroom = -1;
 
   //add user to a new room
-  socket.on('join room', function (newRoom) {
+  socket.on('join room', function (data) {
     //var rooms = io.sockets.adapter.rooms;
     /*var clients = function (rm) {
         return io.of('/').adapter.rooms[rm];
     };*/
-    
+    //zhila: fix it. change the argument to newRoom
+    //remove
+    var newRoom =data.username;
+    var sender_id = data.sender_id;
     if (addedUser) return;
 
     socket.username = newRoom;
@@ -66,7 +69,8 @@ io.on('connection', function (socket) {
       socket.join(myroom);
 
       socket.emit('login', {
-        numUsers: 1
+        numUsers: 1,
+        sender_id:sender_id
       });
       // echo globally (all clients) that a person has connected
       io.to(myroom).emit('user joined', {
@@ -91,7 +95,8 @@ io.on('connection', function (socket) {
           console.log("Entering exsiting room. My room is now: "+myroom);
           socket.join(myroom) ;
           socket.emit('login', {
-            numUsers: 2
+            numUsers: 2,
+            sender_id:sender_id
           });
           
           socket.to(myroom).emit('user joined', {
@@ -115,7 +120,8 @@ io.on('connection', function (socket) {
       socket.join(newRoom);
 
       socket.emit('login', {
-        numUsers: 1
+        numUsers: 1,
+        sender_id:sender_id
       });
       // echo globally (all clients) that a person has connected
       socket.to(myroom).emit('user joined', {
@@ -132,14 +138,22 @@ io.on('connection', function (socket) {
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
     is_suggested = data.is_suggested;
+    sender_id = data.sender_id;
+    //zhila:
+    data.sender_id =data.sender_id-1;
     socket.to(myroom).emit('new message', {
     //socket.broadcast.emit('new message', {
       username: socket.username,
       message: data.message,
-      is_suggested: data.is_suggested
+      is_suggested: data.is_suggested,
+      sender_id : data.sender_id
     });
     
 
+  });
+  //zhila:remove it
+  socket.on('sender update', function(id){
+      socket.to(myroom).emit('sender update', id);
   });
 
   // when the client emits 'add user', this listens and executes
