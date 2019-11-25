@@ -140,13 +140,14 @@ io.on('connection', function (socket) {
     is_suggested = data.is_suggested;
     sender_id = data.sender_id;
     //zhila:
-    data.sender_id =data.sender_id-1;
+    data.sender_id =data.sender_id;
     socket.to(myroom).emit('new message', {
     //socket.broadcast.emit('new message', {
       username: socket.username,
       message: data.message,
       is_suggested: data.is_suggested,
-      sender_id : data.sender_id
+      sender_id : data.sender_id,
+      reply_to: data.reply_to
     });
     
 
@@ -157,16 +158,17 @@ io.on('connection', function (socket) {
   });
 
   // when the client emits 'add user', this listens and executes
-  socket.on('add user', function (username) {
+  socket.on('add user', function (data) {
     if (addedUser) return;
 
     if (numUsers < 2){
       // we store the username in the socket session for this client
-      socket.username = username;
+      socket.username = data.username;
       ++numUsers;
       addedUser = true;
       socket.emit('login', {
-        numUsers: numUsers
+        numUsers: numUsers,
+        sender_id: data.sender_id
       });
       // echo globally (all clients) that a person has connected
       socket.broadcast.emit('user joined', {
@@ -177,7 +179,8 @@ io.on('connection', function (socket) {
     else
     {
       socket.emit('login', {
-        numUsers: -1
+        numUsers: -1,
+        sender_id: data.sender_id
       });
     }
   });
