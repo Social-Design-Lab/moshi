@@ -1,4 +1,4 @@
-//PositieNegetive
+//Positive
 $.getJSON('csvjson.json', function(csvjson) {
 
   inputData = csvjson;
@@ -26,6 +26,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var root_id=1; //zhila: ask Jess about this one..
   var sender_id=0;
   var reply_to =0;
+  var partner_name='';
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -408,7 +409,7 @@ function checkSecond(sec) {
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
   //zhila: check
-    var str_val = '{'.concat(user_record.name).concat('}').concat('hal').concat('{').concat(root_id).concat('}');
+    var str_val = (user_record.name).concat('hal').concat(partner_name);
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
     console.log(str_val);
@@ -518,6 +519,8 @@ function codeTab(){
     { 
       sender_id = data.sender_id;
       reply_to = data.sender_id;
+      partner_name=data.username;
+
     }
 
     addChatMessage(data);

@@ -26,6 +26,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var root_id=1; //zhila: ask Jess about this one..
   var sender_id=0;
   var reply_to =0;
+  var partner_name='';
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -58,7 +59,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 00 + ":" + 20; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 30; // set the chat period.
       startTimer();
     }
     log(message);
@@ -407,8 +408,7 @@ function checkSecond(sec) {
 }
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
-  //zhila: check
-    var str_val = '{'.concat(user_record.name).concat('}').concat('hal').concat('{').concat(root_id).concat('}');
+    var str_val = (user_record.name).concat('hal').concat(partner_name);
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
     console.log(str_val);
@@ -551,6 +551,8 @@ function codeTab(){
   socket.on('sender update', function(id){
     reply_to =id;
     sender_id = id;
+    partner_name=data.username;
+
   });
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
