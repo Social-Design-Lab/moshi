@@ -518,6 +518,7 @@ function codeTab(){
     {	
     	sender_id = data.sender_id;
     	reply_to = data.sender_id;
+      partner_name=data.username;
     }
 
     addChatMessage(data);
@@ -551,8 +552,6 @@ function codeTab(){
   socket.on('sender update', function(id){
     reply_to =id;
     sender_id = id;
-    partner_name=data.username;
-
   });
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
