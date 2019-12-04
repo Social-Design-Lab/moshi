@@ -25,7 +25,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var is_suggested;
   var root_id=1; //zhila: ask Jess about this one..
   var sender_id=0;
-  var reply_to =0;
+  var reply_to ='';
   var partner_name='';
   var stored_reply='';
   var previous_sender='';
