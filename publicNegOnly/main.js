@@ -27,6 +27,8 @@ $.getJSON('csvjson.json', function(csvjson) {
   var sender_id=0;
   var reply_to =0;
   var partner_name='';
+  var stored_reply='';
+  var previous_sender='';
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -181,13 +183,28 @@ $.getJSON('csvjson.json', function(csvjson) {
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
     }
     //zhila: Update the data base based on Jess Example:id: reply_number, reply_to: sender_number
+    // if (data.message != 'is typing'){
+    //     conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+    // }
     if (data.message != 'is typing'){
-        conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+
+      // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+      if(previous_sender === data.username)
+      {
+       conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+       stored_reply='';
+      } 
+      else 
+      {
+      conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+      stored_reply = data.reply_to;
+      }
+      previous_sender = data.username;
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
-        console.log('reply to:' +data.reply_to);
-
+      console.log('reply to:' +stored_reply);
     }
+
   
     addMessageElement($messageDiv, options);
   }
