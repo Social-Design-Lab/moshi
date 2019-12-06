@@ -29,7 +29,8 @@ $.getJSON('csvjson.json', function(csvjson) {
   var partner_name='';
   var stored_reply='';
   var previous_sender='';
-  
+  var observed_smart_replies=new Array();
+
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
   var $fullPage = $('.full.page'); // The chatroom page
@@ -188,18 +189,20 @@ $.getJSON('csvjson.json', function(csvjson) {
       // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
       if(previous_sender === data.username)
       {
-       conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+       conv_expriment_second.convo.push({id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
        stored_reply='';
       } 
       else 
       {
-      conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+      conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested,smart_replies: observed_smart_replies, date: new Date()});
       stored_reply = data.reply_to;
       }
       previous_sender = data.username;
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
       console.log('reply to:' +stored_reply);
+      console.log('Smart Replies:'+observed_smart_replies);
+      observed_smart_replies=new Array();
     }
   
     addMessageElement($messageDiv, options);
@@ -305,6 +308,9 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (event.which === 13) {
       is_suggested = 0;
       if (username) {
+        observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+        observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+        observed_smart_replies.push($('.ui.blue.button')[2].textContent);
         sendMessage();
         socket.emit('stop typing');
         typing = false;
@@ -338,6 +344,10 @@ $.getJSON('csvjson.json', function(csvjson) {
     {
     is_suggested = 0;
     if (username) {
+      observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[2].textContent);
+
       sendMessage();
       socket.emit('stop typing');
       typing = false;
@@ -482,7 +492,10 @@ function codeTab(){
 
       box_count = box_count+1;
       is_suggested=1; 
-      $("input:text").val(txt);   
+      $("input:text").val(txt); 
+      observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[2].textContent);  
       sendMessage();
       // update the suggestion box .. after pressing the suggestion box
       $.getJSON('PosCsvjson.json', function(csvjson) {
