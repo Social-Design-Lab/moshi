@@ -315,7 +315,7 @@ $.getJSON('csvjson.json', function(csvjson) {
         observed_smart_replies.push($('.ui.gray.button')[0].textContent);
         observed_smart_replies.push($('.ui.gray.button')[1].textContent);
         observed_smart_replies.push($('.ui.gray.button')[2].textContent);
-        fage();
+        sendMessage();
         socket.emit('stop typing');
         typing = false;
         var count = Object.keys(inputData).length;
