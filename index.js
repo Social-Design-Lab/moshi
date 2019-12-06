@@ -147,7 +147,8 @@ io.on('connection', function (socket) {
       message: data.message,
       is_suggested: data.is_suggested,
       sender_id : data.sender_id,
-      reply_to: data.reply_to
+      reply_to: data.reply_to,
+      observed_smart_replies:data.observed_smart_replies
     });
     
 

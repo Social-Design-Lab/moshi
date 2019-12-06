@@ -30,6 +30,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var stored_reply='';
   var previous_sender='';
   var observed_smart_replies=new Array();
+  var stored_smart_replies = new Array();
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -146,7 +147,8 @@ $.getJSON('csvjson.json', function(csvjson) {
         is_suggested: is_suggested,
         //send sender's id
         sender_id: sender_id,
-        reply_to:reply_to
+        reply_to:reply_to,
+        observed_smart_replies : stored_smart_replies
       };
       socket.emit('new message', obj);
     }
@@ -203,6 +205,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       console.log('sender id is: '+data.sender_id);
       console.log('reply to:' +stored_reply);
       console.log('Smart Replies:'+observed_smart_replies);
+      stored_smart_replies = observed_smart_replies;
       observed_smart_replies=new Array();
     }
   
@@ -554,6 +557,8 @@ function codeTab(){
     	sender_id = data.sender_id;
     	reply_to = data.sender_id;
       partner_name=data.username;
+      observed_smart_replies.push(data.observed_smart_replies);
+      console.log(observed_smart_replies);
     }
     //zhila check this one!
     if(data.username === username)
