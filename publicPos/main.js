@@ -23,11 +23,10 @@ $.getJSON('csvjson.json', function(csvjson) {
   var chat_content = '';
   var box_count =0;
   var is_suggested;
-  var root_id=1; //zhila: ask Jess about this one..
+  var root_id=1; 
   var sender_id=0;
   var reply_to ='';
   var partner_name='';
-  var stored_reply='';
   var previous_sender='';
   var observed_smart_replies=new Array();
 
@@ -52,7 +51,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var conv_expriment_second = {
     data: new Date(),
     group: 'Positive', // this item should be hard coded for each group
-    convo: new Array()// An array to store objects of each conversation
+    convo: new Array(),// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
 
@@ -62,7 +61,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 02 + ":" + 59; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 30; // set the chat period.
       startTimer();
     }
     log(message);
@@ -133,20 +132,18 @@ $.getJSON('csvjson.json', function(csvjson) {
         message: message,
         is_suggested: is_suggested,
         sender_id:sender_id,
-        reply_to:reply_to
+        reply_to:reply_to,
+        observed_smart_replies : observed_smart_replies
       });
       // tell server to execute 'new message' and send along one parameter
-    //sender_id = sender_id+1;
-      //zhila:remove it:
-      // console.log('sender id is: '+sender_id);
-      // console.log('reply to:' +reply_to);
         var obj = {
         username: username,
         message: message,
         is_suggested: is_suggested,
         //send sender's id
         sender_id: sender_id,
-        reply_to:reply_to
+        reply_to:reply_to,
+        observed_smart_replies : stored_smart_replies
       };
       socket.emit('new message', obj);
     }
@@ -184,24 +181,25 @@ $.getJSON('csvjson.json', function(csvjson) {
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
     }
     //zhila: Update the data base based on Jess Example:id: reply_number, reply_to: sender_number
-   if (data.message != 'is typing'){
+    if (data.message != 'is typing'){
 
       // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
       if(previous_sender === data.username)
       {
-       conv_expriment_second.convo.push({id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-       stored_reply='';
+        //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+        conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
       } 
       else 
       {
-      conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested,smart_replies: observed_smart_replies, date: new Date()});
-      stored_reply = data.reply_to;
+        conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
       }
       previous_sender = data.username;
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
-      console.log('reply to:' +stored_reply);
-      console.log('Smart Replies:'+observed_smart_replies);
+      console.log('reply to:' +data.reply_to);
+      console.log('Smart Replies:'+data.observed_smart_replies);
+      stored_smart_replies = new Array();
+      stored_smart_replies.push(observed_smart_replies);
       observed_smart_replies=new Array();
     }
   
@@ -212,7 +210,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   function addChatTyping (data) {
     data.typing = true;
     data.message = 'is typing';
-    addChatMessage(data); //safe..zhila:removeaddChatMessage
+    addChatMessage(data);
   }
 
   // Removes the visual chat typing message
@@ -323,14 +321,6 @@ $.getJSON('csvjson.json', function(csvjson) {
           $('.ui.blue.button')[1].textContent =inputData0[2].Response;
           $('.ui.blue.button')[2].textContent =inputData0[3].Response;
         });
-        // $.getJSON('NegCsvjson.json', function(csvjson) {
-        //   inputData = csvjson;
-        //   inputData00 = shuffle(inputData)
-        //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-        //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-        //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
-
-        // });
 
 
       } else {
@@ -347,7 +337,6 @@ $.getJSON('csvjson.json', function(csvjson) {
       observed_smart_replies.push($('.ui.blue.button')[0].textContent);
       observed_smart_replies.push($('.ui.blue.button')[1].textContent);
       observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-
       sendMessage();
       socket.emit('stop typing');
       typing = false;
@@ -360,16 +349,6 @@ $.getJSON('csvjson.json', function(csvjson) {
         $('.ui.blue.button')[1].textContent =inputData0[2].Response;
         $('.ui.blue.button')[2].textContent =inputData0[3].Response;
       });
-      // $.getJSON('NegCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData00 = shuffle(inputData)
-      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-      //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
-
-      // });
-
-
 
       } else {
         setUsername();
@@ -431,7 +410,6 @@ function checkSecond(sec) {
 }
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
-  //zhila: check
     var str_val = (user_record.name).concat('hal').concat(partner_name);
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
@@ -492,10 +470,10 @@ function codeTab(){
 
       box_count = box_count+1;
       is_suggested=1; 
-      $("input:text").val(txt); 
+      $("input:text").val(txt);  
       observed_smart_replies.push($('.ui.blue.button')[0].textContent);
       observed_smart_replies.push($('.ui.blue.button')[1].textContent);
-      observed_smart_replies.push($('.ui.blue.button')[2].textContent);  
+      observed_smart_replies.push($('.ui.blue.button')[2].textContent);
       sendMessage();
       // update the suggestion box .. after pressing the suggestion box
       $.getJSON('PosCsvjson.json', function(csvjson) {
@@ -505,15 +483,6 @@ function codeTab(){
         $('.ui.blue.button')[1].textContent =inputData0[2].Response;
         $('.ui.blue.button')[2].textContent =inputData0[3].Response;
       });
-
-      // $.getJSON('NegCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData00 = shuffle(inputData)
-      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-      //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
-
-      // });
 
     });
 
@@ -546,7 +515,14 @@ function codeTab(){
       sender_id = data.sender_id;
       reply_to = data.sender_id;
       partner_name=data.username;
+      //observed_smart_replies.push(data.observed_smart_replies);
+      //console.log(observed_smart_replies);
+      console.log('*******562*******');
 
+    }
+    if(data.username === username)
+    {
+      reply_to = null;
     }
 
     addChatMessage(data);
@@ -558,15 +534,6 @@ function codeTab(){
           $('.ui.blue.button')[2].textContent =inputData0[3].Response;
 
         });
-
-        // $.getJSON('NegCsvjson.json', function(csvjson) {
-        //   inputData = csvjson;
-        //   inputData00 = shuffle(inputData)
-        //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-        //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-        //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
-
-        // });
   });
 
   // Whenever the server emits 'user joined', log it in the chat body

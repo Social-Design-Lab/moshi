@@ -27,7 +27,6 @@ $.getJSON('csvjson.json', function(csvjson) {
   var sender_id=0;
   var reply_to ='';
   var partner_name='';
-  var stored_reply='';
   var previous_sender='';
   var observed_smart_replies=new Array();
 
@@ -137,10 +136,6 @@ $.getJSON('csvjson.json', function(csvjson) {
         observed_smart_replies : observed_smart_replies
       });
       // tell server to execute 'new message' and send along one parameter
-	  //sender_id = sender_id+1;
-      //zhila:remove it:
-      // console.log('sender id is: '+sender_id);
-      // console.log('reply to:' +reply_to);
         var obj = {
         username: username,
         message: message,
@@ -193,7 +188,6 @@ $.getJSON('csvjson.json', function(csvjson) {
       {
         //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
         conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
-        stored_reply='';
       } 
       else 
       {
@@ -202,11 +196,10 @@ $.getJSON('csvjson.json', function(csvjson) {
       previous_sender = data.username;
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
-      console.log('reply to:' +stored_reply);
+      console.log('reply to:' +data.reply_to);
       console.log('Smart Replies:'+data.observed_smart_replies);
       stored_smart_replies = new Array();
       stored_smart_replies.push(observed_smart_replies);
-      //zhila:
       observed_smart_replies=new Array();
     }
   
@@ -217,7 +210,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   function addChatTyping (data) {
     data.typing = true;
     data.message = 'is typing';
-    addChatMessage(data); //safe..zhila:removeaddChatMessage
+    addChatMessage(data);
   }
 
   // Removes the visual chat typing message
@@ -563,21 +556,12 @@ function codeTab(){
       console.log('*******562*******');
 
     }
-    //zhila check this one!
     if(data.username === username)
     {
     	reply_to = null;
     }
 
     addChatMessage(data);
-    //zhila: ask Jess and possibily remove these..
-    // observed_smart_replies.push($('.ui.blue.button')[0].textContent);
-    // observed_smart_replies.push($('.ui.blue.button')[1].textContent);
-    // observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-    // observed_smart_replies.push($('.ui.gray.button')[0].textContent);
-    // observed_smart_replies.push($('.ui.gray.button')[1].textContent);
-    // observed_smart_replies.push($('.ui.gray.button')[2].textContent);
-
     $.getJSON('PosCsvjson.json', function(csvjson) {
           inputData = csvjson;
           inputData0 = shuffle(inputData)

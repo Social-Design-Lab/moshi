@@ -24,9 +24,6 @@ app.use('/n',express.static(path.join(__dirname, 'publicNegOnly')));
 app.use('/np',express.static(path.join(__dirname, 'publicNegPos'))); 
 app.use('/p',express.static(path.join(__dirname, 'publicPos'))); 
 
-
-//zhila,, fix it .. they might need same name..
-
 // Chatroom
 
 var numUsers = 0;
@@ -41,12 +38,6 @@ io.on('connection', function (socket) {
 
   //add user to a new room
   socket.on('join room', function (data) {
-    //var rooms = io.sockets.adapter.rooms;
-    /*var clients = function (rm) {
-        return io.of('/').adapter.rooms[rm];
-    };*/
-    //zhila: fix it. change the argument to newRoom
-    //remove
     var newRoom =data.username;
     var sender_id = data.sender_id;
     if (addedUser) return;
@@ -139,7 +130,6 @@ io.on('connection', function (socket) {
     // we tell the client to execute 'new message'
     is_suggested = data.is_suggested;
     sender_id = data.sender_id;
-    //zhila:
     data.sender_id =data.sender_id;
     socket.to(myroom).emit('new message', {
     //socket.broadcast.emit('new message', {
@@ -153,7 +143,6 @@ io.on('connection', function (socket) {
     
 
   });
-  //zhila:remove it
   socket.on('sender update', function(id){
       socket.to(myroom).emit('sender update', id);
   });
