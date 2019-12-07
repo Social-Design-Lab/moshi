@@ -133,7 +133,8 @@ $.getJSON('csvjson.json', function(csvjson) {
         message: message,
         is_suggested: is_suggested,
         sender_id:sender_id,
-        reply_to:reply_to
+        reply_to:reply_to,
+        observed_smart_replies : observed_smart_replies
       });
       // tell server to execute 'new message' and send along one parameter
 	  //sender_id = sender_id+1;
@@ -191,18 +192,18 @@ $.getJSON('csvjson.json', function(csvjson) {
       if(previous_sender === data.username)
       {
         //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-        conv_expriment_second.convo.push({id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+        conv_expriment_second.convo.push({id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         stored_reply='';
       } 
       else 
       {
-        conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested,smart_replies: observed_smart_replies, date: new Date()});
+        conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested,smart_replies: data.observed_smart_replies, date: new Date()});
       }
       previous_sender = data.username;
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
       console.log('reply to:' +stored_reply);
-      console.log('Smart Replies:'+observed_smart_replies);
+      console.log('Smart Replies:'+data.observed_smart_replies);
       stored_smart_replies = new Array();
       stored_smart_replies.push(observed_smart_replies);
       //zhila:
