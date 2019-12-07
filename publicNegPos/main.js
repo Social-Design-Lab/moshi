@@ -192,12 +192,12 @@ $.getJSON('csvjson.json', function(csvjson) {
       if(previous_sender === data.username)
       {
         //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-        conv_expriment_second.convo.push({id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+        conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         stored_reply='';
       } 
       else 
       {
-        conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested,smart_replies: data.observed_smart_replies, date: new Date()});
+        conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
       }
       previous_sender = data.username;
       console.log('username:'+data.username)
@@ -558,8 +558,8 @@ function codeTab(){
     	sender_id = data.sender_id;
     	reply_to = data.sender_id;
       partner_name=data.username;
-      observed_smart_replies.push(data.observed_smart_replies);
-      console.log(observed_smart_replies);
+      //observed_smart_replies.push(data.observed_smart_replies);
+      //console.log(observed_smart_replies);
       console.log('*******562*******');
 
     }
