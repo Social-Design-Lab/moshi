@@ -61,7 +61,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 00 + ":" + 30; // set the chat period.
+      document.getElementById('timer').innerHTML = 10 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
