@@ -1,122 +1,140 @@
 [
   {
-    "Response": "No"
+    "No": "That's terrible"
   },
   {
-    "Response": "That's terrible"
+    "No": "Weird"
   },
   {
-    "Response": "Weird"
+    "No": "That sucks"
   },
   {
-    "Response": "That sucks"
+    "No": "I don't know"
   },
   {
-    "Response": "I don't know"
+    "No": "My bad"
   },
   {
-    "Response": "My bad"
+    "No": "Nothing exciting"
   },
   {
-    "Response": "Nothing exciting"
+    "No": "But not yet"
   },
   {
-    "Response": "But not yet"
+    "No": "I'm not too sure"
   },
   {
-    "Response": "I'm not too sure"
+    "No": "I am confused"
   },
   {
-    "Response": "I am confused"
+    "No": "No you don't"
   },
   {
-    "Response": "No you don't"
+    "No": "Don't know"
   },
   {
-    "Response": "Don't know"
+    "No": "/: Exactly"
   },
   {
-    "Response": "/: Exactly"
+    "No": "Ugh"
   },
   {
-    "Response": "Ugh"
+    "No": "Nothing"
   },
   {
-    "Response": "Nothing"
+    "No": "I don't get it"
   },
   {
-    "Response": "I don't get it"
+    "No": "I don't think so"
   },
   {
-    "Response": "I don't think so"
+    "No": "Yeah sorry"
   },
   {
-    "Response": "Yeah sorry"
+    "No": "Sigh"
   },
   {
-    "Response": "Sigh"
+    "No": "I was confused"
   },
   {
-    "Response": "I was confused"
+    "No": "/:"
   },
   {
-    "Response": "/:"
+    "No": "I don't understand your question"
   },
   {
-    "Response": "I don't understand your question"
+    "No": "It's terrible"
   },
   {
-    "Response": "It's terrible"
+    "No": "No!"
   },
   {
-    "Response": "Sorry!"
+    "No": "Sorry!"
   },
   {
-    "Response": "Not sure though"
+    "No": "Not sure though"
   },
   {
-    "Response": "Very sorry"
+    "No": "Very sorry"
   },
   {
-    "Response": "What were you thinking?"
+    "No": "What were you thinking?"
   },
   {
-    "Response": "I edon't know"
+    "No": "I don't know"
   },
   {
-    "Response": "Sorry I was confused"
+    "No": "Sorry I was confused"
   },
   {
-    "Response": "I don't understand"
+    "No": "I don't understand"
   },
   {
-    "Response": "Ouch"
+    "No": "Ouch"
   },
   {
-    "Response": "No you didn't"
+    "No": "No you didn't"
   },
   {
-    "Response": "That is wrong"
+    "No": "That is wrong"
   },
   {
-    "Response": ":/"
+    "No": ":/"
   },
   {
-    "Response": "no"
+    "No": "no"
   },
   {
-    "Response": "Nope. Why?"
+    "No": "Nope. Why?"
   },
   {
-    "Response": "Oops Shoot"
+    "No": "Oops Shoot"
   },
   {
-    "Response": "Sigh"
+    "No": "Sigh"
   },
   {
-    "Response": "No it's not"
+    "No": "No it's not"
   },
   {
-    "Response": "Nope!"
+    "No": "Nope!"
+  },
+  {
+    "No": "No."
+  },
+  {
+    "No": "Nope"
+  },
+  {
+    "No": "No, I'm not"
+  },
+  {
+    "No": "No you're not"
+  },
+  {
+    "No": "Sorry to hear that"
+  },
+  {
+    "No": "Not really"
   }
 ]
