@@ -61,7 +61,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 10 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 40; // set the chat period.
       startTimer();
     }
     log(message);
@@ -135,6 +135,24 @@ $.getJSON('csvjson.json', function(csvjson) {
         reply_to:reply_to,
         observed_smart_replies : observed_smart_replies
       });
+      // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+      if(previous_sender === username)
+      {
+        //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+        conv_expriment_second.convo.push({ user: username, id: sender_id, root:root_id, text: message, is_suggested: is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+      } 
+      else 
+      {
+        conv_expriment_second.convo.push({ user: username, id: sender_id, root:root_id, text: message, is_suggested: is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+      }
+      previous_sender = username;
+      console.log('username:'+username)
+      console.log('sender id is: '+sender_id);
+      console.log('reply to:' +reply_to);
+      console.log('Smart Replies:'+observed_smart_replies);
+      stored_smart_replies = new Array();
+      stored_smart_replies.push(observed_smart_replies);
+      observed_smart_replies=new Array();
       // tell server to execute 'new message' and send along one parameter
         var obj = {
         username: username,
@@ -180,29 +198,6 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (data.message != 'is typing'){
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
     }
-    //zhila: Update the data base based on Jess Example:id: reply_number, reply_to: sender_number
-    if (data.message != 'is typing'){
-
-      // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
-      if(previous_sender === data.username)
-      {
-        //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-        conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
-      } 
-      else 
-      {
-        conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
-      }
-      previous_sender = data.username;
-      console.log('username:'+data.username)
-      console.log('sender id is: '+data.sender_id);
-      console.log('reply to:' +data.reply_to);
-      console.log('Smart Replies:'+data.observed_smart_replies);
-      stored_smart_replies = new Array();
-      stored_smart_replies.push(observed_smart_replies);
-      observed_smart_replies=new Array();
-    }
-  
     addMessageElement($messageDiv, options);
   }
 
