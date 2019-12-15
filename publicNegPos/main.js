@@ -29,6 +29,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var partner_name='';
   var previous_sender='';
   var observed_smart_replies=new Array();
+  var category='';
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -44,6 +45,7 @@ $.getJSON('csvjson.json', function(csvjson) {
 
   var socket = io();
   var conv_expriment = {
+    category: category,
     data: new Date(),
     group: 'Positive_Negetive', // this item should be hard coded for each group
     convo: new Array()// An array to store objects of each conversation
@@ -135,24 +137,48 @@ $.getJSON('csvjson.json', function(csvjson) {
         reply_to:reply_to,
         observed_smart_replies : observed_smart_replies
       });
-      // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
-      if(previous_sender === username)
-      {
-        //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-        conv_expriment_second.convo.push({ user: username, id: sender_id, root:root_id, text: message, is_suggested: is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-      } 
-      else 
-      {
-        conv_expriment_second.convo.push({ user: username, id: sender_id, root:root_id, text: message, is_suggested: is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-      }
-      previous_sender = username;
-      console.log('username:'+username)
-      console.log('sender id is: '+sender_id);
-      console.log('reply to:' +reply_to);
-      console.log('Smart Replies:'+observed_smart_replies);
-      stored_smart_replies = new Array();
-      stored_smart_replies.push(observed_smart_replies);
-      observed_smart_replies=new Array();
+      //zhila: Update the data base based on Jess Example:id: reply_number, reply_to: sender_number
+    // if (data.message != 'is typing'){
+
+    //   // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+    //   if(previous_sender === data.username)
+    //   {
+    //     //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+    //     conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+    //   } 
+    //   else 
+    //   {
+    //     conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+    //   }
+    //   
+    //   previous_sender = data.username;
+    //   console.log('username:'+data.username)
+    //   console.log('sender id is: '+data.sender_id);
+    //   console.log('reply to:' +data.reply_to);
+    //   console.log('Smart Replies:'+data.observed_smart_replies);
+    //   stored_smart_replies = new Array();
+    //   stored_smart_replies.push(observed_smart_replies);
+    //   observed_smart_replies=new Array();
+    // }
+      // // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+      // if(previous_sender === username)
+      // {
+      //   //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+      //   conv_expriment_second.convo.push({ user: username, id: sender_id, root:root_id, text: message, is_suggested: is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+      // } 
+      // else 
+      // {
+      //   conv_expriment_second.convo.push({ user: username, id: sender_id, root:root_id, text: message, is_suggested: is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+      // }
+      // previous_sender = username;
+      // console.log('username:'+username)
+      // console.log('sender id is: '+sender_id);
+      // console.log('reply to:' +reply_to);
+      // console.log('Smart Replies:'+observed_smart_replies);
+      // stored_smart_replies = new Array();
+      // stored_smart_replies.push(observed_smart_replies);
+      // observed_smart_replies=new Array();
+
       // tell server to execute 'new message' and send along one parameter
         var obj = {
         username: username,
@@ -197,6 +223,29 @@ $.getJSON('csvjson.json', function(csvjson) {
 
     if (data.message != 'is typing'){
         conv_expriment.convo.push({name: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+    }
+
+    if (data.message != 'is typing'){
+
+      // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
+      if(previous_sender === data.username)
+      {
+        //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+        conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+      } 
+      else 
+      {
+        conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+      }
+      previous_sender = data.username;
+      console.log('category:' +category);
+      console.log('username:'+data.username)
+      console.log('sender id is: '+data.sender_id);
+      console.log('reply to:' +data.reply_to);
+      console.log('Smart Replies:'+data.observed_smart_replies);
+      stored_smart_replies = new Array();
+      stored_smart_replies.push(observed_smart_replies);
+      observed_smart_replies=new Array();
     }
     addMessageElement($messageDiv, options);
   }
@@ -522,6 +571,18 @@ function codeTab(){
   // Whenever the server emits 'login', log the login message
   socket.on('login', function (data) {
 
+    //zhila: working on it
+    if(data.category ==='a')
+    {
+      category ='a';
+    }
+    else if (data.category==='b')
+    {
+      category='b';
+    }
+    else {
+      category='c';
+    }
     if (data.numUsers != -1) {
       connected = true;
       // Display the welcome message

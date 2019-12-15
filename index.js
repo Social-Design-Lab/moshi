@@ -61,7 +61,8 @@ io.on('connection', function (socket) {
 
       socket.emit('login', {
         numUsers: 1,
-        sender_id:sender_id
+        sender_id:sender_id,
+        category : 'a'
       });
       // echo globally (all clients) that a person has connected
       io.to(myroom).emit('user joined', {
@@ -87,7 +88,8 @@ io.on('connection', function (socket) {
           socket.join(myroom) ;
           socket.emit('login', {
             numUsers: 2,
-            sender_id:sender_id
+            sender_id:sender_id,
+            category : 'b'
           });
           
           socket.to(myroom).emit('user joined', {
@@ -112,7 +114,8 @@ io.on('connection', function (socket) {
 
       socket.emit('login', {
         numUsers: 1,
-        sender_id:sender_id
+        sender_id:sender_id,
+        category : 'a'
       });
       // echo globally (all clients) that a person has connected
       socket.to(myroom).emit('user joined', {
@@ -156,10 +159,26 @@ io.on('connection', function (socket) {
       socket.username = data.username;
       ++numUsers;
       addedUser = true;
-      socket.emit('login', {
+      if (numUsers ===1)
+      {
+        socket.emit('login', {
         numUsers: numUsers,
-        sender_id: data.sender_id
-      });
+        sender_id: data.sender_id,
+        category : 'a'
+        });
+      }
+      else if(numUsers ===2)
+      {
+        socket.emit('login', {
+        numUsers: numUsers,
+        sender_id: data.sender_id,
+        category : 'b'
+        });
+      }
+      // socket.emit('login', {
+      //   numUsers: numUsers,
+      //   sender_id: data.sender_id
+      // });
       // echo globally (all clients) that a person has connected
       socket.broadcast.emit('user joined', {
         username: socket.username,
@@ -170,19 +189,48 @@ io.on('connection', function (socket) {
     {
       socket.emit('login', {
         numUsers: -1,
-        sender_id: data.sender_id
+        sender_id: data.sender_id,
+        category : 'c'
       });
     }
   });
   //when the client emit 'send to DB', we send it to mongoDB:
   // socket.on('send to DB', function(data)
   socket.on('send to DB', function(data)
-  {    
-    MongoClient.connect(url, {useNewUrlParser: true } ,function(err, db) {
+  { 
+    //Data Base from the first partners' perspective  
+    if (data.category === 'a')
+    { 
+      MongoClient.connect(url, {useNewUrlParser: true } ,function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        var myobj = data;
+        dbo.collection("conversationHist").insertOne(myobj,function(err,res){
+          if (err) throw err;
+          console.log("1 document inserted");
+          db.close();
+        });
+      }); 
+
+      MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        dbo.collection("conversationHist").find({}).toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          db.close();
+        });
+      });
+    } 
+    //
+    //Data Base from the second partners' perspective
+    if(data.category === 'b')
+    {
+      MongoClient.connect(url, {useNewUrlParser: true } ,function(err, db) {
       if (err) throw err;
       var dbo = db.db("mydb");
       var myobj = data;
-      dbo.collection("conversationHist").insertOne(myobj,function(err,res){
+      dbo.collection("conversationHistB").insertOne(myobj,function(err,res){
         if (err) throw err;
         console.log("1 document inserted");
         db.close();
@@ -192,13 +240,13 @@ io.on('connection', function (socket) {
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
       var dbo = db.db("mydb");
-      dbo.collection("conversationHist").find({}).toArray(function(err, result) {
+      dbo.collection("conversationHistB").find({}).toArray(function(err, result) {
         if (err) throw err;
         console.log(result);
         db.close();
       });
-
     });
+    }
   });
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
