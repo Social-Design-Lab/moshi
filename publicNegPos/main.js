@@ -29,7 +29,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var partner_name='';
   var previous_sender='';
   var observed_smart_replies=new Array();
-  var category='';
+  // var category='';
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -45,12 +45,12 @@ $.getJSON('csvjson.json', function(csvjson) {
 
   var socket = io();
   var conv_expriment = {
-    category: category,
     data: new Date(),
     group: 'Positive_Negetive', // this item should be hard coded for each group
     convo: new Array()// An array to store objects of each conversation
   };
   var conv_expriment_second = {
+    category: '',
     data: new Date(),
     group: 'Positive_Negetive', // this item should be hard coded for each group
     convo: new Array(),// An array to store objects of each conversation
@@ -228,7 +228,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (data.message != 'is typing'){
 
       // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
-      if(previous_sender === data.username)
+      if(previous_sender == data.username)
       {
         //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
         conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
@@ -238,7 +238,7 @@ $.getJSON('csvjson.json', function(csvjson) {
         conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
       }
       previous_sender = data.username;
-      console.log('category:' +category);
+      console.log('category:' +conv_expriment_second.category);
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
       console.log('reply to:' +data.reply_to);
@@ -452,8 +452,10 @@ $.getJSON('csvjson.json', function(csvjson) {
       "num": box_count
     }
     // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
+
     socket.emit('send to DB', conv_expriment_second);
     console.log('sent to db####################');
+    console.log('my category is:' + conv_expriment_second.category);
     $chatPage.fadeOut();
      $('.ui.modal')
     .modal('show')
@@ -572,16 +574,16 @@ function codeTab(){
   socket.on('login', function (data) {
 
     //zhila: working on it
-    if(data.category ==='a')
+    if(data.category =="a")
     {
-      category ='a';
+      conv_expriment_second.category ='a';
     }
-    else if (data.category==='b')
+    else if (data.category=="b")
     {
-      category='b';
+      conv_expriment_second.category='b';
     }
     else {
-      category='c';
+      conv_expriment_second.category='c';
     }
     if (data.numUsers != -1) {
       connected = true;

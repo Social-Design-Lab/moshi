@@ -159,7 +159,7 @@ io.on('connection', function (socket) {
       socket.username = data.username;
       ++numUsers;
       addedUser = true;
-      if (numUsers ===1)
+      if (numUsers ==1)
       {
         socket.emit('login', {
         numUsers: numUsers,
@@ -167,7 +167,7 @@ io.on('connection', function (socket) {
         category : 'a'
         });
       }
-      else if(numUsers ===2)
+      else if(numUsers ==2)
       {
         socket.emit('login', {
         numUsers: numUsers,
@@ -199,13 +199,13 @@ io.on('connection', function (socket) {
   socket.on('send to DB', function(data)
   { 
     //Data Base from the first partners' perspective  
-    if (data.category === 'a')
+    if (data.category == "a")
     { 
       MongoClient.connect(url, {useNewUrlParser: true } ,function(err, db) {
         if (err) throw err;
         var dbo = db.db("mydb");
         var myobj = data;
-        dbo.collection("conversationHist").insertOne(myobj,function(err,res){
+        dbo.collection("conversationHistA").insertOne(myobj,function(err,res){
           if (err) throw err;
           console.log("1 document inserted");
           db.close();
@@ -215,16 +215,17 @@ io.on('connection', function (socket) {
       MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("mydb");
-        dbo.collection("conversationHist").find({}).toArray(function(err, result) {
+        dbo.collection("conversationHistA").find({}).toArray(function(err, result) {
           if (err) throw err;
           console.log(result);
           db.close();
         });
       });
+      console.log('added to histA');
     } 
     //
     //Data Base from the second partners' perspective
-    if(data.category === 'b')
+    if(data.category == "b")
     {
       MongoClient.connect(url, {useNewUrlParser: true } ,function(err, db) {
       if (err) throw err;
@@ -237,15 +238,16 @@ io.on('connection', function (socket) {
       });
     }); 
 
-    MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      var dbo = db.db("mydb");
-      dbo.collection("conversationHistB").find({}).toArray(function(err, result) {
+      MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        console.log(result);
-        db.close();
+        var dbo = db.db("mydb");
+        dbo.collection("conversationHistB").find({}).toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          db.close();
+        });
       });
-    });
+      console.log('added to histB');
     }
   });
   // when the client emits 'typing', we broadcast it to others
