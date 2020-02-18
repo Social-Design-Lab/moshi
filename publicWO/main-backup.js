@@ -10,8 +10,6 @@ $.getJSON('csvjson.json', function(csvjson) {
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
   ];
 
-  $('#proceed').hide();
-
   // Initialize variables
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
@@ -65,7 +63,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 00 + ":" + 10; // set the chat period.
+      document.getElementById('timer').innerHTML = 10 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
@@ -357,35 +355,30 @@ $.getJSON('csvjson.json', function(csvjson) {
   if(m<0)
   {
     //zhila:instead activate the button and when that is pressed then do the following
-    //$("#proceed").show();
-    //zhila
-    $('#proceed').fadeIn(2200);
-    $('#proceed').on('click', function() {
-      $chatPage.fadeOut();
-      let randCode = Math.random().toString(36).substring(7);
-      // alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
-      user_record ={
-        "name": username,
-        "text" : chat_content,
-        "num": box_count
-      }
-      // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
-
-      socket.emit('send to DB', conv_expriment_second);
-      console.log('sent to db####################');
-      console.log('my category is:' + conv_expriment_second.category);
-      $chatPage.fadeOut();
-       $('.ui.modal')
-      .modal('show')
-    ;
-      // $codePage.show();
-      // $chatPage.off('click');
-      console.log("@@@data  send to mongoDB @@@");
-      codeTab();
-      alertornot();
-
-    });
     
+    $chatPage.fadeOut();
+    let randCode = Math.random().toString(36).substring(7);
+    // alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
+    user_record ={
+      "name": username,
+      "text" : chat_content,
+      "num": box_count
+    }
+    // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
+
+    socket.emit('send to DB', conv_expriment_second);
+    console.log('sent to db####################');
+    console.log('my category is:' + conv_expriment_second.category);
+    $chatPage.fadeOut();
+     $('.ui.modal')
+    .modal('show')
+  ;
+    // $codePage.show();
+    // $chatPage.off('click');
+    console.log("@@@data  send to mongoDB @@@");
+    codeTab();
+    alertornot();
+
   } 
   // add an timeout event to handle it! emit timeout here and handle it down below
   document.getElementById('timer').innerHTML =

@@ -300,14 +300,10 @@ ul {
       font-size:16px; 
       font-weight:bold; 
     }
-/*zhila: to be removed!*/
- /*   .div{
-      background-color:#419D78;
-      color:#EFD0CA;
-      font-size:20px;
-      text-align:center;
+
+    .proceed {
+      display:none; 
     }
-*/
 
 }
 
