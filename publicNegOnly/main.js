@@ -9,7 +9,6 @@ $.getJSON('csvjson.json', function(csvjson) {
     '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
   ];
-
   // Initialize variables
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
@@ -63,7 +62,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 10 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 04 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
@@ -380,29 +379,34 @@ $.getJSON('csvjson.json', function(csvjson) {
   if(s==59){m=m-1}
   if(m<0)
   {
-    $chatPage.fadeOut();
-    let randCode = Math.random().toString(36).substring(7);
-    // alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
-    user_record ={
-      "name": username,
-      "text" : chat_content,
-      "num": box_count
-    }
-    // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
+    //$('#proceed').fadeIn(2200);
+    $('#proceed').attr('disabled',false);
+    $('#proceed').on('click', function() {
+      $chatPage.fadeOut();
+      let randCode = Math.random().toString(36).substring(7);
+      // alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
+      user_record ={
+        "name": username,
+        "text" : chat_content,
+        "num": box_count
+      }
+      // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
 
-    socket.emit('send to DB', conv_expriment_second);
-    console.log('sent to db####################');
-    console.log('my category is:' + conv_expriment_second.category);
-    $chatPage.fadeOut();
-     $('.ui.modal')
-    .modal('show')
-  ;
-    // $codePage.show();
-    // $chatPage.off('click');
-    console.log("@@@data  send to mongoDB @@@");
-    codeTab();
-    alertornot();
+      socket.emit('send to DB', conv_expriment_second);
+      console.log('sent to db####################');
+      console.log('my category is:' + conv_expriment_second.category);
+      $chatPage.fadeOut();
+       $('.ui.modal')
+      .modal('show')
+    ;
+      // $codePage.show();
+      // $chatPage.off('click');
+      console.log("@@@data  send to mongoDB @@@");
+      codeTab();
+      alertornot();
 
+    });
+    
   } 
   // add an timeout event to handle it! emit timeout here and handle it down below
   document.getElementById('timer').innerHTML =
@@ -454,6 +458,10 @@ function codeTab(){
       if($(this).text().length==0 ||  $(this).text()=="Submit") 
       {
         sendText()
+        return
+      }
+      if($(this).text()=="Conversation complete")
+      {
         return
       }
 
