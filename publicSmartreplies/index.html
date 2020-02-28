@@ -1,0 +1,125 @@
+<!-- Pos-Negetive only -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+
+  <title>Socket.IO Chat Example</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+  <title>Stopwatch</title>
+  <link rel="stylesheet" href="stopwatch.css">
+
+<!--   <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+ -->  
+ <script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
+</head>  
+
+<body>
+  <ul class="pages">
+    <li class="chat page">
+      <div class="chatArea">
+        <!-- <div>  Time Left: <span id="timer"></span></div> -->
+        <div hidden> <i class="blue large hourglass half icon" ></i> <span id="timer"></span></div>
+        <ul class="messages"></ul>
+        <div><button id = "proceed" class="ui green right floated button" disabled="true">Conversation complete</i></button></div>
+
+      </div>
+      <div>
+        <button class="Tiny blue ui button">Hello!</button>
+        <button class="Tiny blue ui button">Thanks</button>
+        <button class="Tiny blue ui button">Sounds good</button>
+	  </div>
+	  <div>
+        <button class="Tiny gray ui button">I don't know!</button>
+        <button class="Tiny gray ui button">Ugh</button>
+        <button class="Tiny gray ui button">I don't understand</button>
+	  </div>
+
+
+
+<!-- 	    <div class="ui four column grid">
+	      <div class="row">
+	      	<div class="buttons">
+		      	<div class="column"></div>
+		        <button class="Tiny blue ui button">Hello!</button>
+		        <div class="column"></div>
+		        <button class="Tiny blue ui button">Thanks</button>
+		        <div class="column"></div>
+		        <button class="Tiny blue ui button">Sounds good</button>
+		        <div class="column"></div>
+		        <button class="Tiny gray ui button">I don't know!</button>
+		        <div class="column"></div>
+		        <button class="Tiny gray ui button">Ugh</button>
+		        <div class="column"></div>
+		        <button class="Tiny gray ui button">I don't understand</button>
+		    </div>
+	    </div>
+	  </div> -->
+
+
+<!-- 	  	<div class="ui four column grid">
+ -->	      
+
+<!--  			<div class="row">		      	
+		        <button class="Tiny blue ui button">Hello!</button>
+		        
+		        <button class="Tiny blue ui button">Thanks</button>
+		        
+		        <button class="Tiny blue ui button">Sounds good</button>
+		        
+		        <button class="Tiny gray ui button">I don't know!</button>
+		        
+		        <button class="Tiny gray ui button">Ugh</button>
+		       
+		        <button class="Tiny gray ui button">I don't understand</button>
+		    </div>
+	    </div> -->
+<!-- 	  </div>
+ -->
+      <div class="ui fluid action input">
+        <input id="txt" class="ui input" type="text" placeholder="Type here...">
+        <button id = "snd" class="ui blue button"><i class="telegram plane icon"></i></button>
+      </div>
+
+    <li class="login page">
+      <div class="form">
+        <h3 class="title">What's your nickname?</h3>
+          <input class="usernameInput" type="text" maxlength="14" />
+        <div>
+          <button id = "submit" class="big ui white button">Submit</i></button>
+        </div>
+      </div>
+    </li>
+
+    <!-- zhila: remove this -->
+    <div class = "ui modal">
+        <li class="code page">
+          <div class="form">
+            <h3 class="title">You are finished working with your partner. Please copy and paste the below code into the Qualtrics survey</h3>
+          <div class="ui huge action input">
+            <input type="text" class="ui input" placeholder="Code..." id="codeInput">
+            <button class="ui button">Copy Code</button>
+          </div>
+        </div>
+        </li>
+    </div>
+
+
+  </ul>
+
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+  <script type="text/javascript" src="csvjson.json"></script>
+  <script src="lib/easytimer/dist/easytimer.min.js"></script>
+  <script>
+    var Timer = new easytimer.Timer();
+  </script>
+
+
+</body>
+</html>

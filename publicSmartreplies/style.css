@@ -1,0 +1,318 @@
+/* Fix user-agent 
+Negetive positve version*/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, input {
+  font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
+}
+
+html, body {
+  height: 85%;
+  margin: 0;
+  padding: 0;
+  font-size:30px;
+}
+
+ul {
+  list-style: none;
+  word-wrap: break-word;
+}
+
+/* Pages */
+
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* Login Page */
+
+.login.page {
+  background-color: #000;
+
+}
+
+.full.page {
+  background-color: ##e2d8d8;
+  display: none;
+  font-size: 200%;
+  text-align: center;
+}
+
+.full.page .title, .full.page .usernameInput {
+  color: #fff;
+  font-weight: 100;
+}
+
+.login.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.login.page .form .usernameInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+  /*width: 400px;*/
+}
+
+.login.page .title {
+  font-size: 200%;
+}
+
+.login.page .usernameInput {
+  font-size: 200%;
+  letter-spacing: 3px;
+}
+
+.login.page .title, .login.page .usernameInput {
+  color: #fff;
+  font-weight: 100;
+}
+
+
+
+.code.page {
+  background-color: #000;
+
+}
+.code.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.code.page .title {
+  font-size: 150%;
+}
+
+.code.page .title{
+  color: #fff;
+  font-weight: 100;
+}
+
+.login.page .form  {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+  /*width: 300px;*/
+}
+
+/* Chat page */
+
+.chat.page {
+  display: none;
+}
+
+/* Font */
+
+.messages {
+  font-size: 150%;
+  line-height: 30px;
+}
+
+.inputMessage {
+  font-size: 100%;
+}
+
+.log {
+  color: gray;
+  font-size: 70%;
+  margin: 5px;
+  text-align: center;
+}
+
+/* Messages */
+
+.chatArea {
+  height:85%;  /*Zhila: fix it*/
+  padding-bottom: 60px;
+}
+
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  padding: 10px 20px 10px 20px;
+}
+
+.message.typing .messageBody {
+  color: gray;
+}
+
+.username {
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 15px;
+  text-align: right;
+}
+
+/* Input */
+
+.inputMessage {
+  border: 10px solid #000;
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  position: absolute;
+ outline: none;
+  padding-left: 10px;
+  right: 0;
+  width: 100%;
+}
+/* zhila: to be removed */
+.stopwatch {
+    width: 300px;
+    background-color: #0af;
+    border-radius: 5px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.75), 0 0 1px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+
+    &, & * {
+        transition: all 0.15s ease-out;
+    }
+
+    .controls {
+        display: flex;
+
+        button {
+            flex-grow: 1;
+            margin: 0 5px 4px;
+            padding: 5px 0;
+            border-radius: 5px;
+            box-shadow: 0 4px rgba(0, 0, 0, 0.75);
+            border: 0;
+            outline: 0;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+
+            &:active {
+                margin-bottom: 0;
+                margin-top: 4px;
+                box-shadow: none;
+            }
+        }
+
+        .start {
+            background-color: #5d5;
+
+            &:hover {
+                background-color: #6e6;
+            }
+        }
+
+        .stop {
+            background-color: #d55;
+
+            &:hover {
+                background-color: #e66;
+            }
+        }
+
+        .reset {
+            background-color: #55d;
+
+            &:hover {
+                background-color: #66e;
+            }
+        }
+    }
+
+    .display {
+        font-size: 50px;
+        font-family: sans-serif;
+        text-align: center;
+        margin-top: 10px;
+
+        :not(:last-child):after {
+            content: ':';
+        }
+    }
+    /* Zhila: to be removed or modified!; */
+    .stopWatch {
+        width: 280px;
+        height: auto;
+        text-align: center; 
+        display: block;
+        padding: 5px;
+        margin: 0 auto;
+    } 
+
+     .timer {
+        width: auto;
+        height: auto;
+        padding: 10px;
+        font-weight: bold;
+        font-family: tahoma;
+        display: block;
+        border: 1px solid #eee;
+        text-align: center;
+        box-shadow: 0 0 5px #ccc;
+        background: #fbfbf0;
+        color: darkblue;
+        border-bottom:4px solid darkgrey;
+    } 
+    .button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .fulltime { 
+      display:none; 
+      font-size:16px; 
+      font-weight:bold; 
+    }
+/*zhila: to be removed!*/
+ /*   .div{
+      background-color:#419D78;
+      color:#EFD0CA;
+      font-size:20px;
+      text-align:center;
+    }
+*/
+
+}
+
+
+
+
