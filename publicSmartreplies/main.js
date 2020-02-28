@@ -569,9 +569,9 @@ function codeTab(){
   socket.on('new message', function (data) {
     //zhila
     if(data.username != username)
-    {	
-    	sender_id = data.sender_id;
-    	reply_to = data.sender_id;
+    { 
+      sender_id = data.sender_id;
+      reply_to = data.sender_id;
       partner_name=data.username;
       //observed_smart_replies.push(data.observed_smart_replies);
       //console.log(observed_smart_replies);
@@ -580,22 +580,21 @@ function codeTab(){
     }
     if(data.username === username)
     {
-    	reply_to = null;
+      reply_to = null;
     }
 
     addChatMessage(data);
     // here should be the only place where we update the suggestion box I guess!...
     $.getJSON('PosCsvjson.json', function(csvjson) {
           inputData = csvjson;
-          smart_reply = request({
+          request({
             uri:"http://localhost:5000/api/inference",
             method: "POST",
-            {
+            jsoninput: {
               "input" : "Hello"
             }
-            "Content-Type:application/json"
-          });
-          inputData0 = shuffle(inputData)
+            Content-Type:"application/json",
+          });          inputData0 = shuffle(inputData)
           $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           $('.ui.blue.button')[1].textContent =inputData0[2].Response;
           $('.ui.blue.button')[2].textContent =inputData0[3].Response;
@@ -649,10 +648,10 @@ function codeTab(){
   socket.on('reconnect', function () {
     log('you have been reconnected');
     if (username) {
-    	var obj ={
-	        username: username,
-	        sender_id:sender_id
-      	};
+      var obj ={
+          username: username,
+          sender_id:sender_id
+        };
 
       socket.emit('add user', obj);
     }
