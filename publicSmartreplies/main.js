@@ -584,17 +584,36 @@ function codeTab(){
     }
 
     addChatMessage(data);
-    // here should be the only place where we update the suggestion box I guess!...
+    // ZHILA: here should be the only place where we update the suggestion box I guess!...
     $.getJSON('PosCsvjson.json', function(csvjson) {
           inputData = csvjson;
-          request({
-            uri:"http://localhost:5000/api/inference",
-            method: "POST",
-            jsoninput: {
-              "input" : "Hello"
+          // result=request({
+          //   uri:"http://localhost:5000/api/inference",
+          //   method: "POST",
+          //   jsoninput: {
+          //     "input" : "Hello"
+          //   }
+          //   Content-Type:"application/json",
+          // }); 
+          $.ajax({
+            url: “http://localhost:5000/api/inference”,
+            // beforeSend: function(xhr) {
+            //   xhr.setRequestHeader(“Authorization”, “Basic ” + btoa(“username:password”));
+            // },
+            type: ‘POST’,
+            dataType: ‘json’,
+            contentType: ‘application/json’,
+            processData: false,
+            data: ‘{“input”:“hello”}’,
+            success: function (data) {
+              alert(JSON.stringify(data));
+            },
+            error: function(){
+              alert(“Cannot get data”);
             }
-            Content-Type:"application/json",
-          });          inputData0 = shuffle(inputData)
+        });
+          console.log(result);        
+          inputData0 = shuffle(inputData)
           $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           $('.ui.blue.button')[1].textContent =inputData0[2].Response;
           $('.ui.blue.button')[2].textContent =inputData0[3].Response;
