@@ -584,7 +584,7 @@ function codeTab(){
     }
 
     addChatMessage(data);
-    // ZHILA: here should be the only place where we update the suggestion box I guess!...
+    // Update: here should be the only place where we update the suggestion box I guess!...
     $.getJSON('PosCsvjson.json', function(csvjson) {
           inputData = csvjson;
           // result=request({
@@ -596,22 +596,23 @@ function codeTab(){
           //   Content-Type:"application/json",
           // }); 
           $.ajax({
-            url: “http://localhost:5000/api/inference”,
+            url: "http://localhost:5000/api/inference",
             // beforeSend: function(xhr) {
             //   xhr.setRequestHeader(“Authorization”, “Basic ” + btoa(“username:password”));
             // },
-            type: ‘POST’,
-            dataType: ‘json’,
-            contentType: ‘application/json’,
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
             processData: false,
-            data: ‘{“input”:“hello”}’,
+            data: {"input":"hello"},
             success: function (data) {
               alert(JSON.stringify(data));
             },
             error: function(){
-              alert(“Cannot get data”);
+              alert("Cannot get data");
             }
         });
+          // To be Updated: I will get the result and then update my suggestion buttons using the results... 
           console.log(result);        
           inputData0 = shuffle(inputData)
           $('.ui.blue.button')[0].textContent =inputData0[1].Response;
