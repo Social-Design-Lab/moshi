@@ -596,7 +596,7 @@ function codeTab(){
           //   Content-Type:"application/json",
           // }); 
           $.ajax({
-            url: "http://localhost:5000/api/inference",
+            url: "http://socialsandbox.xyz:5000/api/inference",
             // beforeSend: function(xhr) {
             //   xhr.setRequestHeader(“Authorization”, “Basic ” + btoa(“username:password”));
             // },
