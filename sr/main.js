@@ -595,8 +595,8 @@ function codeTab(){
           //   }
           //   Content-Type:"application/json",
           // }); 
-          $.ajax({
-            url: "http://socialsandbox.xyz:5000/api/inference",
+          var result = $.ajax({
+            url: "http://socialsandbox.xyz/api/smartreply",
             // beforeSend: function(xhr) {
             //   xhr.setRequestHeader(“Authorization”, “Basic ” + btoa(“username:password”));
             // },
@@ -604,8 +604,9 @@ function codeTab(){
             dataType: 'json',
             contentType: 'application/json',
             processData: false,
-            data: {"input":"hello"},
+            data:'{"input":"hello"}',
             success: function (data) {
+              //alert(JSON.stringify(data));
               alert(JSON.stringify(data));
             },
             error: function(){

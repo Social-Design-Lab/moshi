@@ -15,7 +15,7 @@ var url = process.env.url;
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
-
+//test: should I run the python file from here or should I have it run in my server constantly... the second sounds better..
 // Routing
 // Set the folder based on the condition to :publicWO , publicNegOnly, publicNegPos
 
