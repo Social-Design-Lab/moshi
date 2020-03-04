@@ -595,24 +595,47 @@ function codeTab(){
           //   }
           //   Content-Type:"application/json",
           // }); 
-          var result = $.ajax({
-            url: "http://socialsandbox.xyz/api/smartreply",
-            // beforeSend: function(xhr) {
-            //   xhr.setRequestHeader(“Authorization”, “Basic ” + btoa(“username:password”));
-            // },
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            processData: false,
-            data:'{"input":"hello"}',
-            success: function (data) {
-              //alert(JSON.stringify(data));
-              alert(JSON.stringify(data));
-            },
-            error: function(){
-              alert("Cannot get data");
-            }
-        });
+      var settings = {
+        "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({"input":"Hello"}),
+      };
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+        console.log('@@@@')
+      });;
+
+        //   var result = $.ajax({
+        //     //ßurl: "http://socialsandbox.xyz/api",
+        //     url: "http://socialsandbox.xyz/api/smartreply/api/inference",
+        //     //const proxyurl = "https://cors-anywhere.herokuapp.com/",
+        //     // xhrFields: {
+        //     //   withCredentials: true
+        //     // },
+        //     // beforeSend: function(xhr) {
+        //     //   xhr.setRequestHeader('Authorization', 'Basic' + btoa('zhila:thinkblue'));
+        //     // },
+        //     type: "POST",
+        //     dataType: 'json',
+        //     contentType: 'application/json; charset=utf-8',
+        //     // contentType: 'application/json',
+        //     processData: false,
+        //     crossDomain: true,
+        //     withCredentials: true,
+        //     data:'{"input":"hello"}',
+        //     success: function (data) {
+        //       //alert(JSON.stringify(data));
+        //       alert(JSON.stringify(data));
+        //     },
+        //     error: function(){
+        //       alert("Cannot get data");
+        //     }
+        // });
           // To be Updated: I will get the result and then update my suggestion buttons using the results... 
           console.log(result);        
           inputData0 = shuffle(inputData)
