@@ -308,34 +308,63 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (event.which === 13) {
       is_suggested = 0;
       if (username) {
+        //probabtly need to change its place ...or maybe not...
         observed_smart_replies.push($('.ui.blue.button')[0].textContent);
         observed_smart_replies.push($('.ui.blue.button')[1].textContent);
         observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-        observed_smart_replies.push($('.ui.gray.button')[0].textContent);
-        observed_smart_replies.push($('.ui.gray.button')[1].textContent);
-        observed_smart_replies.push($('.ui.gray.button')[2].textContent);
+        observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+        observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+        observed_smart_replies.push($('.ui.blue.button')[2].textContent);
         sendMessage();
         socket.emit('stop typing');
         typing = false;
         var count = Object.keys(inputData).length;
         // update after the enter ... I don't think it should update after sending messages though!!!
-        $.getJSON('PosCsvjson.json', function(csvjson) {
-          inputData = csvjson;
-          inputData0 = shuffle(inputData)
-          //here we need to send the message to smartreply.py or the server this py file is running on
-          // and then update these buttons using that...
-          $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-          $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-          $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-        });
-        $.getJSON('NegCsvjson.json', function(csvjson) {
-          inputData = csvjson;
-          inputData00 = shuffle(inputData)
-          $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-          $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-          $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+        //now ...
+        var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
+        message = cleanInput(message);
+        var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
 
-        });
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+          for (var i = 0; i<responses.length ; i++) {
+            $('.ui.blue.button')[i].textContent =responses[i];
+          }
+            
+          });
+
+        //previously...
+        // $.getJSON('PosCsvjson.json', function(csvjson) {
+        //   inputData = csvjson;
+        //   inputData0 = shuffle(inputData)
+        //   //here we need to send the message to smartreply.py or the server this py file is running on
+        //   // and then update these buttons using that...
+        //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+        //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+        //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+        // });
+        // $.getJSON('NegCsvjson.json', function(csvjson) {
+        //   inputData = csvjson;
+        //   inputData00 = shuffle(inputData)
+        //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
+        // });
 
 
       } else {
@@ -352,29 +381,62 @@ $.getJSON('csvjson.json', function(csvjson) {
       observed_smart_replies.push($('.ui.blue.button')[0].textContent);
       observed_smart_replies.push($('.ui.blue.button')[1].textContent);
       observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-      observed_smart_replies.push($('.ui.gray.button')[0].textContent);
-      observed_smart_replies.push($('.ui.gray.button')[1].textContent);
-      observed_smart_replies.push($('.ui.gray.button')[2].textContent); 
+      observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[2].textContent); 
       sendMessage();
       socket.emit('stop typing');
       typing = false;
       var count = Object.keys(inputData).length;
       // update after sending the buttons ... I don't think we should do it anymore . right?
-      $.getJSON('PosCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData0 = shuffle(inputData)
-        $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-        $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-        $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-      });
-      $.getJSON('NegCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData00 = shuffle(inputData)
-        $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-        $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-        $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+      var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
+      message = cleanInput(message);
+      //now ...
+      var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
 
-      });
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+            for (var i = 0; i<responses.length ; i++) {
+              $('.ui.blue.button')[i].textContent =responses[i];
+            }
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+            // $('.ui.blue.button')[0].textContent =responses[0];
+            // $('.ui.blue.button')[1].textContent =responses[1];
+            // $('.ui.blue.button')[2].textContent =responses[2];
+            // $('.ui.blue.button')[3].textContent =responses[3];
+            // $('.ui.blue.button')[4].textContent =responses[4];
+            // $('.ui.blue.button')[5].textContent =responses[5];
+      });;
+
+      // //previously..
+      // $.getJSON('PosCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData0 = shuffle(inputData)
+      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+      // });
+      // $.getJSON('NegCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData00 = shuffle(inputData)
+      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
+      // });
 
 
 
@@ -508,27 +570,60 @@ function codeTab(){
       observed_smart_replies.push($('.ui.blue.button')[0].textContent);
       observed_smart_replies.push($('.ui.blue.button')[1].textContent);
       observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-      observed_smart_replies.push($('.ui.gray.button')[0].textContent);
-      observed_smart_replies.push($('.ui.gray.button')[1].textContent);
-      observed_smart_replies.push($('.ui.gray.button')[2].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[3].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[4].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[5].textContent);
       sendMessage();
       // update the suggestion box .. after pressing the suggestion box
-      $.getJSON('PosCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData0 = shuffle(inputData)
-        $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-        $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-        $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-      });
+      var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
+      message = cleanInput(message);
+      //now ...
+      var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
 
-      $.getJSON('NegCsvjson.json', function(csvjson) {
-        inputData = csvjson;
-        inputData00 = shuffle(inputData)
-        $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-        $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-        $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+            for (var i = 0; i<responses.length ; i++) {
+              $('.ui.blue.button')[i].textContent =responses[i];
+            }
+            // $('.ui.blue.button')[0].textContent =responses[0];
+            // $('.ui.blue.button')[1].textContent =responses[1];
+            // $('.ui.blue.button')[2].textContent =responses[2];
+            // $('.ui.blue.button')[0].textContent =responses[3];
+            // $('.ui.blue.button')[1].textContent =responses[4];
+            // $('.ui.blue.button')[2].textContent =responses[5];
 
-      });
+            });;
+      //previously
+      // $.getJSON('PosCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData0 = shuffle(inputData)
+      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+      // });
+
+      // $.getJSON('NegCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData00 = shuffle(inputData)
+      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
+      // });
 
     });
 
@@ -575,7 +670,6 @@ function codeTab(){
       partner_name=data.username;
       //observed_smart_replies.push(data.observed_smart_replies);
       //console.log(observed_smart_replies);
-      console.log('*******562*******');
 
     }
     if(data.username === username)
@@ -585,74 +679,71 @@ function codeTab(){
 
     addChatMessage(data);
     // Update: here should be the only place where we update the suggestion box I guess!...
-    $.getJSON('PosCsvjson.json', function(csvjson) {
-          inputData = csvjson;
-          // result=request({
-          //   uri:"http://localhost:5000/api/inference",
-          //   method: "POST",
-          //   jsoninput: {
-          //     "input" : "Hello"
-          //   }
-          //   Content-Type:"application/json",
-          // }); 
-      var settings = {
-        "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "data": JSON.stringify({"input":"Hello"}),
-      };
+  //now
+    var input_text = data.message;
+    // var texting = 'seriously'
+    var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              // "data": JSON.stringify({"input":"Hello"}),
+              "data": JSON.stringify({"input":input_text}),
+            };
 
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-        console.log('@@@@')
-      });;
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+          for (var i = 0; i<responses.length ; i++) {
+            $('.ui.blue.button')[i].textContent =responses[i];
+          }
+            // $('.ui.blue.button')[0].textContent =responses[0];
+            // $('.ui.blue.button')[1].textContent =responses[1];
+            // $('.ui.blue.button')[2].textContent =responses[2];
+            // $('.ui.blue.button')[3].textContent =responses[3];
+            // $('.ui.blue.button')[4].textContent =responses[4];
+            // $('.ui.blue.button')[5].textContent =responses[5];
 
-        //   var result = $.ajax({
-        //     //ßurl: "http://socialsandbox.xyz/api",
-        //     url: "http://socialsandbox.xyz/api/smartreply/api/inference",
-        //     //const proxyurl = "https://cors-anywhere.herokuapp.com/",
-        //     // xhrFields: {
-        //     //   withCredentials: true
-        //     // },
-        //     // beforeSend: function(xhr) {
-        //     //   xhr.setRequestHeader('Authorization', 'Basic' + btoa('zhila:thinkblue'));
-        //     // },
-        //     type: "POST",
-        //     dataType: 'json',
-        //     contentType: 'application/json; charset=utf-8',
-        //     // contentType: 'application/json',
-        //     processData: false,
-        //     crossDomain: true,
-        //     withCredentials: true,
-        //     data:'{"input":"hello"}',
-        //     success: function (data) {
-        //       //alert(JSON.stringify(data));
-        //       alert(JSON.stringify(data));
-        //     },
-        //     error: function(){
-        //       alert("Cannot get data");
-        //     }
+            });
+    // $.getJSON('PosCsvjson.json', function(csvjson) {
+    //       inputData = csvjson;
+    //       //now ... 
+            
+    //       // To be Updated: I will get the result and then update my suggestion buttons using the results... 
+    //       //console.log(result);        
+    //       //inputData0 = shuffle(inputData)
+    //       // responses = Object.keys(resonse.result);
+    //       // // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+    //       // // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+    //       // // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+    //       // $('.ui.blue.button')[0].textContent =responses[0];
+    //       // $('.ui.blue.button')[1].textContent =responses[1];
+    //       // $('.ui.blue.button')[2].textContent =responses[2];
+    //       // $('.ui.gray.button')[0].textContent =responses[3];
+    //       // $('.ui.gray.button')[1].textContent =responses[4];
+    //       // $('.ui.gray.button')[2].textContent =responses[5];
+
+
+    //     });
+
+        // $.getJSON('NegCsvjson.json', function(csvjson) {
+        //   // inputData = csvjson;
+        //   // inputData00 = shuffle(inputData)
+        //   // $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        //   // $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        //   // $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+        //   $('.ui.gray.button')[0].textContent =inputData00[3].Response;
+        //   $('.ui.gray.button')[1].textContent =inputData00[4].Response;
+        //   $('.ui.gray.button')[2].textContent =inputData00[5].Response;
+
         // });
-          // To be Updated: I will get the result and then update my suggestion buttons using the results... 
-          console.log(result);        
-          inputData0 = shuffle(inputData)
-          $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-          $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-          $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-
-        });
-
-        $.getJSON('NegCsvjson.json', function(csvjson) {
-          inputData = csvjson;
-          inputData00 = shuffle(inputData)
-          $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-          $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-          $('.ui.gray.button')[2].textContent =inputData00[3].Response;
-
-        });
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
