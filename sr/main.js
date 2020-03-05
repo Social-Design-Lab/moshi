@@ -148,6 +148,29 @@ $.getJSON('csvjson.json', function(csvjson) {
         observed_smart_replies : stored_smart_replies
       };
       socket.emit('new message', obj);
+      var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
+
+          $.ajax(settings).done(function (response) {
+              // console.log(response);
+              // console.log('@@@@')
+              // console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+          for (var i = 0; i<responses.length ; i++) {
+            $('.ui.blue.button')[i].textContent =responses[i];
+          }
+            
+          });
     }
   }
 
@@ -333,7 +356,7 @@ $.getJSON('csvjson.json', function(csvjson) {
               "data": JSON.stringify({"input":message}),
             };
 
-            $.ajax(settings).done(function (response) {
+          $.ajax(settings).done(function (response) {
               console.log(response);
               console.log('@@@@')
               console.log(response.result);
@@ -703,6 +726,10 @@ function codeTab(){
           // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
           for (var i = 0; i<responses.length ; i++) {
             $('.ui.blue.button')[i].textContent =responses[i];
+          }
+          for (var j=responses.length; j<=6;j++)
+          {
+            $('.ui.blue.button')[i].visibility = 'hidden';
           }
             // $('.ui.blue.button')[0].textContent =responses[0];
             // $('.ui.blue.button')[1].textContent =responses[1];
