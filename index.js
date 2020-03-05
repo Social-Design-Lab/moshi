@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'publicWO')));
 app.use('/n',express.static(path.join(__dirname, 'publicNegOnly')));
 app.use('/np',express.static(path.join(__dirname, 'publicNegPos'))); 
 app.use('/p',express.static(path.join(__dirname, 'publicPos'))); 
-app.use('/s',express.static(path.join(__dirname, 's'))); 
+app.use('/sr',express.static(path.join(__dirname, 'sr'))); 
 
 
 // Chatroom
