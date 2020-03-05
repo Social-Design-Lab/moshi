@@ -727,10 +727,10 @@ function codeTab(){
           for (var i = 0; i<responses.length ; i++) {
             $('.ui.blue.button')[i].textContent =responses[i];
           }
-          for (var j=responses.length; j<=6;j++)
-          {
-            $('.ui.blue.button')[i].visibility = 'hidden';
-          }
+          // for (var j=responses.length; j<=6;j++)
+          // {
+          //   $('.ui.blue.button')[i].visibility = 'hidden';
+          // }
             // $('.ui.blue.button')[0].textContent =responses[0];
             // $('.ui.blue.button')[1].textContent =responses[1];
             // $('.ui.blue.button')[2].textContent =responses[2];
