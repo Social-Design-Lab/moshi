@@ -1,4 +1,4 @@
-//PositiveNegative
+//Smart-replies
 $.getJSON('csvjson.json', function(csvjson) {
 
   inputData = csvjson;
@@ -166,7 +166,7 @@ $.getJSON('csvjson.json', function(csvjson) {
           // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
           // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-          for (var i = 0; (i<responses.length && i <4) ; i++) {
+          for (var i = 0; (i<responses.length && i <3) ; i++) {
             $('.ui.blue.button')[i].textContent =responses[i];
           }
             
@@ -335,7 +335,7 @@ $.getJSON('csvjson.json', function(csvjson) {
         observed_smart_replies.push($('.ui.blue.button')[0].textContent);
         observed_smart_replies.push($('.ui.blue.button')[1].textContent);
         observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-        observed_smart_replies.push($('.ui.blue.button')[3].textContent);
+        //observed_smart_replies.push($('.ui.blue.button')[3].textContent);
         // observed_smart_replies.push($('.ui.blue.button')[4].textContent);
         // observed_smart_replies.push($('.ui.blue.button')[5].textContent);
         sendMessage();
@@ -364,7 +364,7 @@ $.getJSON('csvjson.json', function(csvjson) {
           // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
           // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-          for (var i = 0; (i<responses.length && i <4) ; i++) {
+          for (var i = 0; (i<responses.length && i <3) ; i++) {
             $('.ui.blue.button')[i].textContent =responses[i];
           }
             
@@ -404,7 +404,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       observed_smart_replies.push($('.ui.blue.button')[0].textContent);
       observed_smart_replies.push($('.ui.blue.button')[1].textContent);
       observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-      observed_smart_replies.push($('.ui.blue.button')[3].textContent);
+      //observed_smart_replies.push($('.ui.blue.button')[3].textContent);
       // observed_smart_replies.push($('.ui.blue.button')[4].textContent);
       // observed_smart_replies.push($('.ui.blue.button')[5].textContent); 
       sendMessage();
@@ -430,7 +430,7 @@ $.getJSON('csvjson.json', function(csvjson) {
               console.log('@@@@')
               console.log(response.result);
               responses = Object.keys(response.result);
-            for (var i = 0; (i<responses.length && i <4) ; i++) {
+            for (var i = 0; (i<responses.length && i <3) ; i++) {
               $('.ui.blue.button')[i].textContent =responses[i];
             }
           // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
@@ -593,7 +593,7 @@ function codeTab(){
       observed_smart_replies.push($('.ui.blue.button')[0].textContent);
       observed_smart_replies.push($('.ui.blue.button')[1].textContent);
       observed_smart_replies.push($('.ui.blue.button')[2].textContent);
-      observed_smart_replies.push($('.ui.blue.button')[3].textContent);
+      //observed_smart_replies.push($('.ui.blue.button')[3].textContent);
       // observed_smart_replies.push($('.ui.blue.button')[4].textContent);
       // observed_smart_replies.push($('.ui.blue.button')[5].textContent);
       sendMessage();
@@ -619,7 +619,7 @@ function codeTab(){
           // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
           // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-            for (var i = 0; (i<responses.length && i <4) ; i++) {
+            for (var i = 0; (i<responses.length && i <3) ; i++) {
               $('.ui.blue.button')[i].textContent =responses[i];
             }
             // $('.ui.blue.button')[0].textContent =responses[0];
@@ -724,7 +724,7 @@ function codeTab(){
           // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
           // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
           // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-          for (var i = 0; (i<responses.length && i <4) ; i++) {
+          for (var i = 0; (i<responses.length && i <3) ; i++) {
             $('.ui.blue.button')[i].textContent =responses[i];
           }
           // for (var j=responses.length; j<=6;j++)
