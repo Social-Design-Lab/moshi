@@ -46,13 +46,13 @@ $.getJSON('csvjson.json', function(csvjson) {
   var socket = io();
   var conv_expriment = {
     data: new Date(),
-    group: 'Positive_Negetive', // this item should be hard coded for each group
+    group: 'Smart-replies', // this item should be hard coded for each group
     convo: new Array()// An array to store objects of each conversation
   };
   var conv_expriment_second = {
     category: '',
     data: new Date(),
-    group: 'Positive_Negetive', // this item should be hard coded for each group
+    group: 'Smart-replies', // this item should be hard coded for each group
     convo: new Array(),// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
