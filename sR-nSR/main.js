@@ -214,39 +214,47 @@ $.getJSON('csvjson.json', function(csvjson) {
 
     if (data.message != 'is typing'){
 
-      // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
       if(previous_sender == data.username)
       { 
-        if(conv_expriment_second.group =='Smart-replies')
+        if(conv_expriment_second.category =='b')
         {
+          conv_expriment_second.group = 'sR'
           console.log('ADDED SMART-record')
+          console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
           conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         }
-        else if(conv_expriment_second.group=='NO-smart-replies')
+        else if(conv_expriment_second.category=='a')
         {
+          conv_expriment_second.group = 'No-sR'
           console.log('ADDED No-smart-record')
+          console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
           conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: "", date: new Date()});
         }
       } 
       else 
       {
-        if(conv_expriment_second.group =='Smart-replies')
+        if(conv_expriment_second.category =='b')
         {
-           console.log('ADDED SMART-record')
-           console.log(conv_expriment_second.convo)
+          conv_expriment_second.group = 'sR'
+          console.log('ADDED SMART-record')
+          console.log(conv_expriment_second.group)
+          console.log(conv_expriment_second.convo)
           conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         }
-        else if(conv_expriment_second.group=='NO-smart-replies')
+        else if(conv_expriment_second.category=='a')
         {
+          conv_expriment_second.group = 'No-sR'
           console.log('ADDED No-smart-record')
+          console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
           conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: "", date: new Date()});
         }
       }
       previous_sender = data.username;
-      console.log('Group:' +conv_expriment_second.group);
+      console.log('category:' +conv_expriment_second.category);
+      console.log('Group:' +conv_expriment_second.group); //Zhila: Change a and b to No-Smart-Replies, and Smart-replies groups
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
       console.log('reply to:' +data.reply_to);
@@ -681,13 +689,16 @@ function codeTab(){
 
     if(data.category =="a")
     {
+      conv_expriment_second.category ='a';
       conv_expriment_second.group ='NO-smart-replies';
     }
     else if (data.category=="b")
     {
+      conv_expriment_second.category='b';
       conv_expriment_second.group='Smart-replies';
     }
     else {
+      conv_expriment_second.category='c';
       conv_expriment_second.group='unknown';
     }
     if (data.numUsers != -1) {
