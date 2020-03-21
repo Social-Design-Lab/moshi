@@ -61,6 +61,12 @@ $.getJSON('csvjson.json', function(csvjson) {
     var message = '';
     if (data.numUsers === 1) {
       message += "there's 1 participant";
+      
+      //Zhila: make the suggestion box unhidden...
+      alert("Congrads, you are the first participant!");
+      //$('.ui.blue.button').style.visibility='hidden'
+      document.getElementById('sr').style.visibility = 'hidden';
+      // se the group number .. 
     } else {
       message += "there are " + data.numUsers + " participants"; 
       document.getElementById('timer').innerHTML = 04 + ":" + 00; // set the chat period.

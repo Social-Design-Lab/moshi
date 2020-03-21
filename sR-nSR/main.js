@@ -1,4 +1,4 @@
-//WithoutSuggestion
+//Smart-replies-and-NOSr
 $.getJSON('csvjson.json', function(csvjson) {
 
   inputData = csvjson;
@@ -46,13 +46,14 @@ $.getJSON('csvjson.json', function(csvjson) {
   var socket = io();
   var conv_expriment = {
     data: new Date(),
-    group: 'WO', // this item should be hard coded for each group
+    group: 'Smart-replies', // this item should be hard coded for each group
     convo: new Array()// An array to store objects of each conversation
   };
   var conv_expriment_second = {
     category: '',
     data: new Date(),
-    group: 'WO', // this item should be hard coded for each group
+    //group: 'Smart-replies', // this item should be hard coded for each group
+    group:'',
     convo: new Array(),// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
@@ -61,9 +62,14 @@ $.getJSON('csvjson.json', function(csvjson) {
     var message = '';
     if (data.numUsers === 1) {
       message += "there's 1 participant";
+      document.getElementById('sr').style.visibility = 'hidden';
+      conv_expriment_second.group='NO-smart-replies';
+      // data.userID = 1;
     } else {
+      // data.userID = 2;
+      conv_expriment_second.group='Smart-replies'
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 40; // set the chat period.
       startTimer();
     }
     log(message);
@@ -148,6 +154,29 @@ $.getJSON('csvjson.json', function(csvjson) {
         observed_smart_replies : stored_smart_replies
       };
       socket.emit('new message', obj);
+      var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
+
+          $.ajax(settings).done(function (response) {
+              // console.log(response);
+              // console.log('@@@@')
+              // console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+          for (var i = 0; (i<responses.length && i <3) ; i++) {
+            $('.ui.blue.button')[i].textContent =responses[i];
+          }
+            
+          });
     }
   }
 
@@ -187,16 +216,37 @@ $.getJSON('csvjson.json', function(csvjson) {
 
       // conv_expriment_second.convo.push({id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, date: new Date()});
       if(previous_sender == data.username)
-      {
-        //conv_expriment_second.convo.push({id: data.sender_id, reply_to: '', root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
-        conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+      { 
+        if(conv_expriment_second.group =='Smart-replies')
+        {
+          console.log('ADDED SMART-record')
+          console.log(conv_expriment_second.convo)
+          conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+        }
+        else if(conv_expriment_second.group=='NO-smart-replies')
+        {
+          console.log('ADDED No-smart-record')
+          console.log(conv_expriment_second.convo)
+          conv_expriment_second.convo.push({ id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: "", date: new Date()});
+        }
       } 
       else 
       {
-        conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+        if(conv_expriment_second.group =='Smart-replies')
+        {
+           console.log('ADDED SMART-record')
+           console.log(conv_expriment_second.convo)
+          conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+        }
+        else if(conv_expriment_second.group=='NO-smart-replies')
+        {
+          console.log('ADDED No-smart-record')
+          console.log(conv_expriment_second.convo)
+          conv_expriment_second.convo.push({ id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: "", date: new Date()});
+        }
       }
       previous_sender = data.username;
-      console.log('category:' +conv_expriment_second.category);
+      console.log('Group:' +conv_expriment_second.group);
       console.log('username:'+data.username)
       console.log('sender id is: '+data.sender_id);
       console.log('reply to:' +data.reply_to);
@@ -308,10 +358,65 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (event.which === 13) {
       is_suggested = 0;
       if (username) {
+        //probabtly need to change its place ...or maybe not...
+        observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+        observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+        observed_smart_replies.push($('.ui.blue.button')[2].textContent);
+        //observed_smart_replies.push($('.ui.blue.button')[3].textContent);
+        // observed_smart_replies.push($('.ui.blue.button')[4].textContent);
+        // observed_smart_replies.push($('.ui.blue.button')[5].textContent);
         sendMessage();
         socket.emit('stop typing');
         typing = false;
         var count = Object.keys(inputData).length;
+        // update after the enter ... I don't think it should update after sending messages though!!!
+        //now ...
+        var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
+        message = cleanInput(message);
+        var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
+
+          $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+          for (var i = 0; (i<responses.length && i <3) ; i++) {
+            $('.ui.blue.button')[i].textContent =responses[i];
+          }
+            
+          });
+
+        //previously...
+        // $.getJSON('PosCsvjson.json', function(csvjson) {
+        //   inputData = csvjson;
+        //   inputData0 = shuffle(inputData)
+        //   //here we need to send the message to smartreply.py or the server this py file is running on
+        //   // and then update these buttons using that...
+        //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+        //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+        //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+        // });
+        // $.getJSON('NegCsvjson.json', function(csvjson) {
+        //   inputData = csvjson;
+        //   inputData00 = shuffle(inputData)
+        //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
+        // });
+
+
       } else {
         setUsername();
       }
@@ -323,10 +428,66 @@ $.getJSON('csvjson.json', function(csvjson) {
     {
     is_suggested = 0;
     if (username) {
+      observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[2].textContent);
+      //observed_smart_replies.push($('.ui.blue.button')[3].textContent);
+      // observed_smart_replies.push($('.ui.blue.button')[4].textContent);
+      // observed_smart_replies.push($('.ui.blue.button')[5].textContent); 
       sendMessage();
       socket.emit('stop typing');
       typing = false;
       var count = Object.keys(inputData).length;
+      // update after sending the buttons ... I don't think we should do it anymore . right?
+      var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
+      message = cleanInput(message);
+      //now ...
+      var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+            for (var i = 0; (i<responses.length && i <3) ; i++) {
+              $('.ui.blue.button')[i].textContent =responses[i];
+            }
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+            // $('.ui.blue.button')[0].textContent =responses[0];
+            // $('.ui.blue.button')[1].textContent =responses[1];
+            // $('.ui.blue.button')[2].textContent =responses[2];
+            // $('.ui.blue.button')[3].textContent =responses[3];
+            // $('.ui.blue.button')[4].textContent =responses[4];
+            // $('.ui.blue.button')[5].textContent =responses[5];
+      });;
+
+      // //previously..
+      // $.getJSON('PosCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData0 = shuffle(inputData)
+      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+      // });
+      // $.getJSON('NegCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData00 = shuffle(inputData)
+      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
+      // });
+
 
 
       } else {
@@ -367,7 +528,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
 
       socket.emit('send to DB', conv_expriment_second);
-      console.log('sent to db####################');
+      console.log('sent to db#');
       console.log('my category is:' + conv_expriment_second.category);
       $chatPage.fadeOut();
        $('.ui.modal')
@@ -434,10 +595,6 @@ function codeTab(){
         sendText()
         return
       }
-      if($(this).text()=="Conversation complete")
-      {
-        return
-      }
 
       if($(this).text()=="Ok!")
       {
@@ -459,8 +616,61 @@ function codeTab(){
 
       box_count = box_count+1;
       is_suggested=1; 
-      $("input:text").val(txt); 
+      $("input:text").val(txt);  
+      observed_smart_replies.push($('.ui.blue.button')[0].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[1].textContent);
+      observed_smart_replies.push($('.ui.blue.button')[2].textContent);
       sendMessage();
+      // update the suggestion box .. after pressing the suggestion box
+      var message = $inputMessage.context.getElementsByClassName("ui input").txt.value;
+      message = cleanInput(message);
+      //now ...
+      var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "data": JSON.stringify({"input":message}),
+            };
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+            for (var i = 0; (i<responses.length && i <3) ; i++) {
+              $('.ui.blue.button')[i].textContent =responses[i];
+            }
+            // $('.ui.blue.button')[0].textContent =responses[0];
+            // $('.ui.blue.button')[1].textContent =responses[1];
+            // $('.ui.blue.button')[2].textContent =responses[2];
+            // $('.ui.blue.button')[0].textContent =responses[3];
+            // $('.ui.blue.button')[1].textContent =responses[4];
+            // $('.ui.blue.button')[2].textContent =responses[5];
+
+            });;
+      //previously
+      // $.getJSON('PosCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData0 = shuffle(inputData)
+      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+      //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+      // });
+
+      // $.getJSON('NegCsvjson.json', function(csvjson) {
+      //   inputData = csvjson;
+      //   inputData00 = shuffle(inputData)
+      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+      //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+
+      // });
 
     });
 
@@ -469,17 +679,16 @@ function codeTab(){
   // Whenever the server emits 'login', log the login message
   socket.on('login', function (data) {
 
-    //zhila: working on it
     if(data.category =="a")
     {
-      conv_expriment_second.category ='a';
+      conv_expriment_second.group ='NO-smart-replies';
     }
     else if (data.category=="b")
     {
-      conv_expriment_second.category='b';
+      conv_expriment_second.group='Smart-replies';
     }
     else {
-      conv_expriment_second.category='c';
+      conv_expriment_second.group='unknown';
     }
     if (data.numUsers != -1) {
       connected = true;
@@ -499,7 +708,6 @@ function codeTab(){
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
-    //zhila
     if(data.username != username)
     { 
       sender_id = data.sender_id;
@@ -507,7 +715,6 @@ function codeTab(){
       partner_name=data.username;
       //observed_smart_replies.push(data.observed_smart_replies);
       //console.log(observed_smart_replies);
-      console.log('*******562*******');
 
     }
     if(data.username === username)
@@ -516,6 +723,76 @@ function codeTab(){
     }
 
     addChatMessage(data);
+    // Update: here should be the only place where we update the suggestion box I guess!...
+  //now
+    var input_text = data.message;
+    // var texting = 'seriously'
+    var settings = {
+              "url": "http://socialsandbox.xyz/api/smartreply/api/inference",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              // "data": JSON.stringify({"input":"Hello"}),
+              "data": JSON.stringify({"input":input_text}),
+            };
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+              console.log('@@@@')
+              console.log(response.result);
+              responses = Object.keys(response.result);
+          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+          for (var i = 0; (i<responses.length && i <3) ; i++) {
+            $('.ui.blue.button')[i].textContent =responses[i];
+          }
+          // for (var j=responses.length; j<=6;j++)
+          // {
+          //   $('.ui.blue.button')[i].visibility = 'hidden';
+          // }
+            // $('.ui.blue.button')[0].textContent =responses[0];
+            // $('.ui.blue.button')[1].textContent =responses[1];
+            // $('.ui.blue.button')[2].textContent =responses[2];
+            // $('.ui.blue.button')[3].textContent =responses[3];
+            // $('.ui.blue.button')[4].textContent =responses[4];
+            // $('.ui.blue.button')[5].textContent =responses[5];
+
+            });
+    // $.getJSON('PosCsvjson.json', function(csvjson) {
+    //       inputData = csvjson;
+    //       //now ... 
+            
+    //       // To be Updated: I will get the result and then update my suggestion buttons using the results... 
+    //       //console.log(result);        
+    //       //inputData0 = shuffle(inputData)
+    //       // responses = Object.keys(resonse.result);
+    //       // // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
+    //       // // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
+    //       // // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
+    //       // $('.ui.blue.button')[0].textContent =responses[0];
+    //       // $('.ui.blue.button')[1].textContent =responses[1];
+    //       // $('.ui.blue.button')[2].textContent =responses[2];
+    //       // $('.ui.gray.button')[0].textContent =responses[3];
+    //       // $('.ui.gray.button')[1].textContent =responses[4];
+    //       // $('.ui.gray.button')[2].textContent =responses[5];
+
+
+    //     });
+
+        // $.getJSON('NegCsvjson.json', function(csvjson) {
+        //   // inputData = csvjson;
+        //   // inputData00 = shuffle(inputData)
+        //   // $('.ui.gray.button')[0].textContent =inputData00[1].Response;
+        //   // $('.ui.gray.button')[1].textContent =inputData00[2].Response;
+        //   // $('.ui.gray.button')[2].textContent =inputData00[3].Response;
+        //   $('.ui.gray.button')[0].textContent =inputData00[3].Response;
+        //   $('.ui.gray.button')[1].textContent =inputData00[4].Response;
+        //   $('.ui.gray.button')[2].textContent =inputData00[5].Response;
+
+        // });
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
@@ -530,7 +807,6 @@ function codeTab(){
     reply_to =id;
     sender_id = id;
     log(data.username + ' is in the chat room');
-    // ZHILA: try making the suggestion boxes here for the second user : ...
   });
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
