@@ -30,6 +30,18 @@ $.getJSON('csvjson.json', function(csvjson) {
   var previous_sender='';
   var observed_smart_replies=new Array();
   // var category='';
+ //Zhila: fix it 
+  $('#IntroModal').modal('show');
+  //Handle on click to hide this modle!
+  $('.ui.button').on('click',function(){
+    if($(this)[0].id=='Start')
+    {
+      $('.ui.large.post.modal')
+        .transition('vertical flip')
+      ;
+    }
+  });
+
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
@@ -81,6 +93,10 @@ $.getJSON('csvjson.json', function(csvjson) {
     if($(this).text()=="Submit")
     {
      setUsername(); 
+    }
+    if($(this).text()=="Start")
+    {
+      return
     }
 
     if($(this).text()=="Ok!")
@@ -601,6 +617,10 @@ function codeTab(){
       if($(this).text().length==0 ||  $(this).text()=="Submit") 
       {
         sendText()
+        return
+      }
+      if($(this).text()=="Start")
+      {
         return
       }
 
