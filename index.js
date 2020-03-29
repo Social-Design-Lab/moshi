@@ -39,6 +39,7 @@ var all_rooms = [];
 io.on('connection', function (socket) {
   var addedUser = false;
   var myroom = -1;
+  var chosen=false;
 
   //add user to a new room
   socket.on('join room', function (data) {
@@ -52,6 +53,23 @@ io.on('connection', function (socket) {
     ++numUsers;
     addedUser = true;
 
+    if(!chosen)
+    {
+      if (Math.random()<0.5)
+        {
+          // smart_group = 'a' //first group gets the smart replies
+          group_a = 'SR';
+          group_b='NSR';
+        }
+      else
+        {
+          // smart_group = 'b' //second group gets the smart replies
+          group_b = 'SR';
+          group_a ='NSR';
+        }
+
+      chosen = true
+    }
     console.log("Total number of rooms is: "+all_rooms.length)
 
     if (all_rooms.length == 0)
@@ -66,7 +84,8 @@ io.on('connection', function (socket) {
       socket.emit('login', {
         numUsers: 1,
         sender_id:sender_id,
-        category : 'a'
+        category : 'a',
+        group: group_a
       });
       // echo globally (all clients) that a person has connected
       io.to(myroom).emit('user joined', {
@@ -93,7 +112,8 @@ io.on('connection', function (socket) {
           socket.emit('login', {
             numUsers: 2,
             sender_id:sender_id,
-            category : 'b'
+            category : 'b',
+            group: group_b
           });
           
           socket.to(myroom).emit('user joined', {
@@ -119,7 +139,8 @@ io.on('connection', function (socket) {
       socket.emit('login', {
         numUsers: 1,
         sender_id:sender_id,
-        category : 'a'
+        category : 'a',
+        group: group_a
       });
       // echo globally (all clients) that a person has connected
       socket.to(myroom).emit('user joined', {
@@ -158,6 +179,24 @@ io.on('connection', function (socket) {
   socket.on('add user', function (data) {
     if (addedUser) return;
 
+    if(!chosen)
+    {
+      if (Math.random()<0.5)
+        {
+          // smart_group = 'a' //first group gets the smart replies
+          group_a = 'SR';
+          group_b='NSR';
+        }
+      else
+        {
+          // smart_group = 'b' //second group gets the smart replies
+          group_b = 'SR';
+          group_a ='NSR';
+        }
+
+      chosen = true
+    }
+
     if (numUsers < 2){
       // we store the username in the socket session for this client
       socket.username = data.username;
@@ -168,7 +207,8 @@ io.on('connection', function (socket) {
         socket.emit('login', {
         numUsers: numUsers,
         sender_id: data.sender_id,
-        category : 'a'
+        category : 'a', // first person who joins
+        group: group_a
         });
       }
       else if(numUsers ==2)
@@ -176,7 +216,8 @@ io.on('connection', function (socket) {
         socket.emit('login', {
         numUsers: numUsers,
         sender_id: data.sender_id,
-        category : 'b'
+        category : 'b', //second person who joins the room
+        group: group_b
         });
       }
       // socket.emit('login', {
@@ -194,7 +235,8 @@ io.on('connection', function (socket) {
       socket.emit('login', {
         numUsers: -1,
         sender_id: data.sender_id,
-        category : 'c'
+        category : 'c',
+        group: 'unknown'
       });
     }
   });
@@ -203,6 +245,7 @@ io.on('connection', function (socket) {
   socket.on('send to DB', function(data)
   { 
     //Data Base from the first partners' perspective  
+    //Zhila: change it based on groups not categories .. 
     if (data.category == "a")
     { 
       MongoClient.connect(url, {useNewUrlParser: true } ,function(err, db) {
