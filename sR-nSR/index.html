@@ -30,26 +30,27 @@
         <button class="Tiny blue ui button">Hello!</button>
         <button class="Tiny blue ui button">Thanks</button>
         <button class="Tiny blue ui button">Sounds good</button>
-        <!-- <button class="Tiny blue ui button">I don't know!</button> -->
-        <!-- <button class="Tiny blue ui button">Ugh</button> -->
-        <!-- <button class="Tiny blue ui button">I don't understand</button> -->
 	  </div>
-	  <!-- <div>
-        <button class="Tiny blue ui button">I don't know!</button>
-        <button class="Tiny blue ui button">Ugh</button>
-        <button class="Tiny blue ui button">I don't understand</button>
-	  </div> -->
 
       <div class="ui fluid action input">
         <input id="txt" class="ui input" type="text" placeholder="Type here...">
         <button id = "snd" class="ui blue button"><i class="telegram plane icon"></i></button>
       </div>
      <!-- Show a modal here to introduce the app to the participants ...  -->
-    <li>
-      <div class="ui large post modal" id="IntroModal">
+    <li style="display: none;">
+      <div class="ui large post modal" id="IntroModalSR">
         <div class = "header">Introduction</div>
         <div class="ui fluid card test">
-          <div class="image"><img src = "./testImg.jpg" /></div>
+          <div class="image"><img src = "./alertMessage_sr.png" /></div>
+          <div id = 'Start' class="ui button">Start</div>
+        </div>
+      </div>
+    </li>
+    <li style="display: none;" >
+      <div class="ui large post modal" id="IntroModalNSR">
+        <div class = "header">Introduction</div>
+        <div class="ui fluid card test">
+          <div class="image"><img src = "./alertMessage_no_sr.png" /></div>
           <div id = 'Start' class="ui button">Start</div>
         </div>
       </div>
@@ -76,8 +77,20 @@
         </div>
         </li>
     </div>
-
-
+   <!--  <div hidden class="ui large post modal" id="IntroModalSR">
+      <div class = "header">Introduction</div>
+      <div class="ui fluid card test">
+        <div class="image"><img src = "./alertMessage_sr.png" /></div>
+        <div id = 'Start' class="ui button">Start</div>
+      </div>
+    </div>
+    <div hidden class="ui large post modal" id="IntroModal">
+      <div class = "header">Introduction</div>
+      <div class="ui fluid card test">
+        <div class="image"><img src = "./testImg.jpg" /></div>
+        <div id = 'Start' class="ui button">Start</div>
+      </div>
+    </div> -->
   </ul>
 
 

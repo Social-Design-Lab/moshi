@@ -30,18 +30,21 @@ $.getJSON('csvjson.json', function(csvjson) {
   var partner_name='';
   var previous_sender='';
   var observed_smart_replies=new Array();
+  var flg_first_login = false; 
+  // $('#IntroModalNSR').modal('hide');
+  // $('#IntroModalSR').modal('hide');
   // var category='';
  //Zhila: fix it 
-  $('#IntroModal').modal('show');
-  //Handle on click to hide this modle!
-  $('.ui.button').on('click',function(){
-    if($(this)[0].id=='Start')
-    {
-      $('.ui.large.post.modal')
-        .transition('vertical flip')
-      ;
-    }
-  });
+  // $('#IntroModal').modal('show');
+  // //Handle on click to hide this modle!
+  // $('.ui.button').on('click',function(){
+  //   if($(this)[0].id=='Start')
+  //   {
+  //     $('.ui.large.post.modal')
+  //       .transition('vertical flip')
+  //     ;
+  //   }
+  // });
 
 
   var $loginPage = $('.login.page'); // The login page
@@ -76,8 +79,8 @@ $.getJSON('csvjson.json', function(csvjson) {
     // var rand_num = Math.random();
     if (data.numUsers === 1) {
       message += "there's 1 participant";
-      // document.getElementById('sr').style.visibility = 'hidden';
-      // conv_expriment_second.group='NO-smart-replies';
+      //zhila: testing .. 
+
     } else {
       // conv_expriment_second.group='Smart-replies'
       message += "there are " + data.numUsers + " participants"; 
@@ -719,11 +722,38 @@ function codeTab(){
     if(data.group=='SR')
     {
       conv_expriment_second.group = 'SR'
+      //Zhila: fix it
+      if(!flg_first_login)
+      {
+        flg_first_login = true;
+        $('#IntroModalSR').modal('show');
+        $('.ui.button').on('click',function(){
+          if($(this)[0].id=='Start')
+          {
+            $('.ui.large.post.modal')
+              .transition('vertical flip')
+            ;
+          }
+        });
+      }
     }
     else if(data.group=='NSR')
     {
       conv_expriment_second.group='NSR'
-      document.getElementById('sr').style.visibility = 'hidden';
+      document.getElementById("sr").style.visibility = 'hidden';
+      if(!flg_first_login)
+      {
+        flg_first_login = true;
+        $('#IntroModalNSR').modal('show');
+        $('.ui.button').on('click',function(){
+          if($(this)[0].id=='Start')
+          {
+            $('.ui.large.post.modal')
+              .transition('vertical flip')
+            ;
+          }
+        });
+      }
     }
     else {
       conv_expriment_second.group ='unknown'
