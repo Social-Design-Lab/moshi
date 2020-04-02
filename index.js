@@ -32,6 +32,7 @@ app.use('/nsr',express.static(path.join(__dirname, 'sR-nSR')));
 
 var numUsers = 0;
 var all_rooms = [];
+var chosen=false;
 
 //array of all active rooms
 //var room = io.sockets.adapter.rooms
@@ -39,7 +40,7 @@ var all_rooms = [];
 io.on('connection', function (socket) {
   var addedUser = false;
   var myroom = -1;
-  var chosen=false;
+  // var chosen=false;
 
   //add user to a new room
   socket.on('join room', function (data) {
@@ -53,25 +54,25 @@ io.on('connection', function (socket) {
     ++numUsers;
     addedUser = true;
 
-    // if(!chosen)
-    // {
-    //   if (Math.random()<0.5)
-    //     {
-    //       // smart_group = 'a' //first group gets the smart replies
-    //       group_a = 'SR';
-    //       group_b='NSR';
-    //     }
-    //   else
-    //     {
-    //       // smart_group = 'b' //second group gets the smart replies
-    //       group_b = 'SR';
-    //       group_a ='NSR';
-    //     }
+    if(!chosen)
+    {
+      if (Math.random()<0.5)
+        {
+          // smart_group = 'a' //first group gets the smart replies
+          group_a = 'SR';
+          group_b='NSR';
+        }
+      else
+        {
+          // smart_group = 'b' //second group gets the smart replies
+          group_b = 'SR';
+          group_a ='NSR';
+        }
 
-    //   chosen = true
-    // }
-    group_a = 'SR';
-    group_b='NSR';
+      chosen = true
+    }
+    // group_a = 'SR';
+    // group_b='NSR';
 
     console.log("Total number of rooms is: "+all_rooms.length)
 
@@ -118,6 +119,8 @@ io.on('connection', function (socket) {
             category : 'b',
             group: group_b
           });
+          //ZH: restart the group : NEXT THING TO CHECK
+          chosen = false;
           
           socket.to(myroom).emit('user joined', {
             username: socket.username,
@@ -182,23 +185,23 @@ io.on('connection', function (socket) {
   socket.on('add user', function (data) {
     if (addedUser) return;
 
-    if(!chosen)
-    {
-      if (Math.random()<0.5)
-        {
-          // smart_group = 'a' //first group gets the smart replies
-          group_a = 'SR';
-          group_b='NSR';
-        }
-      else
-        {
-          // smart_group = 'b' //second group gets the smart replies
-          group_b = 'SR';
-          group_a ='NSR';
-        }
+    // if(!chosen)
+    // {
+    //   if (Math.random()<0.5)
+    //     {
+    //       // smart_group = 'a' //first group gets the smart replies
+    //       group_a = 'SR';
+    //       group_b='NSR';
+    //     }
+    //   else
+    //     {
+    //       // smart_group = 'b' //second group gets the smart replies
+    //       group_b = 'SR';
+    //       group_a ='NSR';
+    //     }
 
-      chosen = true
-    }
+    //   chosen = true
+    // }
 
     if (numUsers < 2){
       // we store the username in the socket session for this client
@@ -211,7 +214,8 @@ io.on('connection', function (socket) {
         numUsers: numUsers,
         sender_id: data.sender_id,
         category : 'a', // first person who joins
-        group: group_a
+        //group: group_a
+        group:data.group
         });
       }
       else if(numUsers ==2)
@@ -220,7 +224,8 @@ io.on('connection', function (socket) {
         numUsers: numUsers,
         sender_id: data.sender_id,
         category : 'b', //second person who joins the room
-        group: group_b
+        //group: group_b
+        group: data.group
         });
       }
       // socket.emit('login', {

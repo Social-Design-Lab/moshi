@@ -903,7 +903,8 @@ function codeTab(){
     if (username) {
       var obj ={
           username: username,
-          sender_id:sender_id
+          sender_id:sender_id,
+          group:conv_expriment_second.group
         };
 
       socket.emit('add user', obj);
