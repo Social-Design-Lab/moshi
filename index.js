@@ -53,23 +53,26 @@ io.on('connection', function (socket) {
     ++numUsers;
     addedUser = true;
 
-    if(!chosen)
-    {
-      if (Math.random()<0.5)
-        {
-          // smart_group = 'a' //first group gets the smart replies
-          group_a = 'SR';
-          group_b='NSR';
-        }
-      else
-        {
-          // smart_group = 'b' //second group gets the smart replies
-          group_b = 'SR';
-          group_a ='NSR';
-        }
+    // if(!chosen)
+    // {
+    //   if (Math.random()<0.5)
+    //     {
+    //       // smart_group = 'a' //first group gets the smart replies
+    //       group_a = 'SR';
+    //       group_b='NSR';
+    //     }
+    //   else
+    //     {
+    //       // smart_group = 'b' //second group gets the smart replies
+    //       group_b = 'SR';
+    //       group_a ='NSR';
+    //     }
 
-      chosen = true
-    }
+    //   chosen = true
+    // }
+    group_a = 'SR';
+    group_b='NSR';
+
     console.log("Total number of rooms is: "+all_rooms.length)
 
     if (all_rooms.length == 0)
