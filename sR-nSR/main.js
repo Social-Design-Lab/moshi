@@ -69,7 +69,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     category: '',
     data: new Date(),
     //group: 'Smart-replies', // this item should be hard coded for each group
-    group:'',
+    group:'SR-NSR',
     convo: new Array(),// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
