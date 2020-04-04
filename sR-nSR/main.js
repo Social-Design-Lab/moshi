@@ -241,6 +241,7 @@ $.getJSON('csvjson.json', function(csvjson) {
           console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
           conv_expriment_second.convo.push({ group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+          conv_expriment_second.convo.push({ group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         }
         else if(conv_expriment_second.category=='a')
         {
