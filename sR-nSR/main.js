@@ -240,15 +240,15 @@ $.getJSON('csvjson.json', function(csvjson) {
           // conv_expriment_second.group = 'sR'
           console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
-          conv_expriment_second.convo.push({ group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
-          conv_expriment_second.convo.push({ group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+          conv_expriment_second.convo.push({ participant:'p2',group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+          //conv_expriment_second.convo.push({ group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         }
         else if(conv_expriment_second.category=='a')
         {
           // conv_expriment_second.group = 'No-sR'
           console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
-          conv_expriment_second.convo.push({ group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+          conv_expriment_second.convo.push({ participant:'p1',group:conv_expriment_second.group, id: data.sender_id, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         }
       } 
       else 
@@ -257,13 +257,13 @@ $.getJSON('csvjson.json', function(csvjson) {
         {
           console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
-          conv_expriment_second.convo.push({ group: conv_expriment_second.group, id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
+          conv_expriment_second.convo.push({ participant:'p2',group: conv_expriment_second.group, id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: data.observed_smart_replies, date: new Date()});
         }
         else if(conv_expriment_second.category=='a')
         {
           console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
-          conv_expriment_second.convo.push({ group:conv_expriment_second.group, id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: "", date: new Date()});
+          conv_expriment_second.convo.push({ participant:'p1',group:conv_expriment_second.group, id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: "", date: new Date()});
         }
       }
       previous_sender = data.username;
