@@ -69,8 +69,9 @@ $.getJSON('csvjson.json', function(csvjson) {
     category: '',
     data: new Date(),
     //group: 'Smart-replies', // this item should be hard coded for each group
-    group:'SR-NSR',
-    convo: new Array(),// An array to store objects of each conversation
+    group:'',
+    experiment_group:'',
+    convo: new Array()// An array to store objects of each conversation
   };
   console.log('000000000---000---0000000');
 
@@ -419,26 +420,6 @@ $.getJSON('csvjson.json', function(csvjson) {
             
           });
 
-        //previously...
-        // $.getJSON('PosCsvjson.json', function(csvjson) {
-        //   inputData = csvjson;
-        //   inputData0 = shuffle(inputData)
-        //   //here we need to send the message to smartreply.py or the server this py file is running on
-        //   // and then update these buttons using that...
-        //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-        //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-        //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-        // });
-        // $.getJSON('NegCsvjson.json', function(csvjson) {
-        //   inputData = csvjson;
-        //   inputData00 = shuffle(inputData)
-        //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-        //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-        //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
-
-        // });
-
-
       } else {
         setUsername();
       }
@@ -482,33 +463,7 @@ $.getJSON('csvjson.json', function(csvjson) {
             for (var i = 0; (i<responses.length && i <3) ; i++) {
               $('.ui.blue.button')[i].textContent =responses[i];
             }
-          // $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-          // $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-          // $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-            // $('.ui.blue.button')[0].textContent =responses[0];
-            // $('.ui.blue.button')[1].textContent =responses[1];
-            // $('.ui.blue.button')[2].textContent =responses[2];
-            // $('.ui.blue.button')[3].textContent =responses[3];
-            // $('.ui.blue.button')[4].textContent =responses[4];
-            // $('.ui.blue.button')[5].textContent =responses[5];
       });;
-
-      // //previously..
-      // $.getJSON('PosCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData0 = shuffle(inputData)
-      //   $('.ui.blue.button')[0].textContent =inputData0[1].Response;
-      //   $('.ui.blue.button')[1].textContent =inputData0[2].Response;
-      //   $('.ui.blue.button')[2].textContent =inputData0[3].Response;
-      // });
-      // $.getJSON('NegCsvjson.json', function(csvjson) {
-      //   inputData = csvjson;
-      //   inputData00 = shuffle(inputData)
-      //   $('.ui.gray.button')[0].textContent =inputData00[1].Response;
-      //   $('.ui.gray.button')[1].textContent =inputData00[2].Response;
-      //   $('.ui.gray.button')[2].textContent =inputData00[3].Response;
-
-      // });
 
 
 
@@ -708,16 +663,27 @@ function codeTab(){
     if(data.category =="a")
     {
       conv_expriment_second.category ='a';
-      // conv_expriment_second.group ='NO-smart-replies';
+      if(data.group=='SR'){
+        conv_expriment_second.experiment_group = '1SR_2NSR';
+      }
+      else
+      {
+        conv_expriment_second.experiment_group = '1NSR_2SR';
+      }
     }
     else if (data.category=="b")
     {
       conv_expriment_second.category='b';
-      // conv_expriment_second.group='Smart-replies';
+      if(data.group=='SR'){
+        conv_expriment_second.experiment_group = '1NSR_2SR';
+      }
+      else
+      {
+        conv_expriment_second.experiment_group = '1SR_2NSR';
+      }
     }
     else {
       conv_expriment_second.category='c';
-      // conv_expriment_second.group='unknown';
     }
     // groups..
     if(data.group=='SR')
