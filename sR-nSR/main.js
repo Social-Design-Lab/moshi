@@ -85,7 +85,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     } else {
       // conv_expriment_second.group='Smart-replies'
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 04 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 00 + ":" + 20; // set the chat period.
       startTimer();
     }
     log(message);
@@ -504,7 +504,8 @@ $.getJSON('csvjson.json', function(csvjson) {
         "name": username,
         "text" : chat_content,
         "num": box_count,
-        "group":conv_expriment_second.group
+        "group":conv_expriment_second.group,
+        "partner": partner_name
       }
       // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
 
@@ -537,11 +538,11 @@ function checkSecond(sec) {
 function codeTab(){
     if (user_record.group=='SR')
     {
-      var str_val = (user_record.name).concat('_srhal').concat(partner_name);
+      var str_val = (user_record.name).concat('_srhal').concat(user_record.partner);
     }
     else
     {
-      var str_val = (user_record.name).concat('_halsr').concat(partner_name);
+      var str_val = (user_record.name).concat('_halsr').concat(user_record.partner);
     }
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
