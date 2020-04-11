@@ -264,7 +264,7 @@ $.getJSON('csvjson.json', function(csvjson) {
         {
           console.log(conv_expriment_second.group)
           console.log(conv_expriment_second.convo)
-          conv_expriment_second.convo.push({ participant:'p1',group:conv_expriment_second.group, id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: observed_smart_replies, date: new Date()});
+          conv_expriment_second.convo.push({ participant:'p1',group:conv_expriment_second.group, id: data.sender_id, reply_to: data.reply_to, root:root_id, user: data.username, text: data.message, is_suggested: data.is_suggested, smart_replies: "", date: new Date()});
         }
       }
       previous_sender = data.username;
@@ -496,15 +496,16 @@ $.getJSON('csvjson.json', function(csvjson) {
     $('#proceed').attr('disabled',false);
     $('#proceed').on('click', function() {
       $chatPage.fadeOut();
-      // $('#IntroModalSR').fadeOut();
-      // $('#IntroModalNSR').fadeOut();
+      // $('#IntroModalSR').style.display = "none";
+      // $('#IntroModalNSR').style.display = "none";
+      $('#IntroModalSR').fadeOut();
+      $('#IntroModalNSR').fadeOut();
       let randCode = Math.random().toString(36).substring(7);
       // alert("You are finished working with your partner. Your conversation completion code is "+randCode+". Please copy and paste this code into the Qualtrics survey");
       user_record ={
         "name": username,
         "text" : chat_content,
-        "num": box_count,
-        "group":conv_expriment_second.group
+        "num": box_count
       }
       // show a link to a post-survey .. or automatically lead the participent to the post survey  page!
 
@@ -535,14 +536,7 @@ function checkSecond(sec) {
 }
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
-    if (user_record.group=='SR')
-    {
-      var str_val = (user_record.name).concat('_srhal').concat(partner_name);
-    }
-    else
-    {
-      var str_val = (user_record.name).concat('_halsr').concat(partner_name);
-    }
+    var str_val = (user_record.name).concat('hal').concat(partner_name);
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
     console.log(str_val);
@@ -702,14 +696,14 @@ function codeTab(){
       if(!flg_first_login)
       {
         flg_first_login = true;
-        // $('#IntroModalSR').modal('show');
+        $('#IntroModalSR').modal('show');
         $('.ui.button').on('click',function(){
           if($(this)[0].id=='Start')
           {
             $('.ui.large.post.modal')
               .transition('vertical flip')
             ;
-            // $('#IntroModalSR').modal('hide');
+            $('#IntroModalSR').modal('hide');
           }
         });
       }

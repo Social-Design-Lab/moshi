@@ -1,0 +1,1 @@
+curl -d '{"input" : "Hello"}' -H "Content-Type:application/json" http://socialsandbox.xyz/api/smartreply
