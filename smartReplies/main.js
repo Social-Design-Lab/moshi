@@ -75,7 +75,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       // se the group number .. 
     } else {
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 04 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
