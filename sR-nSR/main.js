@@ -85,7 +85,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     } else {
       // conv_expriment_second.group='Smart-replies'
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 04 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
