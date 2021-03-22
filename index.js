@@ -33,6 +33,7 @@ app.use('/nsr',express.static(path.join(__dirname, 'sR-nSR')));
 var numUsers = 0;
 var all_rooms = [];
 var chosen=false;
+var Max_Users = 3;
 
 //array of all active rooms
 //var room = io.sockets.adapter.rooms
@@ -82,6 +83,7 @@ io.on('connection', function (socket) {
       myroom = newRoom;
       r.name = newRoom;
       r.full = false;
+      r.numUsers = 1;
       all_rooms.push(r);
       socket.join(myroom);
 
@@ -106,16 +108,25 @@ io.on('connection', function (socket) {
     for (var i = 0; i < all_rooms.length; i++) {
         console.log("now looking at room: "+all_rooms[i].name)
         console.log("The room is : "+all_rooms[i].full)
-
+        all_rooms[i].numUsers = all_rooms[i].numUsers +1
         if (!all_rooms[i].full) 
         {
+          // max number of the particpants ...
+          if (all_rooms[i].numUsers == Max_Users) 
+          {
+            all_rooms[i].full = true;
+          }
+
           myroom = all_rooms[i].name;
-          all_rooms[i].full = true;
+
+          // all_rooms[i].full = true;
+          // increase the number of 
           console.log("Entering exsiting room. My room is now: "+myroom);
           socket.join(myroom) ;
           socket.emit('login', {
-            numUsers: 2,
-            sender_id:sender_id,
+            // numUsers: 2,
+            numUsers: numUsers, //-->check this
+            sender_id: sender_id,
             category : 'b',
             group: group_b
           });
@@ -139,12 +150,13 @@ io.on('connection', function (socket) {
       var r = new Object();
       r.name = newRoom;
       r.full = false;
+      r.numUsers = 1;
       all_rooms.push(r);
       socket.join(newRoom);
 
       socket.emit('login', {
         numUsers: 1,
-        sender_id:sender_id,
+        sender_id: sender_id,
         category : 'a',
         group: group_a
       });
@@ -172,7 +184,7 @@ io.on('connection', function (socket) {
       is_suggested: data.is_suggested,
       sender_id : data.sender_id,
       reply_to: data.reply_to,
-      observed_smart_replies:data.observed_smart_replies
+      observed_smart_replies:data.observed_smart_replies,
     });
     
 
@@ -184,24 +196,6 @@ io.on('connection', function (socket) {
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function (data) {
     if (addedUser) return;
-
-    // if(!chosen)
-    // {
-    //   if (Math.random()<0.5)
-    //     {
-    //       // smart_group = 'a' //first group gets the smart replies
-    //       group_a = 'SR';
-    //       group_b='NSR';
-    //     }
-    //   else
-    //     {
-    //       // smart_group = 'b' //second group gets the smart replies
-    //       group_b = 'SR';
-    //       group_a ='NSR';
-    //     }
-
-    //   chosen = true
-    // }
 
     if (numUsers < 2){
       // we store the username in the socket session for this client

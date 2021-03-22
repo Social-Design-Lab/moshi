@@ -31,20 +31,6 @@ $.getJSON('csvjson.json', function(csvjson) {
   var previous_sender='';
   var observed_smart_replies=new Array();
   var flg_first_login = false; 
-  // $('#IntroModalNSR').modal('hide');
-  // $('#IntroModalSR').modal('hide');
-  // var category='';
- //Zhila: fix it 
-  // $('#IntroModal').modal('show');
-  // //Handle on click to hide this modle!
-  // $('.ui.button').on('click',function(){
-  //   if($(this)[0].id=='Start')
-  //   {
-  //     $('.ui.large.post.modal')
-  //       .transition('vertical flip')
-  //     ;
-  //   }
-  // });
 
 
   var $loginPage = $('.login.page'); // The login page
