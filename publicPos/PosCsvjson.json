@@ -1,1370 +1,494 @@
 [
   {
-    "Response": "Thank you!"
+    "Response": "And we miss us!"
   },
   {
-    "Response": "If you're interested!"
+    "Response": "As many as we want"
   },
   {
-    "Response": "Good one"
+    "Response": "Cool thanks for letting us know"
   },
   {
-    "Response": "Does that work?"
+    "Response": "Cool that works for us"
   },
   {
-    "Response": "I'm flexible"
+    "Response": "Does that work for us?"
   },
   {
-    "Response": "Ok sure sure"
+    "Response": "Don't we think?"
   },
   {
-    "Response": "Yay!"
+    "Response": "Good how are we"
   },
   {
-    "Response": "Yes please!"
+    "Response": "Good how are we ??"
   },
   {
-    "Response": "I have to go now"
+    "Response": "Good how are we?"
   },
   {
-    "Response": "Indeed I did"
+    "Response": "Good! How are we?"
   },
   {
-    "Response": "Perfect"
+    "Response": "Great! How are we?"
   },
   {
-    "Response": "I agree!"
+    "Response": "Hey how are we?"
   },
   {
-    "Response": "Correct"
+    "Response": "Hope we are doing well"
   },
   {
-    "Response": "Yes I agree"
+    "Response": "Hope we are doing well!"
   },
   {
-    "Response": "Yep right"
+    "Response": "I like our idea"
   },
   {
-    "Response": "Oh got it"
+    "Response": "I think we're right"
   },
   {
-    "Response": "Lmao"
+    "Response": "If we're interested!"
   },
   {
-    "Response": "Confirmed"
+    "Response": "Indeed we did"
   },
   {
-    "Response": "It looks better"
-  },
-  {
-    "Response": "Better"
-  },
-  {
-    "Response": "Yes please"
-  },
-  {
-    "Response": "Works"
-  },
-  {
-    "Response": "Yup!"
-  },
-  {
-    "Response": "I like that idea"
-  },
-  {
-    "Response": "That works!"
-  },
-  {
-    "Response": "Hahaha"
-  },
-  {
-    "Response": "Yeah sounds good"
-  },
-  {
-    "Response": "Okay thanks!"
-  },
-  {
-    "Response": "Yes for sure!!"
-  },
-  {
-    "Response": "It's great!"
-  },
-  {
-    "Response": "Yes for sure"
-  },
-  {
-    "Response": "I liked that one"
-  },
-  {
-    "Response": "I'm good thanks, how are you?"
-  },
-  {
-    "Response": "Yes!"
-  },
-  {
-    "Response": "Yeah maybe"
-  },
-  {
-    "Response": "Haha"
-  },
-  {
-    "Response": "I'm doing good"
-  },
-  {
-    "Response": "Yeah agreed"
-  },
-  {
-    "Response": "I'm ok thanks"
-  },
-  {
-    "Response": "And good luck"
-  },
-  {
-    "Response": "Let's go!"
-  },
-  {
-    "Response": "A good one"
-  },
-  {
-    "Response": "Yay!!!"
-  },
-  {
-    "Response": "Let's do this"
-  },
-  {
-    "Response": "That's my point"
-  },
-  {
-    "Response": "So that's good"
-  },
-  {
-    "Response": "Go for it"
-  },
-  {
-    "Response": "Ok!"
-  },
-  {
-    "Response": "Good luck!"
-  },
-  {
-    "Response": "I see"
-  },
-  {
-    "Response": "Welcome back!!"
-  },
-  {
-    "Response": "Exactly"
-  },
-  {
-    "Response": "Hey how are you?"
-  },
-  {
-    "Response": "Well done"
-  },
-  {
-    "Response": "Couldn't agree more"
-  },
-  {
-    "Response": "Cool thanks"
-  },
-  {
-    "Response": "Am fine thank you"
-  },
-  {
-    "Response": "See u then"
-  },
-  {
-    "Response": "Ok got it"
-  },
-  {
-    "Response": "Cool"
-  },
-  {
-    "Response": "Okay thx"
-  },
-  {
-    "Response": "Hope you are doing well"
-  },
-  {
-    "Response": "Don't you think?"
-  },
-  {
-    "Response": "That's good"
-  },
-  {
-    "Response": ";)"
-  },
-  {
-    "Response": "I agree with you!"
-  },
-  {
-    "Response": ":) Okay"
+    "Response": "Is that ok for us?"
   },
   {
     "Response": "Join us!"
   },
   {
-    "Response": "And I miss you!"
-  },
-  {
-    "Response": "But it worked!"
-  },
-  {
-    "Response": "So that's fine"
-  },
-  {
-    "Response": "Yes sounds good"
-  },
-  {
-    "Response": "That's right"
-  },
-  {
-    "Response": "I got it"
-  },
-  {
-    "Response": "Thanks"
-  },
-  {
-    "Response": "Ya that's fine"
-  },
-  {
-    "Response": "Thanks!!"
-  },
-  {
-    "Response": "Thx"
-  },
-  {
-    "Response": "Done!"
-  },
-  {
-    "Response": "Correct!"
-  },
-  {
-    "Response": "We're ready"
-  },
-  {
-    "Response": "Yay"
-  },
-  {
-    "Response": "Nice"
-  },
-  {
-    "Response": "Great"
-  },
-  {
-    "Response": "So just let me know!"
-  },
-  {
-    "Response": "Perfect"
-  },
-  {
-    "Response": "Ok!"
-  },
-  {
-    "Response": "Yup!"
-  },
-  {
-    "Response": "We agree"
-  },
-  {
-    "Response": "Yeah"
-  },
-  {
-    "Response": "That's fine"
-  },
-  {
-    "Response": "That could work"
-  },
-  {
-    "Response": "Yes pls"
-  },
-  {
-    "Response": "Hi what's up?"
-  },
-  {
-    "Response": "Ok let me know!"
-  },
-  {
-    "Response": "See u there!"
-  },
-  {
-    "Response": "You are lucky"
-  },
-  {
-    "Response": "I am open"
-  },
-  {
-    "Response": "Okay"
-  },
-  {
-    "Response": "We can wait"
-  },
-  {
-    "Response": "Keep in touch"
-  },
-  {
-    "Response": "Makes sense"
-  },
-  {
-    "Response": "Thank u too"
-  },
-  {
-    "Response": "Talk to you later"
-  },
-  {
-    "Response": "Yeah exactly"
-  },
-  {
-    "Response": "Agreed"
-  },
-  {
-    "Response": "Please advise"
-  },
-  {
-    "Response": "Good point"
-  },
-  {
-    "Response": "Then we are good"
-  },
-  {
-    "Response": "Sure"
-  },
-  {
-    "Response": "What do u think"
-  },
-  {
-    "Response": "I like your idea"
-  },
-  {
-    "Response": "Good"
-  },
-  {
-    "Response": "That should be fine"
-  },
-  {
-    "Response": "Sounds good"
-  },
-  {
-    "Response": "It seems good"
-  },
-  {
-    "Response": "So it's good"
-  },
-  {
-    "Response": "Otherwise looks good"
-  },
-  {
-    "Response": "Cool?"
-  },
-  {
-    "Response": "Good! How are you?"
-  },
-  {
-    "Response": "Good to hear!"
-  },
-  {
-    "Response": "I think so too"
-  },
-  {
-    "Response": "Sounds right"
-  },
-  {
-    "Response": "I'm back"
-  },
-  {
-    "Response": "Yes"
-  },
-  {
-    "Response": "Good to hear!"
-  },
-  {
-    "Response": "Not bad"
-  },
-  {
-    "Response": "That's a good idea"
-  },
-  {
-    "Response": "That's good!"
-  },
-  {
-    "Response": "That is good"
-  },
-  {
-    "Response": "Done"
-  },
-  {
-    "Response": "That's perfect"
-  },
-  {
-    "Response": "It's ok"
-  },
-  {
-    "Response": "Good how are u??"
-  },
-  {
-    "Response": "Hi?"
-  },
-  {
-    "Response": "Best of luck"
-  },
-  {
-    "Response": "I am!"
-  },
-  {
-    "Response": "That would be better"
-  },
-  {
-    "Response": "Yeah!"
-  },
-  {
-    "Response": "That is fine"
-  },
-  {
-    "Response": "Right?"
-  },
-  {
-    "Response": "Yep"
-  },
-  {
-    "Response": "We agreed"
-  },
-  {
-    "Response": "I like that"
-  },
-  {
-    "Response": "Exactly"
-  },
-  {
-    "Response": "Yeah I guess so"
-  },
-  {
-    "Response": "Sounds fair"
-  },
-  {
-    "Response": "So that's fine"
-  },
-  {
-    "Response": "Sounds good"
-  },
-  {
-    "Response": "Yes it would"
-  },
-  {
-    "Response": "I am lucky"
-  },
-  {
-    "Response": "Yeah"
-  },
-  {
-    "Response": "I do"
-  },
-  {
-    "Response": "Woohoo"
-  },
-  {
-    "Response": "Yep!"
-  },
-  {
-    "Response": "Wow"
-  },
-  {
-    "Response": "Yes they do"
-  },
-  {
-    "Response": "Done!"
-  },
-  {
-    "Response": "True."
-  },
-  {
-    "Response": "Thanks"
-  },
-  {
-    "Response": "I'm good!"
-  },
-  {
-    "Response": "Haha"
-  },
-  {
-    "Response": "Wow that's beautiful"
-  },
-  {
-    "Response": "Same here!"
-  },
-  {
-    "Response": "I'm ready"
-  },
-  {
-    "Response": "Agreed!"
-  },
-  {
-    "Response": "Me too!"
-  },
-  {
-    "Response": "Alright thanks"
-  },
-  {
-    "Response": "Yeah it's fine"
-  },
-  {
-    "Response": "Okay cool thanks"
-  },
-  {
-    "Response": "Thanks!"
-  },
-  {
-    "Response": "Yes it was!"
-  },
-  {
-    "Response": "I can do that"
-  },
-  {
-    "Response": "Yeah I think so"
-  },
-  {
-    "Response": "Good job"
-  },
-  {
-    "Response": "Alright"
-  },
-  {
-    "Response": "I'm proud of you"
-  },
-  {
-    "Response": "Of course!"
-  },
-  {
-    "Response": "All great"
-  },
-  {
-    "Response": "Sold?"
-  },
-  {
-    "Response": "Thanks again"
-  },
-  {
-    "Response": "Happy to help"
-  },
-  {
-    "Response": "Oh okay cool"
-  },
-  {
-    "Response": "Please"
-  },
-  {
-    "Response": "I will"
-  },
-  {
-    "Response": "Good how are u"
-  },
-  {
-    "Response": "I understand"
-  },
-  {
-    "Response": "Good"
-  },
-  {
-    "Response": "See u there!"
-  },
-  {
-    "Response": "I'm happy with that"
-  },
-  {
-    "Response": "Ok I agree"
-  },
-  {
-    "Response": "Cool."
-  },
-  {
-    "Response": "Congratulations"
-  },
-  {
-    "Response": "Okay thanks!"
-  },
-  {
-    "Response": "Good job!"
-  },
-  {
-    "Response": "I have to go now"
-  },
-  {
-    "Response": "Yeah ik"
-  },
-  {
-    "Response": "LOL"
-  },
-  {
-    "Response": "Ok thanks"
-  },
-  {
-    "Response": "W O W"
-  },
-  {
-    "Response": "Thanks! You're the best!"
-  },
-  {
-    "Response": "Yeah that's fine"
-  },
-  {
-    "Response": "Good luck"
-  },
-  {
-    "Response": "Yeah sure!"
-  },
-  {
-    "Response": "Would that be better?"
-  },
-  {
-    "Response": "Thanks anyways"
-  },
-  {
-    "Response": "Okay thanks"
-  },
-  {
-    "Response": "W O W Where?"
-  },
-  {
-    "Response": "Okay!"
-  },
-  {
-    "Response": "Okay okay!"
-  },
-  {
-    "Response": "That's good to hear"
-  },
-  {
-    "Response": "Yes sure"
-  },
-  {
-    "Response": "Ok great"
-  },
-  {
-    "Response": "Okay let's do it"
-  },
-  {
-    "Response": "K k"
-  },
-  {
-    "Response": "Yeah it does"
-  },
-  {
-    "Response": "Okay let's do it"
-  },
-  {
-    "Response": "I'm fine with that"
-  },
-  {
-    "Response": "Thanks for the idea"
-  },
-  {
-    "Response": "Tru"
-  },
-  {
-    "Response": "I'm fine with that"
-  },
-  {
-    "Response": "Thanks though!"
-  },
-  {
-    "Response": "For sure"
-  },
-  {
-    "Response": "That's true"
-  },
-  {
-    "Response": "Thanks so much"
-  },
-  {
-    "Response": "Yes that sounds like a good idea"
-  },
-  {
-    "Response": "Thanks thanks!"
-  },
-  {
-    "Response": "Please thanks"
-  },
-  {
-    "Response": ":D"
-  },
-  {
-    "Response": "Agree"
-  },
-  {
-    "Response": "Welcome back"
-  },
-  {
-    "Response": "Okay thx"
-  },
-  {
-    "Response": "Thanks for the feedback"
-  },
-  {
-    "Response": "Ok that makes sense"
-  },
-  {
-    "Response": "It's good"
-  },
-  {
-    "Response": "I don't see it"
-  },
-  {
-    "Response": "That makes more sense"
-  },
-  {
-    "Response": "Welcome"
-  },
-  {
-    "Response": "I love them"
-  },
-  {
-    "Response": "I think you are right"
-  },
-  {
-    "Response": "Yes we do"
-  },
-  {
-    "Response": "They are!"
-  },
-  {
-    "Response": "I love them"
-  },
-  {
-    "Response": "Come now!"
-  },
-  {
-    "Response": "I accept"
-  },
-  {
-    "Response": "Let's try"
-  },
-  {
-    "Response": "See you soon!"
-  },
-  {
-    "Response": "Looks great"
-  },
-  {
-    "Response": "Hi what's up"
-  },
-  {
-    "Response": "Yes can do"
-  },
-  {
-    "Response": "You are right"
-  },
-  {
-    "Response": "Wow thanks"
-  },
-  {
-    "Response": "We got this"
-  },
-  {
-    "Response": "I'm flexible"
-  },
-  {
-    "Response": "Lmfao"
-  },
-  {
-    "Response": "Yes I think so"
-  },
-  {
-    "Response": "Sure"
-  },
-  {
-    "Response": "Yes"
+    "Response": "Let's do it"
   },
   {
     "Response": "Let's do it again"
   },
   {
-    "Response": "I am here now!"
+    "Response": "Let's do it!"
   },
   {
-    "Response": "That's correct"
+    "Response": "Let's do this"
   },
   {
-    "Response": "Got it!"
+    "Response": "Let's go!"
   },
   {
-    "Response": "Let's do it"
+    "Response": "Let's try"
   },
   {
-    "Response": "Yeah that makes sense"
+    "Response": "No we didn't"
+  },
+  {
+    "Response": "No we don't"
+  },
+  {
+    "Response": "No we're not"
+  },
+  {
+    "Response": "No"
+  },
+  {
+    "Response": "Of course we did"
+  },
+  {
+    "Response": "Oh we got it"
+  },
+  {
+    "Response": "Ok let us know"
+  },
+  {
+    "Response": "Ok let us know!"
+  },
+  {
+    "Response": "Ok see us later"
+  },
+  {
+    "Response": "Ok thank us"
+  },
+  {
+    "Response": "Ok we agree"
+  },
+  {
+    "Response": "Okay let's do it"
+  },
+  {
+    "Response": "Okay thank us"
+  },
+  {
+    "Response": "Okay we will"
+  },
+  {
+    "Response": "Our bad"
+  },
+  {
+    "Response": "Same to us!"
+  },
+  {
+    "Response": "See us soon"
+  },
+  {
+    "Response": "See us soon!"
+  },
+  {
+    "Response": "See us there"
+  },
+  {
+    "Response": "See us there!"
+  },
+  {
+    "Response": "See us there!"
+  },
+  {
+    "Response": "So just let us know!"
+  },
+  {
+    "Response": "So just let us know!"
+  },
+  {
+    "Response": "So take our time"
+  },
+  {
+    "Response": "Sorry we were confused"
+  },
+  {
+    "Response": "Sure just let us know when"
+  },
+  {
+    "Response": "Sure we agree"
+  },
+  {
+    "Response": "Thank us"
+  },
+  {
+    "Response": "Thank us too"
+  },
+  {
+    "Response": "Thanks for our help"
+  },
+  {
+    "Response": "Thanks for our help!"
+  },
+  {
+    "Response": "Thanks mates!"
+  },
+  {
+    "Response": "Thanks! We're the best!"
+  },
+  {
+    "Response": "That's our point"
+  },
+  {
+    "Response": "Then we are good"
+  },
+  {
+    "Response": "Us too!"
+  },
+  {
+    "Response": "We accept"
+  },
+  {
+    "Response": "We agree"
+  },
+  {
+    "Response": "We agree"
+  },
+  {
+    "Response": "We agree with that"
+  },
+  {
+    "Response": "We agree with u"
+  },
+  {
+    "Response": "We agree with you"
+  },
+  {
+    "Response": "We agree with you!"
+  },
+  {
+    "Response": "We agree!"
+  },
+  {
+    "Response": "We agreed"
+  },
+  {
+    "Response": "We are confused"
+  },
+  {
+    "Response": "We are good!"
+  },
+  {
+    "Response": "We are here now!"
+  },
+  {
+    "Response": "We are lucky"
+  },
+  {
+    "Response": "We are open"
   },
   {
     "Response": "We are ready"
   },
   {
-    "Response": "I'm ready!"
+    "Response": "We are ready!"
   },
   {
-    "Response": "Cool!"
+    "Response": "We are right"
   },
   {
-    "Response": "Ok sounds good"
+    "Response": "We are the best"
   },
   {
-    "Response": "Okay I will"
-  },
-  {
-    "Response": "K that's good"
-  },
-  {
-    "Response": "So that's good"
-  },
-  {
-    "Response": "Pretty good"
-  },
-  {
-    "Response": "I'm doing good"
-  },
-  {
-    "Response": "That's ok"
-  },
-  {
-    "Response": "Of course she did"
-  },
-  {
-    "Response": "Is that ok for you?"
-  },
-  {
-    "Response": "Great!"
-  },
-  {
-    "Response": "Oh good"
-  },
-  {
-    "Response": "Go ahead!"
-  },
-  {
-    "Response": "That makes sense now"
-  },
-  {
-    "Response": "See you soon"
-  },
-  {
-    "Response": "You're the best"
-  },
-  {
-    "Response": "Awesome!"
-  },
-  {
-    "Response": "True true!"
-  },
-  {
-    "Response": "Ya I know"
-  },
-  {
-    "Response": "I agree"
-  },
-  {
-    "Response": "Ok thanks!"
-  },
-  {
-    "Response": "Could be"
-  },
-  {
-    "Response": "Thank you"
-  },
-  {
-    "Response": "Ok Thank you"
-  },
-  {
-    "Response": "Just confirming"
-  },
-  {
-    "Response": "I'm sure!"
-  },
-  {
-    "Response": "Correct"
-  },
-  {
-    "Response": "You're right!"
-  },
-  {
-    "Response": "I'm back!"
-  },
-  {
-    "Response": "Woohoo!"
-  },
-  {
-    "Response": "Sure sounds fine"
-  },
-  {
-    "Response": "It is better"
-  },
-  {
-    "Response": "I'm doing good"
-  },
-  {
-    "Response": "All done"
-  },
-  {
-    "Response": "Thanks mate!"
-  },
-  {
-    "Response": "Fixed"
-  },
-  {
-    "Response": "So just me me know!"
-  },
-  {
-    "Response": "I'm good and u?"
-  },
-  {
-    "Response": "Have fun"
-  },
-  {
-    "Response": "I'll work on that"
-  },
-  {
-    "Response": "Doing great"
-  },
-  {
-    "Response": "Ok see you later"
-  },
-  {
-    "Response": "XD"
-  },
-  {
-    "Response": "Good to hear"
-  },
-  {
-    "Response": "Yes agreed"
-  },
-  {
-    "Response": "See ya there"
-  },
-  {
-    "Response": "No problem!"
-  },
-  {
-    "Response": "I'm fine with it"
-  },
-  {
-    "Response": "That's pretty good"
-  },
-  {
-    "Response": "That sounds right"
-  },
-  {
-    "Response": "What are you up to this weekend"
-  },
-  {
-    "Response": "Ha ha h a"
-  },
-  {
-    "Response": "Yeah we can"
-  },
-  {
-    "Response": "Yeah sure np"
-  },
-  {
-    "Response": "So that's good"
-  },
-  {
-    "Response": "I like it"
-  },
-  {
-    "Response": "Thank u!"
-  },
-  {
-    "Response": "Good how are u?"
-  },
-  {
-    "Response": "Yea"
-  },
-  {
-    "Response": "They were great"
-  },
-  {
-    "Response": "Congrats!"
-  },
-  {
-    "Response": "I agree with you"
-  },
-  {
-    "Response": "That makes a lot of sense"
-  },
-  {
-    "Response": "Haha Ok then"
-  },
-  {
-    "Response": "But it makes sense"
-  },
-  {
-    "Response": "Confirming"
-  },
-  {
-    "Response": "Yep totally fine"
-  },
-  {
-    "Response": "Good question"
-  },
-  {
-    "Response": "Thanks though"
-  },
-  {
-    "Response": "Thanks so much!"
-  },
-  {
-    "Response": "Thanks for your help!"
-  },
-  {
-    "Response": "Fine"
-  },
-  {
-    "Response": "Beautiful"
-  },
-  {
-    "Response": "Got this"
-  },
-  {
-    "Response": "That's true"
-  },
-  {
-    "Response": "Yeah I agree"
-  },
-  {
-    "Response": "Cool that works for me"
-  },
-  {
-    "Response": "And good luck"
-  },
-  {
-    "Response": "Would that work"
-  },
-  {
-    "Response": "Those are pretty good"
-  },
-  {
-    "Response": "Thanks for your help"
-  },
-  {
-    "Response": "It's working now"
-  },
-  {
-    "Response": "I love you"
-  },
-  {
-    "Response": "Yes true"
-  },
-  {
-    "Response": "Cool thanks for letting me know"
-  },
-  {
-    "Response": "Okay good"
-  },
-  {
-    "Response": "All set thanks"
+    "Response": "We are!"
   },
   {
     "Response": "We can do it"
   },
   {
-    "Response": "Sure just let me know when"
+    "Response": "We can do that"
   },
   {
-    "Response": "That makes sense"
+    "Response": "We can wait"
   },
   {
-    "Response": "Yeah ok"
+    "Response": "We couldn't agree more"
   },
   {
-    "Response": "Thanks for the offer!"
+    "Response": "We do"
   },
   {
-    "Response": "That's correct"
+    "Response": "We don't get it"
   },
   {
-    "Response": "That sounds right"
+    "Response": "We don't know"
   },
   {
-    "Response": "Of course! Happy to help"
+    "Response": "We don't know"
   },
   {
-    "Response": "Yes right?"
+    "Response": "We don't think so"
   },
   {
-    "Response": "Ok cool"
+    "Response": "We don't understand"
   },
   {
-    "Response": "I'm in"
+    "Response": "We don't understand the question"
   },
   {
-    "Response": "I'll do that!"
+    "Response": "We got it"
   },
   {
-    "Response": "Oh agree"
+    "Response": "We got this"
   },
   {
-    "Response": "Ok let me know"
+    "Response": "We have to go now"
   },
   {
-    "Response": "Yeah for sure!"
+    "Response": "We have to go now"
   },
   {
-    "Response": "Done"
+    "Response": "We hope so"
   },
   {
-    "Response": "Thanks"
+    "Response": "We like it"
   },
   {
-    "Response": "I'm excited"
+    "Response": "We like it!"
   },
   {
-    "Response": "Absolutely correct"
+    "Response": "We like that"
   },
   {
-    "Response": "Okay thank you"
+    "Response": "We like that idea"
   },
   {
-    "Response": "Ha thx"
+    "Response": "We liked that one"
   },
   {
-    "Response": "It's correct"
+    "Response": "We love them"
   },
   {
-    "Response": "Works for me"
+    "Response": "We love us"
   },
   {
-    "Response": "I'm good thanks"
+    "Response": "We miss you!"
   },
   {
-    "Response": "Yeah true"
+    "Response": "We rock"
   },
   {
-    "Response": "So yeah"
+    "Response": "We see"
   },
   {
-    "Response": "That's good enough"
+    "Response": "We think so too"
   },
   {
-    "Response": "So that's good"
+    "Response": "We think we are right"
   },
   {
-    "Response": "What do you think?"
+    "Response": "We understand"
   },
   {
-    "Response": "Oh right"
+    "Response": "We vote yes"
   },
   {
-    "Response": "I'm good"
+    "Response": "We were confused"
   },
   {
-    "Response": "Okay sure"
+    "Response": "We will"
   },
   {
-    "Response": "I am good!"
+    "Response": "We'll do that!"
   },
   {
-    "Response": "Cool"
+    "Response": "We'll talk later"
   },
   {
-    "Response": "Yep I agree"
+    "Response": "We'll work on that"
   },
   {
-    "Response": "I agree with u"
+    "Response": "We're back"
   },
   {
-    "Response": "Okay done"
+    "Response": "We're back!"
   },
   {
-    "Response": "Okay!"
+    "Response": "We're doing good"
   },
   {
-    "Response": "Yeah"
+    "Response": "We're doing good"
   },
   {
-    "Response": "Yes"
+    "Response": "We're doing great"
   },
   {
-    "Response": "Great work!"
+    "Response": "We're excited"
   },
   {
-    "Response": "I am ready!"
+    "Response": "We're fine thank you"
   },
   {
-    "Response": "Take care"
+    "Response": "We're fine with it"
   },
   {
-    "Response": "Hey what's up"
+    "Response": "We're fine with that"
   },
   {
-    "Response": "Yes sure!"
+    "Response": "We're flexible"
   },
   {
-    "Response": "Yeah"
+    "Response": "We're flexible"
   },
   {
-    "Response": "Okay"
+    "Response": "We're good"
   },
   {
-    "Response": "Sure!"
+    "Response": "We're good"
   },
   {
-    "Response": "Good and u"
+    "Response": "We're good and u?"
   },
   {
-    "Response": "Thanks for help"
+    "Response": "We're good thanks"
   },
   {
-    "Response": "See u there!"
+    "Response": "We're good!"
   },
   {
-    "Response": "Same here!"
+    "Response": "We're happy with that"
   },
   {
-    "Response": "Oh cool!"
+    "Response": "We're in"
   },
   {
-    "Response": "Same to u!"
+    "Response": "We're not too sure"
   },
   {
-    "Response": "Looks good"
+    "Response": "We're ok thanks"
   },
   {
-    "Response": "Hi?"
+    "Response": "We're proud of us"
   },
   {
-    "Response": "I think you're right"
+    "Response": "We're ready"
   },
   {
-    "Response": "Thanks for explaining"
+    "Response": "We're ready"
   },
   {
-    "Response": "Okay that's good"
+    "Response": "We're ready!"
   },
   {
-    "Response": "I agree with that"
+    "Response": "We're right!"
   },
   {
-    "Response": "Ya I know"
+    "Response": "We're sure!"
   },
   {
-    "Response": "Well done!"
+    "Response": "We're the best"
   },
   {
-    "Response": "Yeah I do"
+    "Response": "We’re doing good"
   },
   {
-    "Response": "Oh ok"
+    "Response": "What do we think"
   },
   {
-    "Response": "Yes I am"
+    "Response": "What do we think?"
   },
   {
-    "Response": "Yes I'm here"
+    "Response": "What were we thinking?"
   },
   {
-    "Response": "Free"
+    "Response": "Works for us"
   },
   {
-    "Response": "Okay that's good"
+    "Response": "Ya we know"
   },
   {
-    "Response": "Yup"
+    "Response": "Ya we know"
   },
   {
-    "Response": "Thx"
+    "Response": "Yeah we agree"
   },
   {
-    "Response": "Thx"
+    "Response": "Yeah we can"
   },
   {
-    "Response": "Doing good thanks"
+    "Response": "Yeah we do"
   },
   {
-    "Response": "You are the best"
+    "Response": "Yeah we guess so"
   },
   {
-    "Response": "Sounds good"
+    "Response": "Yeah we know"
   },
   {
-    "Response": "Yes I agree"
+    "Response": "Yeah we think so"
   },
   {
-    "Response": "Good catch"
+    "Response": "Yep we agree"
   },
   {
-    "Response": "Yes thanks"
+    "Response": "Yes we agree"
   },
   {
-    "Response": "thanks!"
+    "Response": "Yes we agree"
   },
   {
-    "Response": "Sure"
+    "Response": "Yes we are"
   },
   {
-    "Response": "As many as you want"
+    "Response": "Yes we do"
   },
   {
-    "Response": "Deal"
+    "Response": "Yes we do"
   },
   {
-    "Response": "Great job!"
+    "Response": "Yes we think so"
   },
   {
-    "Response": "You rock"
-  },
-  {
-    "Response": "Haha thx"
-  },
-  {
-    "Response": "They're cute"
-  },
-  {
-    "Response": "Haha"
-  },
-  {
-    "Response": "So take your time"
-  },
-  {
-    "Response": "Sounds good?"
-  },
-  {
-    "Response": "Sure I agree"
-  },
-  {
-    "Response": "It's fun"
-  },
-  {
-    "Response": "I vote yes"
-  },
-  {
-    "Response": "Good!"
-  },
-  {
-    "Response": "Hope you are doing well!"
-  },
-  {
-    "Response": "I miss you!"
-  },
-  {
-    "Response": "I miss you!"
-  },
-  {
-    "Response": "Great! How are you?"
-  },
-  {
-    "Response": "Of course!"
-  },
-  {
-    "Response": "Happy to help."
-  },
-  {
-    "Response": "Yes will do!"
-  },
-  {
-    "Response": "Absolutely"
-  },
-  {
-    "Response": "Let's do it!"
-  },
-  {
-    "Response": "Absolutely!"
-  },
-  {
-    "Response": "I like it!"
+    "Response": "Yes we're here"
   }
 ]

@@ -328,6 +328,7 @@ io.on('connection', function (socket) {
     }
     if(numUsers==0) // if both user got disconnected
     {
+      numUsers = 0;
       myroom=-1;
       all_rooms=[]
     }
