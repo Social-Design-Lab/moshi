@@ -127,7 +127,8 @@ io.on('connection', function (socket) {
           socket.join(myroom) ;
           socket.emit('login', {
             // numUsers: 2,
-            numUsers: numUsers, //-->check this
+            // numUsers: numUsers, //-->check this
+            numUsers: all_rooms[i].numUsers,
             sender_id: sender_id,
             category : 'b',
             group: group_b
@@ -234,7 +235,7 @@ io.on('connection', function (socket) {
       // socket.broadcast.emit('user joined', {
       io.to(myroom).emit('user joined', {
         username: socket.username,
-        numUsers: numUsers
+        numUsers: myroom.numUsers
       });
     }
     else
@@ -327,7 +328,7 @@ io.on('connection', function (socket) {
       // echo globally that this client has left
       socket.to(myroom).emit('user left', {
         username: socket.username,
-        numUsers: numUsers
+        numUsers: myroom.numUsers
       });
       //all_rooms.pop(r); //DO I NEED TO kill the room when only one participant leaves ? maybe another one come and start the chat with the other participant...
     }
