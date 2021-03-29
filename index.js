@@ -30,7 +30,7 @@ app.use('/nsr',express.static(path.join(__dirname, 'sR-nSR')));
 
 // Chatroom
 
-var numUsers = 0;
+// var numUsers = 0; // should be defined for each room .... 
 var all_rooms = [];
 var chosen=false;
 var Max_Users = 3;
@@ -38,7 +38,9 @@ var Max_Users = 3;
 //array of all active rooms
 //var room = io.sockets.adapter.rooms
 
+
 io.on('connection', function (socket) {
+  var numUsers = 0; // should be defined for each room .... 
   var addedUser = false;
   var myroom = -1;
   // var chosen=false;
@@ -227,7 +229,10 @@ io.on('connection', function (socket) {
       //   sender_id: data.sender_id
       // });
       // echo globally (all clients) that a person has connected
-      socket.broadcast.emit('user joined', {
+      // this should be only sent to the room -- numUsers .. instead or broadcasting it it should be in the room .... 
+      
+      // socket.broadcast.emit('user joined', {
+      io.to(myroom).emit('user joined', {
         username: socket.username,
         numUsers: numUsers
       });
