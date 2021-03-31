@@ -98,7 +98,7 @@ io.on('connection', function (socket) {
       // echo globally (all clients) that a person has connected
       io.to(myroom).emit('user joined', {
         username: socket.username,
-        numUsers: 1
+        numUsers: r.numUsers
       });
 
     }
@@ -138,7 +138,7 @@ io.on('connection', function (socket) {
           
           socket.to(myroom).emit('user joined', {
             username: socket.username,
-            numUsers: 2,
+            numUsers: all_rooms[i].numUsers,
           });
           break;
 
