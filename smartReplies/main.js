@@ -73,7 +73,10 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (data.numUsers === 1) {
       message += "there's 1 participant";
       // se the group number .. 
-    } else {
+    } else if (data.numUsers === 1){
+      message += "there's 2 participant";
+    }
+    else{
       message += "there are " + data.numUsers + " participants"; 
       document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
       startTimer();
