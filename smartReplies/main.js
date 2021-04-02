@@ -75,6 +75,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       // se the group number .. 
     } else if (data.numUsers === 2){
       message += "there's 2 participant";
+      // ZH: create the partner name here ..
     }
     else if  (data.numUsers === 3){
       message += "there are " + data.numUsers + " participants"; 
@@ -799,6 +800,8 @@ function codeTab(){
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
+    // create the partner_name here .. 
+    partner_name = (partner_name).concat(data.username);
     addParticipantsMessage(data);
     //give the new user the sender id
     socket.emit('sender update', sender_id);
