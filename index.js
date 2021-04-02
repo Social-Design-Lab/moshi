@@ -86,6 +86,7 @@ io.on('connection', function (socket) {
       r.name = newRoom;
       r.full = false;
       r.numUsers = 1;
+      r.partner = '';
       all_rooms.push(r);
       socket.join(myroom);
 
@@ -138,8 +139,9 @@ io.on('connection', function (socket) {
           
           socket.to(myroom).emit('user joined', {
             username: socket.username,
-            numUsers: all_rooms[i].numUsers,
-          });
+            numUsers: all_rooms[i].numUsers
+            // partner : socket.username
+            });
           break;
 
         } 
@@ -225,6 +227,18 @@ io.on('connection', function (socket) {
         group: data.group
         });
       }
+      else if(numUsers ==3)
+      {
+        socket.emit('login', {
+        numUsers: numUsers,
+        sender_id: data.sender_id,
+        category : 'c', //second person who joins the room
+        //group: group_b
+        group: data.group, 
+
+        });
+      }
+
       // socket.emit('login', {
       //   numUsers: numUsers,
       //   sender_id: data.sender_id

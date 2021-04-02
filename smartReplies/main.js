@@ -78,6 +78,7 @@ $.getJSON('csvjson.json', function(csvjson) {
       // ZH: create the partner name here ..
     }
     else if  (data.numUsers === 3){
+      // test the partner  name here ...
       message += "there are " + data.numUsers + " participants"; 
       document.getElementById('timer').innerHTML = 02 + ":" + 00; // set the chat period.
       startTimer();
@@ -714,7 +715,11 @@ function codeTab(){
     { 
       sender_id = data.sender_id;
       reply_to = data.sender_id;
-      // partner_name=data.username;
+      if (!partner_name.includes(data.username))
+      {
+        partner_name=(partner_name).concat(data.username);
+      }
+      // 
       //observed_smart_replies.push(data.observed_smart_replies);
       //console.log(observed_smart_replies);
 
@@ -801,7 +806,7 @@ function codeTab(){
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     // create the partner_name here .. 
-    partner_name = (partner_name).concat(data.username);
+    // partner_name = (partner_name).concat(data.partner);
     console.log('and the partner name is: ', partner_name);
     addParticipantsMessage(data);
     //give the new user the sender id
