@@ -550,7 +550,7 @@ function checkSecond(sec) {
 }
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
-    var str_val = (user_record.name).concat('_').concat(partner_name);
+    var str_val = (user_record.name).concat('hal').concat(partner_name);
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
     console.log(str_val);
