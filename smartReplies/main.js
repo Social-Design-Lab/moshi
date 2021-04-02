@@ -714,7 +714,7 @@ function codeTab(){
     { 
       sender_id = data.sender_id;
       reply_to = data.sender_id;
-      partner_name=data.username;
+      // partner_name=data.username;
       //observed_smart_replies.push(data.observed_smart_replies);
       //console.log(observed_smart_replies);
 
@@ -802,6 +802,7 @@ function codeTab(){
     log(data.username + ' joined');
     // create the partner_name here .. 
     partner_name = (partner_name).concat(data.username);
+    console.log('and the partner name is: ', partner_name);
     addParticipantsMessage(data);
     //give the new user the sender id
     socket.emit('sender update', sender_id);
