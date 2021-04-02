@@ -79,7 +79,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     }
     else if  (data.numUsers === 3){
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 02 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
@@ -549,7 +549,7 @@ function checkSecond(sec) {
 }
 //load the code tab, and on click event redirect the user to qualtrics survey url ... 
 function codeTab(){
-    var str_val = (user_record.name).concat('hal').concat(partner_name);
+    var str_val = (user_record.name).concat('_').concat(partner_name);
     console.log(str_val);
     $('.input.ui.input')[3].value = str_val;
     console.log(str_val);
