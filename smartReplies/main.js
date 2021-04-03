@@ -80,7 +80,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     else if  (data.numUsers === 3){
       // test the partner  name here ...
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 01 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
