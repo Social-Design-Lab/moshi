@@ -27,7 +27,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   var root_id=1; 
   var sender_id=0;
   var reply_to ='';
-  var partner_name='';
+  var partner_name = '';
   var previous_sender='';
   var observed_smart_replies=new Array();
   // var category='';
@@ -80,7 +80,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     else if  (data.numUsers === 3){
       // test the partner  name here ...
       message += "there are " + data.numUsers + " participants"; 
-      document.getElementById('timer').innerHTML = 02 + ":" + 00; // set the chat period.
+      document.getElementById('timer').innerHTML = 01 + ":" + 00; // set the chat period.
       startTimer();
     }
     log(message);
@@ -711,14 +711,15 @@ function codeTab(){
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
     //zhila
+    // partner_name = data.partner_name;
     if(data.username != username)
     { 
       sender_id = data.sender_id;
       reply_to = data.sender_id;
-      if (!partner_name.includes(data.username))
-      {
-        partner_name=(partner_name).concat(data.username);
-      }
+      // if (!partner_name.includes(data.username))
+      // {
+      //   partner_name=(partner_name).concat(data.username);
+      // }
       // 
       //observed_smart_replies.push(data.observed_smart_replies);
       //console.log(observed_smart_replies);
@@ -807,16 +808,30 @@ function codeTab(){
     log(data.username + ' joined');
     // create the partner_name here .. 
     // partner_name = (partner_name).concat(data.partner);
+    if(data.partner){
+      partner_name = data.partner;
+    }
     console.log('and the partner name is: ', partner_name);
     addParticipantsMessage(data);
     //give the new user the sender id
-    socket.emit('sender update', sender_id);
+    var obj = {
+      sender_id : sender_id, 
+      // partner_name : data.username
+    }
+    socket.emit('sender update', obj);
 
   });
   socket.on('sender update', function(id){
     reply_to =id;
     sender_id = id;
   });
+
+
+  // socket.on('partner code update', function(partner_name){
+  //   partner_name =partner_name;
+  // });
+
+
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
     log(data.username + ' left');

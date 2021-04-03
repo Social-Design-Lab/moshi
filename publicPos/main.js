@@ -561,11 +561,6 @@ function codeTab(){
     { 
       sender_id = data.sender_id;
       reply_to = data.sender_id;
-      // partner_name=data.username;
-      if (!partner_name.includes(data.username))
-      {
-        partner_name=(partner_name).concat(data.username);
-      }
       //observed_smart_replies.push(data.observed_smart_replies);
       //console.log(observed_smart_replies);
       console.log('*******562*******');
@@ -591,6 +586,9 @@ function codeTab(){
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     // partner_name = (partner_name).concat(data.username);
+    if(data.partner){
+      partner_name = data.partner;
+    }
     addParticipantsMessage(data);
     //give the new user the sender id
     socket.emit('sender update', sender_id);

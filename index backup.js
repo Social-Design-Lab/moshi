@@ -48,13 +48,7 @@ io.on('connection', function (socket) {
 
   //add user to a new room
   socket.on('join room', function (data) {
-
-    // if (!partner_name.includes(data.username))
-    // {
-    //   partner_name=(partner_name).concat(data.username);
-    // }
-    // partner_name=(partner_name).concat('hal').concat(data.username);
-    // console.log('partner name:  ', partner_name);
+    
     var newRoom =data.username;
     var sender_id = data.sender_id;
     if (addedUser) return;
@@ -93,7 +87,7 @@ io.on('connection', function (socket) {
       r.name = newRoom;
       r.full = false;
       r.numUsers = 1;
-      r.partner = socket.username;
+      r.partner = '';
       all_rooms.push(r);
       socket.join(myroom);
 
@@ -119,17 +113,7 @@ io.on('connection', function (socket) {
     for (var i = 0; i < all_rooms.length; i++) {
         console.log("now looking at room: "+all_rooms[i].name)
         console.log("The room is : "+all_rooms[i].full)
-        if (all_rooms[i].numUsers ==0)
-        {
-          all_rooms[i].partner = socket.username;
-        }
-        else{
-          all_rooms[i].partner = (all_rooms[i].partner).concat('hal').concat(socket.username);
-        }
-
-
         all_rooms[i].numUsers = all_rooms[i].numUsers +1
-
         if (!all_rooms[i].full) 
         {
           // max number of the particpants ...
@@ -155,19 +139,14 @@ io.on('connection', function (socket) {
           //ZH: restart the group : NEXT THING TO CHECK
           chosen = false;
           
-          // socket.in(myroom).emit('user joined', {
-          io.in(myroom).emit('user joined', {
-
+          socket.to(myroom).emit('user joined', {
             username: socket.username,
-            numUsers: all_rooms[i].numUsers,
-            partner : all_rooms[i].partner
+            numUsers: all_rooms[i].numUsers
+            partner : socket.username
             });
           break;
 
-        }
-        // else{
-        //   // empathy partner name variable
-        // } 
+        } 
     }//for loop
 
     //still didn't find anything, make a new room
@@ -179,7 +158,6 @@ io.on('connection', function (socket) {
       r.name = newRoom;
       r.full = false;
       r.numUsers = 1;
-      r.partner = socket.username;
       all_rooms.push(r);
       socket.join(newRoom);
 
@@ -192,8 +170,7 @@ io.on('connection', function (socket) {
       // echo globally (all clients) that a person has connected
       socket.to(myroom).emit('user joined', {
         username: socket.username,
-        numUsers: 1, 
-        partner : socket.username
+        numUsers: 1
       });
     }
 
@@ -215,7 +192,6 @@ io.on('connection', function (socket) {
       sender_id : data.sender_id,
       reply_to: data.reply_to,
       observed_smart_replies:data.observed_smart_replies,
-      partner_name: partner_name,
     });
     
 
@@ -223,12 +199,12 @@ io.on('connection', function (socket) {
   socket.on('sender update', function(obj){
       // socket.to(myroom).emit('sender update', id);
       socket.to(myroom).emit('sender update', obj.id);
-      // if (!partner_name.includes(obj.partner_name))
-      // {
-      //   partner_name=(partner_name).concat(obj.partner_name);
-      // }
+      if (!partner_name.includes(obj.partner_name))
+      {
+        partner_name=(partner_name).concat(obj.partner_name);
+      }
 
-      // socket.to(myroom).emit('partner code update', partner_name);
+      socket.to(myroom).emit('partner code update', partner_name);
 
   });
 
@@ -283,7 +259,7 @@ io.on('connection', function (socket) {
       // socket.broadcast.emit('user joined', {
       io.to(myroom).emit('user joined', {
         username: socket.username,
-        numUsers: myroom.numUsers,
+        numUsers: myroom.numUsers
       });
     }
     else
