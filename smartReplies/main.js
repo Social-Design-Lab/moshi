@@ -77,7 +77,8 @@ $.getJSON('csvjson.json', function(csvjson) {
       message += "there's 2 participant";
       // ZH: create the partner name here ..
     }
-    else if  (data.numUsers === 3){
+    else 
+    {
       // test the partner  name here ...
       message += "there are " + data.numUsers + " participants"; 
       document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
@@ -509,6 +510,7 @@ $.getJSON('csvjson.json', function(csvjson) {
   if(s==59){m=m-1}
   if(m<0)
   {
+    // alert('Done');
     $('#proceed').attr('disabled',false);
     $('#proceed').on('click', function() {
       $chatPage.fadeOut();
@@ -699,7 +701,8 @@ function codeTab(){
       log(message, {
         prepend: true
       });
-      addParticipantsMessage(data);
+      // alert('timer is called now')
+      // addParticipantsMessage(data);
       sender_id = data.sender_id;
     } else {
       $chatPage.fadeOut();

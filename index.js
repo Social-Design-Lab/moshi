@@ -104,7 +104,7 @@ io.on('connection', function (socket) {
         group: group_a
       });
       // echo globally (all clients) that a person has connected
-      io.to(myroom).emit('user joined', {
+      io.in(myroom).emit('user joined', {
         username: socket.username,
         numUsers: r.numUsers,
         partner : socket.username
@@ -190,7 +190,7 @@ io.on('connection', function (socket) {
         group: group_a
       });
       // echo globally (all clients) that a person has connected
-      socket.to(myroom).emit('user joined', {
+      io.in(myroom).emit('user joined', {
         username: socket.username,
         numUsers: 1, 
         partner : socket.username
@@ -281,7 +281,7 @@ io.on('connection', function (socket) {
       // this should be only sent to the room -- numUsers .. instead or broadcasting it it should be in the room .... 
       
       // socket.broadcast.emit('user joined', {
-      io.to(myroom).emit('user joined', {
+      io.in(myroom).emit('user joined', {
         username: socket.username,
         numUsers: myroom.numUsers,
       });
