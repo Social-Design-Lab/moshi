@@ -80,9 +80,7 @@ $.getJSON('csvjson.json', function(csvjson) {
     } else if (data.numUsers === 2){
       message += "there's 2 participant";
     }
-    else 
-    {
-      // test the partner  name here ...
+    else if  (data.numUsers === 3){
       message += "there are " + data.numUsers + " participants"; 
       document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
       startTimer();
@@ -510,7 +508,7 @@ function codeTab(){
       log(message, {
         prepend: true
       });
-      // addParticipantsMessage(data);
+      addParticipantsMessage(data);
       sender_id = data.sender_id;
     } else {
       $chatPage.fadeOut();
@@ -552,8 +550,11 @@ function codeTab(){
     }
     addParticipantsMessage(data);
     //give the new user the sender id
-    socket.emit('sender update', sender_id);
-
+    var obj = {
+      sender_id : sender_id, 
+      // partner_name : data.username
+    }
+    socket.emit('sender update', obj);
   });
 
 
