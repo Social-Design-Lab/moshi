@@ -626,7 +626,11 @@ function codeTab(){
     }
     addParticipantsMessage(data);
     //give the new user the sender id
-    socket.emit('sender update', sender_id);
+    var obj = {
+      sender_id : sender_id, 
+      // partner_name : data.username
+    }
+    socket.emit('sender update', obj);
 
   });
   socket.on('sender update', function(id){
