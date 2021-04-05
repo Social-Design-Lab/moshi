@@ -508,7 +508,7 @@ function codeTab(){
       log(message, {
         prepend: true
       });
-      addParticipantsMessage(data);
+      // addParticipantsMessage(data);
       sender_id = data.sender_id;
     } else {
       $chatPage.fadeOut();
