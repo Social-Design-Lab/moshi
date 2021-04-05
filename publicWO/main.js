@@ -544,10 +544,12 @@ function codeTab(){
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
-    // partner_name = (partner_name).concat(data.username);
+    // create the partner_name here .. 
+    // partner_name = (partner_name).concat(data.partner);
     if(data.partner){
       partner_name = data.partner;
     }
+    console.log('and the partner name is: ', partner_name);
     addParticipantsMessage(data);
     //give the new user the sender id
     var obj = {
@@ -555,15 +557,12 @@ function codeTab(){
       // partner_name : data.username
     }
     socket.emit('sender update', obj);
+
   });
-
-
-
+  
   socket.on('sender update', function(id){
     reply_to =id;
     sender_id = id;
-    log(data.username + ' is in the chat room');
-    // ZHILA: try making the suggestion boxes here for the second user : ...
   });
 
 
