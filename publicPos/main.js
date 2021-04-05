@@ -79,7 +79,9 @@ $.getJSON('csvjson.json', function(csvjson) {
     } else if (data.numUsers === 2){
       message += "there's 2 participant";
     }
-    else if  (data.numUsers === 3){
+    else 
+    {
+      // test the partner  name here ...
       message += "there are " + data.numUsers + " participants"; 
       document.getElementById('timer').innerHTML = 05 + ":" + 00; // set the chat period.
       startTimer();
@@ -545,7 +547,7 @@ function codeTab(){
       log(message, {
         prepend: true
       });
-      addParticipantsMessage(data);
+      // addParticipantsMessage(data);
       sender_id = data.sender_id;
     } else {
       $chatPage.fadeOut();
