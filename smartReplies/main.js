@@ -73,10 +73,10 @@ $.getJSON('csvjson.json', function(csvjson) {
     if (data.numUsers === 1) {
       message += "there's 1 participant";
       // se the group number .. 
-    } else if (data.numUsers === 2){
-      message += "there's 2 participant";
-      // ZH: create the partner name here ..
     }
+    // else if (data.numUsers === 2){
+    //   message += "there's 2 participant";
+      // ZH: create the partner name here ..
     else 
     {
       // test the partner  name here ...
