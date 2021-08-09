@@ -13,9 +13,9 @@
     "express-cache-controller": "^1.1.0",
     "mangodb": "^1.0.0",
     "mongodb": "^3.3.2",
-    "mongoose": "^5.7.1",
+    "mongoose": "^5.7.5",
     "random-permutation": "0.0.0",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "scripts": {
     "start": "node index.js"
