@@ -33,7 +33,7 @@ app.use('/nsr',express.static(path.join(__dirname, 'sR-nSR')));
 // var numUsers = 0; // should be defined for each room .... 
 var all_rooms = [];
 var chosen=false;
-var Max_Users =3;
+var Max_Users =2;
 
 //array of all active rooms
 //var room = io.sockets.adapter.rooms
